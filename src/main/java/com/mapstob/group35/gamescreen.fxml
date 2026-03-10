@@ -4,7 +4,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="CONTROLLER_NAME">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mapstob.group35.HelloApplication">
    <children>
       <Button layoutX="29.0" layoutY="355.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="120.0" text="Main Menu" />
       <TextField layoutX="177.0" layoutY="355.0" prefHeight="25.0" prefWidth="398.0" />
