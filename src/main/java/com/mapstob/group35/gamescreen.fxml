@@ -4,14 +4,13 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mapstob.group35.HelloApplication">
-   <children>
-      <Button layoutX="29.0" layoutY="355.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="120.0" text="Main Menu" />
-      <TextField layoutX="177.0" layoutY="355.0" prefHeight="25.0" prefWidth="398.0" />
-      <Pane layoutX="177.0" layoutY="16.0" prefHeight="322.0" prefWidth="398.0" />
-      <Button layoutX="29.0" layoutY="312.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="120.0" text="Shop" />
-      <Text layoutX="29.0" layoutY="29.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Wave: #" />
-      <Text layoutX="30.0" layoutY="46.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Coins: #" />
-      <Text layoutX="30.0" layoutY="63.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Time left: #" />
-   </children>
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.12"
+            xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mapstob.group35.HelloApplication">
+   <Button layoutX="29.0" layoutY="355.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="120.0" text="Main Menu"/>
+   <TextField layoutX="177.0" layoutY="355.0" prefHeight="25.0" prefWidth="398.0"/>
+   <Pane layoutX="177.0" layoutY="16.0" prefHeight="322.0" prefWidth="398.0"/>
+   <Button layoutX="29.0" layoutY="312.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="120.0" text="Shop"/>
+   <Text layoutX="29.0" layoutY="29.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Wave: #"/>
+   <Text layoutX="30.0" layoutY="46.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Coins: #"/>
+   <Text layoutX="30.0" layoutY="63.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Time left: #"/>
 </AnchorPane>
