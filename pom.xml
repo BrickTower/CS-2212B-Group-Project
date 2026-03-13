@@ -33,7 +33,6 @@
         <dependency>
             <groupId>com.github.almasb</groupId>
             <artifactId>fxgl</artifactId>
-            <version>17.3</version>
             <exclusions>
                 <exclusion>
                     <groupId>org.openjfx</groupId>
