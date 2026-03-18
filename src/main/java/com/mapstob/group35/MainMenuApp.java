@@ -24,8 +24,4 @@ public class MainMenuApp extends Application{
         stage.show();
     }
 
-    public static void main(String[] args) { // AUTO LAUNCH IF RUN FROM HERE
-        launch(args);
-    }
-
 }
