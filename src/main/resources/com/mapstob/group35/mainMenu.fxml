@@ -5,7 +5,7 @@
 <?import javafx.scene.shape.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mapstob.group35.MainMenuApp">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mapstob.group35.MainMenuController">
    <children>
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#05001a" height="400.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="600.0" />
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#062e50" height="400.0" layoutX="171.0" layoutY="-3.0" stroke="BLACK" strokeType="INSIDE" width="259.0" />
@@ -17,6 +17,6 @@
       <Button layoutX="230.0" layoutY="148.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="140.0" text="Log In" />
       <Button layoutX="230.0" layoutY="203.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="140.0" text="Tutorial" />
       <Button layoutX="230.0" layoutY="257.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="140.0" text="Leaderboard" />
-      <Button layoutX="230.0" layoutY="310.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="140.0" text="Quit" />
+      <Button layoutX="230.0" layoutY="310.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="140.0" text="Quit" onAction="#onQuit"/>
    </children>
 </AnchorPane>
