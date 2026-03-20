@@ -14,7 +14,7 @@ import java.io.IOException;
  * @author Ethan Gregory
  *
  */
-public class MainMenuApp extends Application{
+public class mainApp extends Application{
     @Override // BASED ON INTELIJ JAVAFX PRESET HELLOWORLD
     public void start(Stage stage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("mainMenu.fxml")); // LOAD MAIN MENU FROM FXML

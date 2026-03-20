@@ -33,6 +33,7 @@
         <dependency>
             <groupId>com.github.almasb</groupId>
             <artifactId>fxgl</artifactId>
+            <version>LATEST</version>
             <exclusions>
                 <exclusion>
                     <groupId>org.openjfx</groupId>
@@ -79,7 +80,7 @@
                         <!-- Default configuration for running with: mvn clean javafx:run -->
                         <id>default-cli</id>
                         <configuration>
-                            <mainClass>com.mapstob.demo/com.mapstob.group35.HelloApplication</mainClass>
+                            <mainClass>com.mapstob.demo/com.mapstob.group35.Launcher</mainClass>
                             <launcher>app</launcher>
                             <jlinkZipName>app</jlinkZipName>
                             <jlinkImageName>app</jlinkImageName>
