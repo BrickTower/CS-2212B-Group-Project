@@ -14,7 +14,7 @@ import java.io.IOException;
  * @author Ethan Gregory
  *
  */
-public class MainMenuApp extends Application{
+public class mainApp extends Application{
     @Override // BASED ON INTELIJ JAVAFX PRESET HELLOWORLD
     public void start(Stage stage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("mainMenu.fxml")); // LOAD MAIN MENU FROM FXML
@@ -22,10 +22,6 @@ public class MainMenuApp extends Application{
         stage.setTitle("BotSpam");
         stage.setScene(scene); // SHOW SCENE
         stage.show();
-    }
-
-    public static void main(String[] args) { // AUTO LAUNCH IF RUN FROM HERE
-        launch(args);
     }
 
 }
