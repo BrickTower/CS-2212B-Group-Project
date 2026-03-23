@@ -29,10 +29,22 @@ public class PlayerProfile extends User {
 
     // SIMPLE GETTERS
 
+    /**
+     * Returns an Integer representation of the Player's current difficulty level
+     * @return the Player's current difficulty level, represented as a Integer
+     * @see Integer
+     * @author Ethan Gregory
+     */
     public int getLevel() {
         return this.level;
     }
 
+    /**
+     * Returns an Integer representation of the amount of coins the Player currently has.
+     * @return the Player's current amount of coins, represented as a Integer
+     * @see Integer
+     * @author Ethan Gregory
+     */
     public int getCoins() {
         return this.coins;
     }
