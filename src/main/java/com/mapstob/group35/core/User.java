@@ -1,7 +1,7 @@
 package com.mapstob.group35.core;
 
 /**
- * User object meant to be extended for use with the Student and Guardian classes.
+ * User object meant to be extended for use with the Student and Parent classes.
  * <br><br>
  * Any methods created within the initial construction can be extracted using its corresponding Getter.
  * @version 0.01
