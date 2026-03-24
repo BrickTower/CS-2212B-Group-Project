@@ -27,6 +27,14 @@ public class PlayerProfile extends User {
         this.level++; // INCREASE LEVEL
     }
 
+    /**
+     * Resets Player's difficulty level back to 1. Used when a run ends to reset back to normal
+     * <br>
+     * @author Ethan Gregory
+     */
+    public void resetLevel() {
+        this.level = 1;
+    }
     // SIMPLE GETTERS
 
     /**
