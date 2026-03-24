@@ -1,8 +1,11 @@
 package com.mapstob.group35.core;
 
 public class PlayerProfile extends User {
+    /** The player's current difficulty level.*/
     private int level;
+    /** The current amount of coins the Player has.*/
     private int coins;
+    /** A {@link Stats} representation of the current Statistics (WPM, accuracy, etc.)*/
     private Stats playerStats;
 
     public PlayerProfile(int userID, String userName, String password) {
@@ -25,6 +28,11 @@ public class PlayerProfile extends User {
         } // END OF IF/ELSE
     }
 
+    /**
+     * Increases the Player's current difficulty level by 1. Used when they successfully complete a wave.
+     * <br>
+     * @author Ethan Gregory
+     */
     public void levelUp() {
         this.level++; // INCREASE LEVEL
     }
