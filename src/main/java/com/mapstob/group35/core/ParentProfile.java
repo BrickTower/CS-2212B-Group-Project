@@ -32,4 +32,20 @@ public class ParentProfile extends PlayerProfile { // Parents should be able to 
             this.playersManaged.remove(player);
         }
     }
+
+    public Stats getPlayerStats(PlayerProfile player) {
+        if (!this.playersManaged.contains(player)) { // CHECK TO SEE IF PLAYER IS MANAGED BY PARENT. IF NOT, THROW AN ERROR
+            throw new IllegalArgumentException("Player is not managed by this Parent.");
+        } else { // OTHERWISE, GET STATS
+            return player.getPlayerStats();
+        }
+    }
+
+    public void resetPlayerStats(PlayerProfile player) {
+        if (!this.playersManaged.contains(player)) { // CHECK TO SEE IF PLAYER IS MANAGED BY PARENT. IF NOT, THROW AN ERROR
+            throw new IllegalArgumentException("Player is not managed by this Parent.");
+        } else { // OTHERWISE, RESET STATS
+            player.resetStats();
+        }
+    }
 }

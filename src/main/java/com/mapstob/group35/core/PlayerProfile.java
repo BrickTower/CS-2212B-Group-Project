@@ -68,4 +68,13 @@ public class PlayerProfile extends User {
     public Stats getPlayerStats() {
         return this.playerStats;
     }
+
+    /**
+     * Resets a player's Stats to the basic use case. Should only be used when a Parent is resetting Player stats.
+     * @see Stats
+     * @author Ethan Gregory
+     */
+    protected void resetStats() {
+        this.playerStats = new Stats();
+    }
 }
