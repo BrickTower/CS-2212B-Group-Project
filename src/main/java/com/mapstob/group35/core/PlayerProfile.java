@@ -3,11 +3,13 @@ package com.mapstob.group35.core;
 public class PlayerProfile extends User {
     private int level;
     private int coins;
+    private Stats playerStats;
 
     public PlayerProfile(int userID, String userName, String password) {
         super(userID, userName, password); // CALL INITIAL CONSTRUCTOR & INIT. CLASS-SPECIFIC VARIABLES
         this.level = 1;
         this.coins = 0;
+        this.playerStats = new Stats();
     }
 
     public void addCoins(int amount) {
@@ -55,5 +57,15 @@ public class PlayerProfile extends User {
      */
     public int getCoins() {
         return this.coins;
+    }
+
+    /**
+     * Returns a Stats object containing the current Stats of the Player.
+     * @return the Player's current statistics, represented as a Stats object
+     * @see Stats
+     * @author Ethan Gregory
+     */
+    public Stats getPlayerStats() {
+        return this.playerStats;
     }
 }
