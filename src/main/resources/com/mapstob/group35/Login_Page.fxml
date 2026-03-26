@@ -6,7 +6,7 @@
 
 <VBox xmlns="http://javafx.com/javafx/17"
       xmlns:fx="http://javafx.com/fxml"
-      fx:controller="com.mapstob.group35.core.LoginController"
+      fx:controller="com.mapstob.group35.LoginController"
       alignment="CENTER"
       spacing="18"
       style="-fx-background-color: #05001A;">
