@@ -9,6 +9,12 @@ import javafx.scene.control.Button;
 
 import java.io.IOException;
 
+/**
+ * Controller for BotSpam's Main Menu. Controls Main Menu, allowing to quit game and change to the different screens. (Login, etc.)
+ * <br>
+ * @author Ethan Gregory
+ *
+ */
 public class mainController {
     @FXML
     private Button logIn;
