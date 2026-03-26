@@ -19,8 +19,6 @@ public class mainController {
     @FXML
     private Button logIn;
     @FXML
-    private Button leaderboard;
-    @FXML
     private Button tutorial;
 
     /*
@@ -30,6 +28,15 @@ public class mainController {
     @FXML
     protected void onQuit() {
         Platform.exit(); // CLOSE GAME
+    }
+
+    /*
+       Moves
+    */
+    @FXML
+    protected void goToLogin() throws IOException {
+        FXMLLoader load = new FXMLLoader(getClass().getResource("Login_Page.fxml"));
+        logIn.getScene().setRoot(load.load());
     }
 
     /*

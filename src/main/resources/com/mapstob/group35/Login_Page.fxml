@@ -4,23 +4,15 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<VBox xmlns="http://javafx.com/javafx/17"
-      xmlns:fx="http://javafx.com/fxml"
-      fx:controller="com.mapstob.group35.LoginController"
-      alignment="CENTER"
-      spacing="18"
-      style="-fx-background-color: #05001A;">
+<VBox alignment="CENTER" spacing="18" style="-fx-background-color: #05001A;" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mapstob.group35.LoginController">
 
     <!-- TOP BAR -->
     <BorderPane style="-fx-background-color: #062E50;">
         <left>
-            <Button text="EXIT"
-                    onAction="#handleExit"
-                    style="-fx-background-color: #7D8570; -fx-text-fill: #FBFAF3;" />
+            <Button fx:id="backButton" onAction="#handleExit" style="-fx-background-color: #7D8570; -fx-text-fill: #FBFAF3;" text="EXIT" />
         </left>
         <center>
-            <Label text="LOGIN"
-                   style="-fx-text-fill: #FBFAF3; -fx-font-size: 50px; -fx-font-weight: bold;" />
+            <Label style="-fx-text-fill: #FBFAF3; -fx-font-size: 50px; -fx-font-weight: bold;" text="LOGIN" />
         </center>
         <padding>
             <Insets bottom="15" left="20" right="20" top="15" />

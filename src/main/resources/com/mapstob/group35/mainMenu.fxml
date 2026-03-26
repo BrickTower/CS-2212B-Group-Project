@@ -14,7 +14,7 @@
             <Font name="System Bold" size="53.0" />
          </font>
       </Text>
-      <Button layoutX="230.0" layoutY="148.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="140.0" text="Log In" />
+      <Button layoutX="230.0" layoutY="148.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="140.0" text="Log In" fx:id="logIn" onAction="#goToLogin"/>
       <Button layoutX="230.0" layoutY="203.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="140.0" text="Tutorial" fx:id="tutorial" onAction="#goToTutorial" />
       <Button layoutX="230.0" layoutY="257.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="140.0" text="Leaderboard" />
       <Button layoutX="230.0" layoutY="310.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="140.0" text="Quit" onAction="#onQuit"/>

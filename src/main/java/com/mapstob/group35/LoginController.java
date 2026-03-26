@@ -1,10 +1,14 @@
 package com.mapstob.group35;
 
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import javafx.scene.Node;
+
+import java.io.IOException;
 
 public class LoginController {
 
@@ -18,6 +22,9 @@ public class LoginController {
     private TextField parentalField;
 
     @FXML
+    private Button backButton;
+
+    @FXML
     private void handleLogin() {
         System.out.println("Logging in as: " + usernameField.getText());
     }
@@ -28,8 +35,8 @@ public class LoginController {
     }
 
     @FXML
-    private void handleExit(javafx.event.ActionEvent event) {
-        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        stage.close();
+    private void handleExit(javafx.event.ActionEvent event) throws IOException {
+        FXMLLoader load = new FXMLLoader(getClass().getResource("mainMenu.fxml"));
+        backButton.getScene().setRoot(load.load());
     }
 }
