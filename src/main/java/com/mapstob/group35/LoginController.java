@@ -36,7 +36,7 @@ public class LoginController {
 
     @FXML
     private void handleExit(javafx.event.ActionEvent event) throws IOException {
-        FXMLLoader load = new FXMLLoader(getClass().getResource("mainMenu.fxml"));
+        FXMLLoader load = new FXMLLoader(getClass().getResource("baseMenu.fxml"));
         backButton.getScene().setRoot(load.load());
     }
 }
