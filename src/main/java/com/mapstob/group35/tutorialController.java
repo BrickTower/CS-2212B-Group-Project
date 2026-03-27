@@ -2,12 +2,11 @@ package com.mapstob.group35;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 
 import java.io.IOException;
 
-public class tutorialController extends mainController {
+public class tutorialController extends baseController {
     @FXML
     private Button backButton;
 

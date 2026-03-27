@@ -8,10 +8,10 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 /**
- * Controller for BotSpam's Main Menu. Controls access to logging in, accessing the Tutorial, and viewing current leaderboard scores.
- * Implementation based on the InteliJ JavaFx
- * <br>
- * @author Ethan Gregory
+ * Interface for opening BotSpam. This should open directly to the main menu.
+ * <br><br>
+ * Implementation is a slightly modified InteliJ JavaFX Hello World Preset, created when initializing the project.
+ * @author InteliJ, Ethan Gregory
  *
  */
 public class mainApp extends Application{
