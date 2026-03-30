@@ -1,16 +1,23 @@
 package com.mapstob.group35.core;
 
 
-import java.util.ArrayList;
+import java.util.LinkedList; // IMPORT ARRAYLIST FOR PLAYER LIST
 
 public class ParentProfile extends PlayerProfile { // Parents should be able to play
-    private ArrayList<PlayerProfile> playersManaged;
+    /** A list of all Players currently managed by this Parent*/
+    private LinkedList<PlayerProfile> playersManaged;
 
     public ParentProfile(int userID, String userName, String password) {
         super(userID, userName, password);
-        this.playersManaged = new ArrayList<PlayerProfile>();
+        this.playersManaged = new LinkedList<PlayerProfile>();
     }
 
+    /**
+     * Adds a new Player to the list of Players managed by the calling Parent.
+     * This Player must be a {@link PlayerProfile} only. Parents can not be managed by other Parents.
+     * @throws IllegalArgumentException if the Player is not managed by the Parent calling the function, or if said Player is a Parent themselves.
+     * @param newPlayer A valid Player who is managed by the calling Parent
+     */
     public void addPlayer(PlayerProfile newPlayer) {
         if ((newPlayer instanceof ParentProfile)) {
             throw new IllegalArgumentException("Parents cannot be managed by other Parents.");
@@ -22,10 +29,12 @@ public class ParentProfile extends PlayerProfile { // Parents should be able to 
         }
     }
 
+    /**
+     * Removes a Player from the list of Players managed by the Parent
+     * @throws IllegalArgumentException if the Player is not already managed by the Parent calling the function
+     * @param player A valid Player who is managed by the calling Parent
+     */
     public void removePlayer(PlayerProfile player) {
-        if (player instanceof ParentProfile) {
-            throw new IllegalArgumentException("Parents cannot be managed by other Parents.");
-        }
         if (!this.playersManaged.contains(player)) { // GUARD AGAINST PLAYER IF ALREADY MANAGED, AND IS NOT PARENT AS WELL
             throw new IllegalArgumentException("Player is not managed by this Parent.");
         } else {
@@ -33,6 +42,11 @@ public class ParentProfile extends PlayerProfile { // Parents should be able to 
         }
     }
 
+    /**
+     * Retrieves the Stats associated with a Player managed by the Parent
+     * @throws IllegalArgumentException if the Player is not managed by the Parent calling the function
+     * @param player A valid Player who is managed by the calling Parent
+     */
     public Stats getPlayerStats(PlayerProfile player) {
         if (!this.playersManaged.contains(player)) { // CHECK TO SEE IF PLAYER IS MANAGED BY PARENT. IF NOT, THROW AN ERROR
             throw new IllegalArgumentException("Player is not managed by this Parent.");
@@ -41,6 +55,11 @@ public class ParentProfile extends PlayerProfile { // Parents should be able to 
         }
     }
 
+    /**
+     * Resets the Stats of a Player who the Parent is managing.
+     * @throws IllegalArgumentException if the Player is not managed by the Parent calling the function
+     * @param player A valid Player who is managed by the calling Parent
+     */
     public void resetPlayerStats(PlayerProfile player) {
         if (!this.playersManaged.contains(player)) { // CHECK TO SEE IF PLAYER IS MANAGED BY PARENT. IF NOT, THROW AN ERROR
             throw new IllegalArgumentException("Player is not managed by this Parent.");

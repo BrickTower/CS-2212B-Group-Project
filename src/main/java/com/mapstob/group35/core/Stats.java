@@ -32,7 +32,7 @@ public class Stats {
      * Takes the WPM and Accuracy score calculated over the course of a Game's Round and updates the player's corresponding Stats.
      * For specifics: <br>
      * - If WPM exceeds any current previous WPM value, update peakWPM.<br>
-     * - Update the averages for Accuracy and WPM<br>
+     * - Update the averages for Accuracy and WPM<br><br>
      * This function should only be called <b>once</b> after Game end, as it updates a counter of games played for the accuracy calculations.
      * @param wpm A Double representation of words typed per minute (i.e. 25.3 WPM)
      * @param accuracy A percentage amount of words typed correctly over the course of the round (3 out of 4 typed correctly = 75.0)

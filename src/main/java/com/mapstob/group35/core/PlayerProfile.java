@@ -8,6 +8,15 @@ public class PlayerProfile extends User {
     /** A {@link Stats} representation of the current Statistics (WPM, accuracy, etc.)*/
     private Stats playerStats;
 
+    /**
+     Player constructor. Creates a new Player Profile object.
+
+     @param userID Integer representing userID
+     @param userName String representing the login's userName
+     @param password String representing the account's password
+     @see User
+     @author Ethan Gregory
+     */
     public PlayerProfile(int userID, String userName, String password) {
         super(userID, userName, password); // CALL INITIAL CONSTRUCTOR & INIT. CLASS-SPECIFIC VARIABLES
         this.level = 1;
