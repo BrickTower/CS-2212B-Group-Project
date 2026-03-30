@@ -17,7 +17,7 @@ import java.io.IOException;
 public class mainApp extends Application{
     @Override // BASED ON INTELIJ JAVAFX PRESET HELLOWORLD
     public void start(Stage stage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("mainMenu.fxml")); // LOAD MAIN MENU FROM FXML
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("baseMenu.fxml")); // LOAD MAIN MENU FROM FXML
         Scene scene = new Scene(fxmlLoader.load(), 600, 400); // LOAD OUR FXML AS A SCENE
         stage.setTitle("BotSpam");
         stage.setScene(scene); // SHOW SCENE
