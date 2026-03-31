@@ -8,17 +8,16 @@ import com.fasterxml.jackson.annotation.JsonAutoDetect;
 
 @JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY, getterVisibility = JsonAutoDetect.Visibility.NONE)
 public class ParentProfile extends PlayerProfile { // Parents should be able to play
-    /** A list of all Players currently managed by this Parent*/
-    private LinkedList<PlayerProfile> playersManaged;
+    /** A list of all Players currently managed by this Parent, listed by UserName*/
+    private LinkedList<String> playersManaged;
 
-    /** Empty version of ParentProfile Constructor. Should only be used for Jackson compatibility, according to this chatbot log from Eric's work:
-     * [PUT LINK HERE]
+    /** Empty version of ParentProfile Constructor. Should only be used for Jackson compatibility.
      */
     public ParentProfile() {super();}
 
     public ParentProfile(String userName, String password) {
         super(userName, password);
-        this.playersManaged = new LinkedList<PlayerProfile>();
+        this.playersManaged = new LinkedList<String>();
     }
 
     /**
@@ -34,7 +33,7 @@ public class ParentProfile extends PlayerProfile { // Parents should be able to 
         else if (this.playersManaged.contains(newPlayer)) { // GUARD AGAINST PLAYER IF ALREADY MANAGED, AND IF PLAYER IS PARENT
             throw new IllegalArgumentException("Player already exists in list.");
         } else {
-            this.playersManaged.add(newPlayer); // ADD IF NOT IN LIST
+            this.playersManaged.add(newPlayer.getUserName()); // ADD IF NOT IN LIST
         }
     }
 

@@ -5,10 +5,7 @@ import com.mapstob.group35.core.ParentProfile;
 import com.mapstob.group35.core.PlayerProfile;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.control.Button;
-import javafx.scene.control.CheckBox;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.stage.Stage;
 import javafx.scene.Node;
 
@@ -17,51 +14,87 @@ import java.util.List;
 
 public class LoginController {
 
+    /// Field to enter account username
     @FXML
     private TextField usernameField;
 
+    /// Field to enter account password
     @FXML
     private PasswordField passwordField;
 
-    @FXML
-    private TextField parentalField;
-
+    /// Button to go back to Base Menu
     @FXML
     private Button backButton;
 
+    /// Checkbox for determining if new account is Parent Profile
     @FXML
     private CheckBox newParentBox;
+
+    /// Error message for invalid issues with log in (User already exists, etc.)
+    @FXML
+    private Label errorMessage;
 
     @FXML
     private void handleLogin() {
         System.out.println("Logging in as: " + usernameField.getText());
     }
 
+    /**
+     * Handles the registering of a new Profile. Checks to make sure username is not taken prior to registering, to prevent doubles.
+     * @return Cleared userName and passWord fields if account registration was successful. Register button will
+     */
     @FXML
     private void handleRegister() {
         // GET TEXT FROM USERNAME AND PASSWORD FIELDS
         String newUserName = usernameField.getText();
         String newPassword = passwordField.getText();
 
-        // DETERMINE WHETHER OR NOT IT IS A PARENT OR PLAYER PROFILE WE'RE MAKING
-        if (newParentBox.isSelected()) {
-            ParentProfile newParent = new ParentProfile(newUserName, newPassword);
-            try {
-                List<ParentProfile> currentList = DataManager.loadList("parents.json", new TypeReference<List<ParentProfile>>(){});
-                currentList.add(newParent);
-                DataManager.saveList("parents.json", currentList);
-            } catch (Exception e) {
-                e.printStackTrace();
+        // CHECK IF FIELDS ARE ALL FILLED, THROW ERROR MESSAGE IF NOT
+        if (newUserName.isBlank() || newPassword.isBlank()) {
+            errorMessage.setText("Not all fields are filled."); // SET ERROR MESSAGE ON REGISTER
+            if (!errorMessage.isVisible()) {
+                errorMessage.setVisible(true);
             }
-        } else {
-            PlayerProfile newPlayer = new PlayerProfile(newUserName, newPassword);
-            try {
-                List<PlayerProfile> currentList = DataManager.loadList("players.json", new TypeReference<List<PlayerProfile>>() {
-                });
-                currentList.add(newPlayer);
-                DataManager.saveList("players.json" ,currentList);
-            } catch (Exception e) {
-                e.printStackTrace();
+            return; // END PROGRAM EARLY
+        }
+        try { // SURROUND ANYTHING INVOLVING LOADING FROM JSON IN TRY CATCH
+            List<ParentProfile> parents = DataManager.loadList("parents.json", new TypeReference<List<ParentProfile>>() {
+            });
+            List<PlayerProfile> players = DataManager.loadList("players.json", new TypeReference<List<PlayerProfile>>() {
+            });
+            for (PlayerProfile player : players) { // USER EXISTENCE GUARDS
+                if (player.getUserName().equals(newUserName)) {
+                    throw new IllegalArgumentException("User exists.");
+                }
+            }
+            for (ParentProfile parent : parents) {
+                if (parent.getUserName().equals(newUserName)) {
+                    throw new IllegalArgumentException("User exists.");
+                }
+            }
+
+                // DETERMINE WHETHER IT IS A PARENT OR PLAYER PROFILE WE'RE MAKING
+                if (newParentBox.isSelected()) {
+                    ParentProfile newParent = new ParentProfile(newUserName, newPassword);
+                    parents.add(newParent);
+                    DataManager.saveList("parents.json", parents);
+                    // CLEAR FIELDS UPON SUCCESSFUL REGISTERING
+                    usernameField.clear();
+                    passwordField.clear();
+                } else {
+                    PlayerProfile newPlayer = new PlayerProfile(newUserName, newPassword);
+                    players.add(newPlayer);
+                    DataManager.saveList("players.json", players);
+                    // CLEAR FIELDS UPON SUCCESSFUL REGISTERING
+                    usernameField.clear();
+                    passwordField.clear();
+                }
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        } catch (IllegalArgumentException e) {
+            errorMessage.setText(e.getMessage()); // SET ERROR MESSAGE ON REGISTER
+            if (!errorMessage.isVisible()) {
+                errorMessage.setVisible(true);
             }
         }
 
