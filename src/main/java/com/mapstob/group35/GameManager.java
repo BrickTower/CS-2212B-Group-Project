@@ -13,6 +13,7 @@ public class GameManager {
     private int defaultCoinGain;
     private int maxLife;
     private int curLife;
+    private boolean died;
 
     private Process process;
 
@@ -33,6 +34,7 @@ public class GameManager {
 
         waveManager = new WaveManager(0,30);
         textManager = new TextManager();
+        died = false;
     }
     //if loading data
     public GameManager(int maxLife, int curLife, int wave, int waveTime, int coins, int defaultCoinGain) {
@@ -43,19 +45,23 @@ public class GameManager {
 
         this.waveManager = new WaveManager(wave,waveTime);
         this.textManager = new TextManager();
+        died = false;
     }
     /// /// /// /// PROCESS
     public void process() throws InterruptedException {
-        while(true){
+        while(!incTime() && !died){
             Thread.sleep(1000);
-            incTime();
+        }
+        if (!died){
+            textManager.clear();
+            saveInfo();
         }
 
     }
 
 
     /// /// /// /// INPUT
-    public void spellingAttempt(String input){ //replace string input with actual input
+    public void spellingAttempt(String input){ //TODO replace string input with actual input
         int spellingAttempt = textManager.spellingAttempt(input);
         if (spellingAttempt == 0){
             spellingCorrect();
@@ -63,6 +69,15 @@ public class GameManager {
         else{
             takeDamage(spellingAttempt);
         }
+    }
+
+    public void startWave() throws InterruptedException {
+        waveManager.startWave();
+        textManager.reset();
+        for(int x = 0;x<5;x++) {
+            textManager.makeText("Placeholder");
+        }
+        process();
     }
 
     /// /// /// /// COINS
@@ -75,6 +90,7 @@ public class GameManager {
         }
         return false;
     }
+
     /// /// /// /// HEALTH
     public void takeDamage(int amount){
         if (amount > curLife) {curLife = 0; die();}
@@ -92,22 +108,28 @@ public class GameManager {
     }
 
     /// /// /// /// TIME
-    public void incTime(){
-        waveManager.incTime();
+    public boolean incTime(){
         int damage;
         damage = textManager.incTime();
 
         if (damage >0){takeDamage(damage);}
+
+        return waveManager.incTime();
     }
 
 
 
 
-    /// /// /// /// SAVE INFO
+    /// /// /// /// MODIFY INFO
     private void saveInfo(){
         //TODO save information
     }
+    private void deleteInfo(){
+        //TODO
+    }
     private void die(){
+        died = true;
+        deleteInfo();
         //TODO show death screen, delete current run stats
     }
 

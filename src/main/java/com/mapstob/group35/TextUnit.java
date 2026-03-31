@@ -2,13 +2,11 @@ package com.mapstob.group35;
 
 public class TextUnit {
     private String text;
-    private int difficulty;
     private int curTime;
     private int timeLimit;
 
-    public TextUnit(String text, int difficulty, int timeLimit) {
+    public TextUnit(String text, int timeLimit) {
         this.text = text;
-        this.difficulty = difficulty;
         this.timeLimit = timeLimit;
         curTime = 0;
     }
@@ -18,8 +16,6 @@ public class TextUnit {
     public void incTime(){ curTime++;}
 
     public String getText(){return text;}
-
-    public int getDifficulty(){return difficulty;}
 
     public float getPercentTime(){
         return (float)curTime / (float)timeLimit;

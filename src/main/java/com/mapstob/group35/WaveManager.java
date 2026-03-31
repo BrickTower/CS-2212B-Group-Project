@@ -9,6 +9,7 @@ public class WaveManager {
     private int waveTime;
     private int defaultWaveTime;
 
+
     private ArrayList<String> buffList;
     /*  BUFF TYPES
     *   increase text time for x waves
@@ -37,11 +38,13 @@ public class WaveManager {
         curTime = 0;
         setWaveTime(defaultWaveTime);
     }
-    public void incTime(){
+    public boolean incTime(){
         curTime++;
         if (curTime>=waveTime){
             waveOver();
+            return true;
         }
+        return false;
     }
     // for the timer icon
     public float waveCompletionPercent(){
