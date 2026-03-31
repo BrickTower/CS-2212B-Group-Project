@@ -38,7 +38,30 @@ public class LoginController {
 
     @FXML
     private void handleRegister() {
-       System.out.println("Registering as: " + usernameField.getText());
+        // GET TEXT FROM USERNAME AND PASSWORD FIELDS
+        String newUserName = usernameField.getText();
+        String newPassword = passwordField.getText();
+
+        // DETERMINE WHETHER OR NOT IT IS A PARENT OR PLAYER PROFILE WE'RE MAKING
+        if (newParentBox.isSelected()) {
+            ParentProfile newParent = new ParentProfile(newUserName, newPassword);
+            try {
+                List<PlayerProfile> currentList = DataManager.loadList();
+                currentList.add(newParent);
+                DataManager.saveList(currentList);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        } else {
+            PlayerProfile newPlayer = new PlayerProfile(newUserName, newPassword);
+            try {
+                List<PlayerProfile> currentList = DataManager.loadList();
+                currentList.add(newPlayer);
+                DataManager.saveList(currentList);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
 
     }
 
