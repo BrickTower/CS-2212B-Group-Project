@@ -6,16 +6,11 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 
 public class GameManager {
-    private int wave;
-    private int curTime;
-    private int waveTime;
-    private int defaultWaveTime;
-    private int wordSpawnTime;
-    private int defaultWordSpawnTime;
+    private WaveManager waveManager;
+    private TextManager textManager;
 
     private int coins;
-
-    private ArrayList<TextUnit> textList;
+    private int defaultCoinGain;
     private int maxLife;
     private int curLife;
 
@@ -26,46 +21,49 @@ public class GameManager {
     private String[] mediumDiffWords = {"poland", "canada", "reimu", "marisa", "important", "zoot", "dryad", "nomad", "heaven", "honeybee", "sandpaper"};
     private String[] hardDiffWords = {"artificial", "manipulation", "despised", "topological", "prerequisite", "difficulty", "completion", "andesite", "granite", "drizzled"};
 
-    private int wordDefaultTimeLeft;
+
 
 
     //Constructor
     public GameManager() {
-        textList = new ArrayList<TextUnit>();
         maxLife = 100; //todo change
         curLife = maxLife;
-        wave = 0;
-        defaultWaveTime = 30;
-        wordDefaultTimeLeft = 10;
         coins = 0;
+        defaultCoinGain = 10;
+
+        waveManager = new WaveManager(0,30);
+        textManager = new TextManager();
     }
     //if loading data
-    public GameManager(int maxLife, int curLife, int wave, int waveTime, int coins) {
-        textList = new ArrayList<TextUnit>();
+    public GameManager(int maxLife, int curLife, int wave, int waveTime, int coins, int defaultCoinGain) {
         this.maxLife = maxLife;
         this.curLife = curLife;
-        this.wave = wave;
-        this.waveTime = waveTime;
         this.coins = coins;
+        this.defaultCoinGain = defaultCoinGain;
+
+        this.waveManager = new WaveManager(wave,waveTime);
+        this.textManager = new TextManager();
     }
     /// /// /// /// PROCESS
     public void process() throws InterruptedException {
         while(true){
             Thread.sleep(1000);
             incTime();
-            for(int index = 0; index < textList.size(); index++){
-                TextUnit text = textList.get(index);
-                text.incTime();
-                if (text.checkTime()){
-                    textTimeout(text);
-                }
-            }
         }
 
     }
 
 
-
+    /// /// /// /// INPUT
+    public void spellingAttempt(String input){ //replace string input with actual input
+        int spellingAttempt = textManager.spellingAttempt(input);
+        if (spellingAttempt == 0){
+            spellingCorrect();
+        }
+        else{
+            takeDamage(spellingAttempt);
+        }
+    }
 
     /// /// /// /// COINS
     public void gainCoins(int amount){coins += amount;}
@@ -87,77 +85,23 @@ public class GameManager {
         else {curLife += amount; }
     }
 
-
-    /// /// /// /// TEXT
-    public void makeText(String text, int difficulty) {
-        TextUnit newTextUnit = new TextUnit(text,difficulty,wordDefaultTimeLeft);
-        textList.add(newTextUnit);
-    }
-    public void removeText(TextUnit text){
-        textList.remove(text);
-    }
-
-    public void spellingAttempt(String input){
-        int mistakes = textList.getFirst().checkSpellingValidity(input);
-        if (mistakes == 0){
-            removeText(textList.getFirst());
-        }
-        else{
-            takeDamage((Integer) mistakes/2);
-        }
-    }
-
-    public void spellingCorrect(int difficulty){
+    /// /// /// /// FINISH
+    public void spellingCorrect(){
         //TODO other additions?
-        gainCoins(difficulty);
+        gainCoins(defaultCoinGain);
     }
-    public void setWordSpawnTime(int WordTime){this.wordSpawnTime = WordTime;}
-    public void incWordSpawnTime(){}
-    public double getWordSpawnTimeLeft () {return wordSpawnTime - (curLife % wordSpawnTime);}
-
 
     /// /// /// /// TIME
-    public void checkTime(){
-        for (int index = 0; index < textList.size(); index++){
-            TextUnit text = textList.get(index);
-            if (text.checkTime()){
-                textTimeout(text);
-            }
-        }
-    }
-
-
-    public void textTimeout(TextUnit text) {
-        takeDamage(text.getText().length() * 2);
-        removeText(text);
-    }
-
-    /// /// /// /// WAVE
-    public void incWave(){wave++;}
-    public int getWave(){return wave;}
-    public void setWaveTime(int waveTime){this.waveTime = waveTime;}
-    public double getWaveTimeLeft () {return waveTime - curTime;}
-
-
-    public void waveOver(){
-        textList.clear();
-        incWave();
-        saveInfo();
-    }
-    public void startWave(){
-        curTime = 0;
-        setWaveTime(defaultWaveTime);
-    }
     public void incTime(){
-        curTime++;
-        if (curTime>=waveTime){
-            waveOver();
-        }
+        waveManager.incTime();
+        int damage;
+        damage = textManager.incTime();
+
+        if (damage >0){takeDamage(damage);}
     }
-    // for the timer icon
-    public float waveCompletionPercent(){
-        return (float) curTime / (float) waveTime;
-    }
+
+
+
 
     /// /// /// /// SAVE INFO
     private void saveInfo(){
