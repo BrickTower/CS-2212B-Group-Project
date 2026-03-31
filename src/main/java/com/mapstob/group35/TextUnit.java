@@ -3,17 +3,21 @@ package com.mapstob.group35;
 public class TextUnit {
     private String text;
     private int difficulty;
+    private double initTime;
     private double timeLimit;
 
     public TextUnit(String text, int difficulty, double timeLimit) {
         this.text = text;
         this.difficulty = difficulty;
         this.timeLimit = timeLimit;
+        initTime = System.nanoTime();
     }
 
     public double getTimeLimit(){return timeLimit;}
+    public double getInitTime(){return initTime;}
 
-   public String getText(){return text;}
+
+    public String getText(){return text;}
 
     public int getDifficulty(){return difficulty;}
 
