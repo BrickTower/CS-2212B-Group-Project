@@ -7,8 +7,8 @@ public class ParentProfile extends PlayerProfile { // Parents should be able to 
     /** A list of all Players currently managed by this Parent*/
     private LinkedList<PlayerProfile> playersManaged;
 
-    public ParentProfile(int userID, String userName, String password) {
-        super(userID, userName, password);
+    public ParentProfile(String userName, String password) {
+        super(userName, password);
         this.playersManaged = new LinkedList<PlayerProfile>();
     }
 

@@ -11,14 +11,13 @@ public class PlayerProfile extends User {
     /**
      Player constructor. Creates a new Player Profile object.
 
-     @param userID Integer representing userID
      @param userName String representing the login's userName
      @param password String representing the account's password
      @see User
      @author Ethan Gregory
      */
-    public PlayerProfile(int userID, String userName, String password) {
-        super(userID, userName, password); // CALL INITIAL CONSTRUCTOR & INIT. CLASS-SPECIFIC VARIABLES
+    public PlayerProfile(String userName, String password) {
+        super(userName, password); // CALL INITIAL CONSTRUCTOR & INIT. CLASS-SPECIFIC VARIABLES
         this.level = 1;
         this.coins = 0;
         this.playerStats = new Stats();
