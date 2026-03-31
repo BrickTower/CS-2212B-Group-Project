@@ -2,7 +2,6 @@ package com.mapstob.group35;
 
 public class TextUnit {
     private String text;
-    private String inputtedText;
     private int difficulty;
     private double timeLimit;
 
@@ -14,9 +13,7 @@ public class TextUnit {
 
     public double getTimeLimit(){return timeLimit;}
 
-    public void setInputtedText(String inputtedText){this.inputtedText = inputtedText;}
-    public String getInputtedText(){return inputtedText;}
-    public String getText(){return text;}
+   public String getText(){return text;}
 
     public int getDifficulty(){return difficulty;}
 
@@ -25,6 +22,15 @@ public class TextUnit {
             return true;
         }
         return false;
+    }
+    public int checkSpellingValidity(String spellingAttempt){
+        int mistakes = 0;
+        for(int index = 0; index < text.length(); index++){
+            if (text.charAt(index) != spellingAttempt.charAt(index)){
+                mistakes++;
+            }
+        }
+        return mistakes;
     }
 
 
