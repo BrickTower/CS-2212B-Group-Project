@@ -1,5 +1,9 @@
 package com.mapstob.group35.core;
 
+// FIX FOR JSON AUTO DETECT FROM GITHUB COPILOT: https://github.com/copilot/share/401d100a-4104-8407-9903-280fe41b405e. FOLLOWING CODE IS HUMAN WRITTEN
+import com.fasterxml.jackson.annotation.JsonAutoDetect;
+
+@JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY, getterVisibility = JsonAutoDetect.Visibility.NONE)
 public class PlayerProfile extends User {
     /** The player's current difficulty level.*/
     private int level;
@@ -8,8 +12,7 @@ public class PlayerProfile extends User {
     /** A {@link Stats} representation of the current Statistics (WPM, accuracy, etc.)*/
     private Stats playerStats;
 
-    /** Empty version of PlayerProfile Constructor. Should only be used for Jackson compatibility, according to this chatbot log from Eric's work:
-     * [PUT LINK HERE]
+    /** Empty version of PlayerProfile Constructor. Should only be used for Jackson compatibility.
      */
     public PlayerProfile() {super();}
 
@@ -18,6 +21,7 @@ public class PlayerProfile extends User {
 
      @param userName String representing the login's userName
      @param password String representing the account's password
+
      @see User
      @author Ethan Gregory
      */

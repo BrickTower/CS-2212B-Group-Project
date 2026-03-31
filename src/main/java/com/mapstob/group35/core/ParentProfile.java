@@ -3,6 +3,10 @@ package com.mapstob.group35.core;
 
 import java.util.LinkedList; // IMPORT ARRAYLIST FOR PLAYER LIST
 
+// FIX FOR JSON AUTO DETECT FROM GITHUB COPILOT: https://github.com/copilot/share/401d100a-4104-8407-9903-280fe41b405e. FOLLOWING CODE IS HUMAN WRITTEN
+import com.fasterxml.jackson.annotation.JsonAutoDetect;
+
+@JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY, getterVisibility = JsonAutoDetect.Visibility.NONE)
 public class ParentProfile extends PlayerProfile { // Parents should be able to play
     /** A list of all Players currently managed by this Parent*/
     private LinkedList<PlayerProfile> playersManaged;
