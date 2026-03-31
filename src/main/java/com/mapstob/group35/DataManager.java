@@ -12,8 +12,6 @@ import java.util.List;
 public class DataManager {
     // object mapper for json file
     private static final ObjectMapper mapper = new ObjectMapper().enable(SerializationFeature.INDENT_OUTPUT);
-    // data json file location
-    private static final String FILE_PATH = "data.json";
 
     public static <T> void saveList(String fileName, List<T> data) throws IOException {
         mapper.writeValue(new File(fileName), data);
