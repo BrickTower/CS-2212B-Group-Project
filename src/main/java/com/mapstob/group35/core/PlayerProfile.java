@@ -8,6 +8,15 @@ public class PlayerProfile extends User {
     /** A {@link Stats} representation of the current Statistics (WPM, accuracy, etc.)*/
     private Stats playerStats;
 
+    /**
+     Player constructor. Creates a new Player Profile object.
+
+     @param userID Integer representing userID
+     @param userName String representing the login's userName
+     @param password String representing the account's password
+     @see User
+     @author Ethan Gregory
+     */
     public PlayerProfile(int userID, String userName, String password) {
         super(userID, userName, password); // CALL INITIAL CONSTRUCTOR & INIT. CLASS-SPECIFIC VARIABLES
         this.level = 1;
@@ -15,12 +24,25 @@ public class PlayerProfile extends User {
         this.playerStats = new Stats();
     }
 
-    public void addCoins(int amount) {
+    /**
+     * Function to add coins to Player's profile. Used when they enter a correct answer.
+     * @throws IllegalArgumentException if coins to add is either 0 or negative
+     * @param amount The amount of coins to add to the Player's Coin amount
+     */
+    public void addCoins(int amount) throws IllegalArgumentException {
+        if (amount <= 0) {
+            throw new IllegalArgumentException("Coin amount not possible to add.");
+        } // END OF IF STATEMENT
         this.coins += amount;
     }
 
+    /**
+     * Boolean function to determine if User can afford an Item from the Item shop. If so, buy the upgrade, removing coins from the account)
+     * @param amount The amount of Coins necessary for purchasing an Item
+     * @return True if Item is bought, False if not.
+     */
     public boolean spendCoins(int amount) {
-        if (amount > this.coins) { // IF WE HAVE LESS COINS THAN AMOUNT, RETURN FALSE
+        if (amount > this.getCoins()) { // IF WE HAVE LESS COINS THAN AMOUNT, RETURN FALSE
             return false;
         } else { // IF WE HAVE ENOUGH, SUBTRACT FROM PROFILE AND RETURN TRUE
             this.coins -= amount;
