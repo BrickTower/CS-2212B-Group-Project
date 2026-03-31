@@ -8,6 +8,10 @@ import java.util.LinkedList;
 public class GameManager {
     private ArrayList<TextUnit> textList;
 
+    private String[] easyDiffWords = {"cake", "cookie", "tea", "hope", "news", "chance", "luck", "known", "you", "soul"};
+    private String[] mediumDiffWords = {"poland", "canada", "reimu", "marisa", "important", "zoot", "dryad", "nomad", "heaven", "honeybee", "sandpaper"};
+    private String[] hardDiffWords = {"artificial", "manipulation", "despised", "topological", "prerequisite", "difficulty", "completion", "andesite", "granite", "drizzled"};
+
     private double curTime;
     private double wordDefaultTimeLeft = 30;
 
