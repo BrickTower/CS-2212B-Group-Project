@@ -1,5 +1,6 @@
 package com.mapstob.group35;
 
+import com.fasterxml.jackson.core.type.TypeReference;
 import com.mapstob.group35.core.ParentProfile;
 import com.mapstob.group35.core.PlayerProfile;
 import javafx.fxml.FXML;
@@ -46,9 +47,9 @@ public class LoginController {
         if (newParentBox.isSelected()) {
             ParentProfile newParent = new ParentProfile(newUserName, newPassword);
             try {
-                List<PlayerProfile> currentList = DataManager.loadList();
+                List<ParentProfile> currentList = DataManager.loadList("parents.json", new TypeReference<List<ParentProfile>>(){});
                 currentList.add(newParent);
-                DataManager.saveList(currentList);
+                DataManager.saveList(currentList, TypeReference<List<ParentProfile>>());
             } catch (Exception e) {
                 e.printStackTrace();
             }

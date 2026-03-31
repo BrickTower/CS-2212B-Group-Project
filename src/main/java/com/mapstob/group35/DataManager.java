@@ -14,8 +14,6 @@ public class DataManager {
 
 
     private static final ObjectMapper mapper = new ObjectMapper().enable(SerializationFeature.INDENT_OUTPUT);
-    // data json file location
-    private static final String FILE_PATH = "data.json";
 
     /**
      * Saves the data in the file from the given filename into a list of any object type
