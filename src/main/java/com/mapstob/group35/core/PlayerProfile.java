@@ -8,6 +8,11 @@ public class PlayerProfile extends User {
     /** A {@link Stats} representation of the current Statistics (WPM, accuracy, etc.)*/
     private Stats playerStats;
 
+    /** Empty version of PlayerProfile Constructor. Should only be used for Jackson compatibility, according to this chatbot log from Eric's work:
+     * [PUT LINK HERE]
+     */
+    public PlayerProfile() {super();}
+
     /**
      Player constructor. Creates a new Player Profile object.
 

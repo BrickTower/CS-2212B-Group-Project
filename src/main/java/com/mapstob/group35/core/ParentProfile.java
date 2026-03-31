@@ -7,6 +7,11 @@ public class ParentProfile extends PlayerProfile { // Parents should be able to 
     /** A list of all Players currently managed by this Parent*/
     private LinkedList<PlayerProfile> playersManaged;
 
+    /** Empty version of ParentProfile Constructor. Should only be used for Jackson compatibility, according to this chatbot log from Eric's work:
+     * [PUT LINK HERE]
+     */
+    public ParentProfile() {super();}
+
     public ParentProfile(String userName, String password) {
         super(userName, password);
         this.playersManaged = new LinkedList<PlayerProfile>();

@@ -11,6 +11,11 @@ public class User {
     private String userName;
     private String password;
 
+    /** Empty version of User Constructor. Should only be used for Jackson compatibility, according to this chatbot log from Eric's work:
+     * [PUT LINK HERE]
+     */
+    public User() {}
+
     /**
        User constructor. Creates a new User object.
 
