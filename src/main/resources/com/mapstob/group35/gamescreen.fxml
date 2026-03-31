@@ -150,42 +150,23 @@
                   </children>
                </HBox>
             </children></VBox>
-         <HBox>
+
+         <Pane layoutX="229.0" layoutY="-6.0" prefHeight="62.0" prefWidth="225.0">
             <children>
-               <Pane prefHeight="62.0" prefWidth="225.0">
-                  <children>
-                     <Pane layoutX="1.0" layoutY="-1.0" prefHeight="62.0" prefWidth="225.0" style="-fx-background-color: #05001A;">
-                        <effect>
-                           <GaussianBlur radius="43.56" />
-                        </effect>
-                     </Pane>
-                     <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#05001a" height="37.0" layoutX="13.0" layoutY="13.0" stroke="WHITE" strokeType="INSIDE" strokeWidth="5.0" width="200.0" />
-                     <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#664143" height="37.0" layoutX="13.0" layoutY="13.0" stroke="WHITE" strokeType="INSIDE" width="200.0" />
-                     <Text fill="WHITE" layoutX="74.0" layoutY="37.0" strokeType="OUTSIDE" strokeWidth="0.0" text="HP: 100/100">
-                        <font>
-                           <Font size="16.0" />
-                        </font>
-                     </Text>
-                  </children>
+               <Pane layoutX="1.0" layoutY="-1.0" prefHeight="62.0" prefWidth="225.0" style="-fx-background-color: #05001A;">
+                  <effect>
+                     <GaussianBlur radius="43.56" />
+                  </effect>
                </Pane>
-               <Pane prefHeight="62.0" prefWidth="225.0">
-                  <children>
-                     <Pane layoutX="1.0" layoutY="-1.0" prefHeight="62.0" prefWidth="225.0" style="-fx-background-color: #05001A;">
-                        <effect>
-                           <GaussianBlur radius="43.56" />
-                        </effect>
-                     </Pane>
-                     <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#05001a" height="37.0" layoutX="13.0" layoutY="13.0" stroke="WHITE" strokeType="INSIDE" strokeWidth="5.0" width="200.0" />
-                     <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#7d8570" height="37.0" layoutX="66.0" layoutY="13.0" stroke="WHITE" strokeType="INSIDE" width="147.0" />
-                     <Text fill="WHITE" layoutX="74.0" layoutY="37.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Time left: #">
-                        <font>
-                           <Font size="16.0" />
-                        </font>
-                     </Text>
-                  </children>
-               </Pane>
+               <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#05001a" height="37.0" layoutX="13.0" layoutY="13.0" stroke="WHITE" strokeType="INSIDE" strokeWidth="5.0" width="200.0" />
+               <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#7d8570" height="37.0" layoutX="66.0" layoutY="13.0" stroke="WHITE" strokeType="INSIDE" width="147.0" />
+               <Text fill="WHITE" layoutX="74.0" layoutY="37.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Time left: #">
+                  <font>
+                     <Font size="16.0" />
+                  </font>
+               </Text>
             </children>
-         </HBox>
+         </Pane>
       </children></Pane>
    <VBox layoutX="11.0" layoutY="46.05078125">
       <children>
