@@ -6,7 +6,7 @@
 
 <VBox xmlns="http://javafx.com/javafx/17"
       xmlns:fx="http://javafx.com/fxml"
-      fx:controller="com.mapstob.group35.core.LoginController"
+      fx:controller="com.mapstob.group35.LoginController"
       alignment="CENTER"
       spacing="18"
       style="-fx-background-color: #05001A;">
@@ -14,7 +14,7 @@
     <!-- TOP BAR -->
     <BorderPane style="-fx-background-color: #062E50;">
         <left>
-            <Button text="EXIT"
+            <Button text="Back"
                     onAction="#handleExit"
                     style="-fx-background-color: #7D8570; -fx-text-fill: #FBFAF3;" />
         </left>
@@ -47,12 +47,6 @@
             <Button onAction="#handleLogin" prefWidth="150" style="-fx-background-color: #062E50; -fx-text-fill: #FBFAF3; -fx-background-radius: 8;" text="LOGIN" />
 
             <Button onAction="#handleRegister" prefWidth="150" style="-fx-background-color: #062E50; -fx-text-fill: #FBFAF3; -fx-background-radius: 8;" text="REGISTER" />
-
-            <VBox alignment="CENTER_LEFT" spacing="2">
-                <Label style="-fx-text-fill: #FBFAF3; -fx-font-size: 10px;" text="PARENTAL CONTROLS CODE" />
-
-                <TextField fx:id="parentalField" prefWidth="110" style="-fx-background-color: #FBFAF3;" />
-            </VBox>
 
         </HBox>
     </VBox>
