@@ -8,28 +8,14 @@ import java.util.LinkedList;
 public class GameManager {
     private ArrayList<TextUnit> textList;
 
+    private double curTime;
     private double wordDefaultTimeLeft;
-    private int maxLife;
-    private int curLife;
 
 
     //Constructor
     public GameManager() {
         textList = new ArrayList<TextUnit>();
-        maxLife = 100;//TODO change
-        curLife = 100;
-
-    }
-
-    public void heal(int life) {
-        if  (life+curLife > maxLife) {curLife = maxLife;}
-        else {curLife += life;}
-    }
-    public void takeDamage(int life) {
-        if (curLife < life) {die();}
-        curLife -= life;
-    }
-    public void die(){
+        curTime = 0;
 
     }
 
@@ -41,21 +27,14 @@ public class GameManager {
         textList.remove(text);
     }
 
-    public void spellingAttempt(String Text){
-        int attemptMistakes = textList.getFirst().checkSpellingValidity(Text);
-        if(attemptMistakes>0){
 
-        }
-        else{
 
-        }
-    }
 
 
     public void checkTime(){
         for (int index = 0; index < textList.size(); index++){
             TextUnit text = textList.get(index);
-            if (text.checkTime(System.nanoTime())){
+            if (text.checkTime(curTime)){
                 textTimeout(text);
             }
         }
