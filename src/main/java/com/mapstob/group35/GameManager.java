@@ -7,21 +7,26 @@ import java.util.LinkedList;
 
 public class GameManager {
     private int wave;
-    private double waveTime;
-    private double waveInitTime;
+    private int curTime;
+    private int waveTime;
     private int defaultWaveTime;
+    private int wordSpawnTime;
+    private int defaultWordSpawnTime;
+
     private int coins;
 
     private ArrayList<TextUnit> textList;
     private int maxLife;
     private int curLife;
 
+    private Process process;
+
     //TODO move elsewhere
     private String[] easyDiffWords = {"cake", "cookie", "tea", "hope", "news", "chance", "luck", "known", "you", "soul"};
     private String[] mediumDiffWords = {"poland", "canada", "reimu", "marisa", "important", "zoot", "dryad", "nomad", "heaven", "honeybee", "sandpaper"};
     private String[] hardDiffWords = {"artificial", "manipulation", "despised", "topological", "prerequisite", "difficulty", "completion", "andesite", "granite", "drizzled"};
 
-    private double wordDefaultTimeLeft;
+    private int wordDefaultTimeLeft;
 
 
     //Constructor
@@ -31,6 +36,7 @@ public class GameManager {
         curLife = maxLife;
         wave = 0;
         defaultWaveTime = 30;
+        wordDefaultTimeLeft = 10;
         coins = 0;
     }
     //if loading data
@@ -42,6 +48,25 @@ public class GameManager {
         this.waveTime = waveTime;
         this.coins = coins;
     }
+    /// /// /// /// PROCESS
+    public void process() throws InterruptedException {
+        while(true){
+            Thread.sleep(1000);
+            incTime();
+            for(int index = 0; index < textList.size(); index++){
+                TextUnit text = textList.get(index);
+                text.incTime();
+                if (text.checkTime()){
+                    textTimeout(text);
+                }
+            }
+        }
+
+    }
+
+
+
+
     /// /// /// /// COINS
     public void gainCoins(int amount){coins += amount;}
     public int getCoins() {return coins;}
@@ -86,24 +111,22 @@ public class GameManager {
         //TODO other additions?
         gainCoins(difficulty);
     }
+    public void setWordSpawnTime(int WordTime){this.wordSpawnTime = WordTime;}
+    public void incWordSpawnTime(){}
+    public double getWordSpawnTimeLeft () {return wordSpawnTime - (curLife % wordSpawnTime);}
 
 
     /// /// /// /// TIME
     public void checkTime(){
         for (int index = 0; index < textList.size(); index++){
             TextUnit text = textList.get(index);
-            if (text.checkTime(System.nanoTime())){
+            if (text.checkTime()){
                 textTimeout(text);
             }
         }
     }
 
-    //use for time left bar
-    public double getPercentTextTimeLeft(TextUnit text){
-        double totaltime = text.getTimeLimit() - text.getInitTime();
-        double curtime = System.nanoTime() - text.getInitTime();
-        return curtime / totaltime;
-    }
+
     public void textTimeout(TextUnit text) {
         takeDamage(text.getText().length() * 2);
         removeText(text);
@@ -112,8 +135,9 @@ public class GameManager {
     /// /// /// /// WAVE
     public void incWave(){wave++;}
     public int getWave(){return wave;}
-    public void setWaveTime(double waveTime){this.waveTime = waveTime;}
-    public double getWaveTimeLeft () {return waveTime - System.nanoTime();}
+    public void setWaveTime(int waveTime){this.waveTime = waveTime;}
+    public double getWaveTimeLeft () {return waveTime - curTime;}
+
 
     public void waveOver(){
         textList.clear();
@@ -121,13 +145,18 @@ public class GameManager {
         saveInfo();
     }
     public void startWave(){
-        waveInitTime =  System.nanoTime();
-        setWaveTime(waveInitTime + defaultWaveTime * 1000000000);
+        curTime = 0;
+        setWaveTime(defaultWaveTime);
     }
-
+    public void incTime(){
+        curTime++;
+        if (curTime>=waveTime){
+            waveOver();
+        }
+    }
     // for the timer icon
-    public double waveCompletionPercent(){
-        return (waveTime - System.nanoTime()) /(waveTime - waveInitTime);
+    public float waveCompletionPercent(){
+        return (float) curTime / (float) waveTime;
     }
 
     /// /// /// /// SAVE INFO
@@ -137,5 +166,6 @@ public class GameManager {
     private void die(){
         //TODO show death screen, delete current run stats
     }
+
 
 }

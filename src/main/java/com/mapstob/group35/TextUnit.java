@@ -3,26 +3,29 @@ package com.mapstob.group35;
 public class TextUnit {
     private String text;
     private int difficulty;
-    private double initTime;
-    private double timeLimit;
+    private int curTime;
+    private int timeLimit;
 
-    public TextUnit(String text, int difficulty, double timeLimit) {
+    public TextUnit(String text, int difficulty, int timeLimit) {
         this.text = text;
         this.difficulty = difficulty;
         this.timeLimit = timeLimit;
-        initTime = System.nanoTime();
+        curTime = 0;
     }
 
     public double getTimeLimit(){return timeLimit;}
-    public double getInitTime(){return initTime;}
-
+    public double getCurTime(){return curTime;}
+    public void incTime(){ curTime++;}
 
     public String getText(){return text;}
 
     public int getDifficulty(){return difficulty;}
 
-    public boolean checkTime(double curTime){
-        if (curTime > timeLimit){
+    public float getPercentTime(){
+        return (float)curTime / (float)timeLimit;
+    }
+    public boolean checkTime(){
+        if (curTime >= timeLimit){
             return true;
         }
         return false;
