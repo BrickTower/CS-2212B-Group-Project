@@ -49,16 +49,17 @@ public class LoginController {
             try {
                 List<ParentProfile> currentList = DataManager.loadList("parents.json", new TypeReference<List<ParentProfile>>(){});
                 currentList.add(newParent);
-                DataManager.saveList(currentList, TypeReference<List<ParentProfile>>());
+                DataManager.saveList("parents.json", currentList);
             } catch (Exception e) {
                 e.printStackTrace();
             }
         } else {
             PlayerProfile newPlayer = new PlayerProfile(newUserName, newPassword);
             try {
-                List<PlayerProfile> currentList = DataManager.loadList();
+                List<PlayerProfile> currentList = DataManager.loadList("players.json", new TypeReference<List<PlayerProfile>>() {
+                });
                 currentList.add(newPlayer);
-                DataManager.saveList(currentList);
+                DataManager.saveList("players.json" ,currentList);
             } catch (Exception e) {
                 e.printStackTrace();
             }
