@@ -8,7 +8,7 @@ import com.mapstob.group35.core.PlayerProfile;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 public class DataManager {
@@ -39,7 +39,7 @@ public class DataManager {
         File file = new File(FILE_PATH);
         
         if (!file.exists()) {
-            return new ArrayList<>();
+            return new LinkedList<>();
         }
 
         // We use TypeReference because Java "erases" generic types at runtime.
