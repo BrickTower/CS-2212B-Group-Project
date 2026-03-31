@@ -9,7 +9,7 @@ public class GameManager {
     private ArrayList<TextUnit> textList;
 
     private double curTime;
-    private double wordDefaultTimeLeft;
+    private double wordDefaultTimeLeft = 30;
 
 
     //Constructor
