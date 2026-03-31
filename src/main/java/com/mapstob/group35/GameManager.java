@@ -42,6 +42,7 @@ public class GameManager {
         this.waveTime = waveTime;
         this.coins = coins;
     }
+    /// /// /// /// COINS
     public void gainCoins(int amount){coins += amount;}
     public int getCoins() {return coins;}
     public boolean useCoins(int amount){
@@ -51,7 +52,7 @@ public class GameManager {
         }
         return false;
     }
-
+    /// /// /// /// HEALTH
     public void takeDamage(int amount){
         if (amount > curLife) {curLife = 0; die();}
         else{ curLife -= amount; }
@@ -62,7 +63,7 @@ public class GameManager {
     }
 
 
-
+    /// /// /// /// TEXT
     public void makeText(String text, int difficulty) {
         TextUnit newTextUnit = new TextUnit(text,difficulty,wordDefaultTimeLeft);
         textList.add(newTextUnit);
@@ -87,7 +88,7 @@ public class GameManager {
     }
 
 
-
+    /// /// /// /// TIME
     public void checkTime(){
         for (int index = 0; index < textList.size(); index++){
             TextUnit text = textList.get(index);
@@ -107,6 +108,8 @@ public class GameManager {
         takeDamage(text.getText().length() * 2);
         removeText(text);
     }
+
+    /// /// /// /// WAVE
     public void incWave(){wave++;}
     public int getWave(){return wave;}
     public void setWaveTime(double waveTime){this.waveTime = waveTime;}
@@ -127,6 +130,7 @@ public class GameManager {
         return (waveTime - System.nanoTime()) /(waveTime - waveInitTime);
     }
 
+    /// /// /// /// SAVE INFO
     private void saveInfo(){
         //TODO save information
     }
