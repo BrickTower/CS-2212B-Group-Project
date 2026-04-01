@@ -25,6 +25,7 @@
         <padding>
             <Insets bottom="40" left="60" right="60" top="40" />
         </padding>
+      <Label fx:id="errorMessage" style="-fx-text-fill: #7D8570; -fx-font-weight: bold;" text="Label" visible="false" />
 
         <Label style="-fx-text-fill: #FBFAF3; -fx-font-weight: bold;" text="USERNAME" />
 
@@ -38,12 +39,10 @@
 
             <Button onAction="#handleLogin" prefWidth="150" style="-fx-background-color: #062E50; -fx-text-fill: #FBFAF3; -fx-background-radius: 8;" text="LOGIN" />
 
-            <Button onAction="#handleRegister" prefWidth="150" style="-fx-background-color: #062E50; -fx-text-fill: #FBFAF3; -fx-background-radius: 8;" text="REGISTER" />
+            <Button fx:id="registerButton" onAction="#handleRegister" prefWidth="150" style="-fx-background-color: #062E50; -fx-text-fill: #FBFAF3; -fx-background-radius: 8;" text="REGISTER" />
 
             <VBox alignment="CENTER_LEFT" spacing="2">
-                <Label style="-fx-text-fill: #FBFAF3; -fx-font-size: 10px;" text="PARENTAL CONTROLS CODE" />
-
-                <TextField fx:id="parentalField" prefWidth="110" style="-fx-background-color: #FBFAF3;" />
+            <CheckBox fx:id="newParentBox" mnemonicParsing="false" style="-fx-text-fill: #FBFAF3; -fx-font-weight: bold;" text="New Parent Account" />
             </VBox>
 
         </HBox>

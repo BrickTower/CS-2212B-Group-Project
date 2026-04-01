@@ -1,5 +1,9 @@
 package com.mapstob.group35.core;
 
+// FIX FOR JSON AUTO DETECT FROM GITHUB COPILOT: https://github.com/copilot/share/401d100a-4104-8407-9903-280fe41b405e. CODE FOLLOWING THIS ANNOTATION IS HUMAN WRITTEN
+import com.fasterxml.jackson.annotation.JsonAutoDetect;
+
+@JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY, getterVisibility = JsonAutoDetect.Visibility.NONE)
 public class Stats {
     /** A sum of all WPM entered by the Player during games*/
     private double totalWPM;
@@ -66,7 +70,7 @@ public class Stats {
      * Returns the Player's Accuracy, across all games.
      * @return A Double representation of the Player's Accuracy, as a percentage (i.e. 75%)
      */
-    public double getAccuracy() {
+    public double getAverageAccuracy() {
         return this.averageAccuracy;
     }
 }

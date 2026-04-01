@@ -3,13 +3,21 @@ package com.mapstob.group35.core;
 
 import java.util.LinkedList; // IMPORT ARRAYLIST FOR PLAYER LIST
 
-public class ParentProfile extends PlayerProfile { // Parents should be able to play
-    /** A list of all Players currently managed by this Parent*/
-    private LinkedList<PlayerProfile> playersManaged;
+// FIX FOR JSON AUTO DETECT FROM GITHUB COPILOT: https://github.com/copilot/share/401d100a-4104-8407-9903-280fe41b405e. CODE FOLLOWING THIS ANNOTATION IS HUMAN WRITTEN
+import com.fasterxml.jackson.annotation.JsonAutoDetect;
 
-    public ParentProfile(int userID, String userName, String password) {
-        super(userID, userName, password);
-        this.playersManaged = new LinkedList<PlayerProfile>();
+@JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY, getterVisibility = JsonAutoDetect.Visibility.NONE)
+public class ParentProfile extends PlayerProfile { // Parents should be able to play
+    /** A list of all Players currently managed by this Parent, listed by UserName*/
+    private LinkedList<String> playersManaged;
+
+    /** Empty version of ParentProfile Constructor. Should only be used for Jackson compatibility.
+     */
+    public ParentProfile() {super();}
+
+    public ParentProfile(String userName, String password) {
+        super(userName, password);
+        this.playersManaged = new LinkedList<String>();
     }
 
     /**
@@ -25,7 +33,7 @@ public class ParentProfile extends PlayerProfile { // Parents should be able to 
         else if (this.playersManaged.contains(newPlayer)) { // GUARD AGAINST PLAYER IF ALREADY MANAGED, AND IF PLAYER IS PARENT
             throw new IllegalArgumentException("Player already exists in list.");
         } else {
-            this.playersManaged.add(newPlayer); // ADD IF NOT IN LIST
+            this.playersManaged.add(newPlayer.getUserName()); // ADD IF NOT IN LIST
         }
     }
 

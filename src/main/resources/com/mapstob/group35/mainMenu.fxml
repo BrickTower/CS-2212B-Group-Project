@@ -25,7 +25,7 @@
                </font>
             </Button>
             <Pane prefHeight="6.0" prefWidth="240.0" />
-            <Button mnemonicParsing="false" prefHeight="51.0" prefWidth="411.0" style="-fx-background-color: #062E50;" text="Stats" textFill="WHITE">
+            <Button onAction="#testFunction" mnemonicParsing="false" prefHeight="51.0" prefWidth="411.0" style="-fx-background-color: #062E50;" text="Stats" textFill="WHITE">
                <font>
                   <Font name="Consolas Bold" size="24.0" />
                </font>
