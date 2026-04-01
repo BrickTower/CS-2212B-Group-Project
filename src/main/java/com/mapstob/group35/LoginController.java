@@ -3,13 +3,12 @@ package com.mapstob.group35;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.mapstob.group35.core.ParentProfile;
 import com.mapstob.group35.core.PlayerProfile;
+import com.mapstob.group35.core.loggedUser;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.control.*;
-import javafx.stage.Stage;
-import javafx.scene.Node;
 
 import java.io.IOException;
 import java.util.List;
@@ -79,14 +78,24 @@ public class LoginController extends baseController {
             }
 
             if (userFoundInPlayer || userFoundInParent) {
+                // SAVE USER TO OUR GLOBAL LOGGED USER BEFORE CHANGING SCENES
+                loggedUser account = new loggedUser();
+                account.setCurrUser(foundUser);
+
+                // CHANGE TO MAIN MENU
                 FXMLLoader load = new FXMLLoader(getClass().getResource("mainMenu.fxml"));
                 Parent root = load.load();
                 mainController control = load.getController();
-                control.setUser(foundUser);
+
                 backButton.getScene().setRoot(root);
+            } else {
+                throw new IllegalArgumentException("Incorrect username/password");
             }
         } catch (IllegalArgumentException e) {
-            throw new RuntimeException(e);
+            errorMessage.setText(e.getMessage()); // SET ERROR MESSAGE ON REGISTER
+            if (!errorMessage.isVisible()) {
+                errorMessage.setVisible(true);
+            }
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

@@ -2,6 +2,7 @@ package com.mapstob.group35;
 
 import com.mapstob.group35.core.ParentProfile;
 import com.mapstob.group35.core.PlayerProfile;
+import com.mapstob.group35.core.loggedUser;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
@@ -14,7 +15,8 @@ public class mainController extends baseController{
     @FXML
     private Button backButton;
 
-    private PlayerProfile currentUser;
+    private loggedUser account = new loggedUser();
+    private PlayerProfile currentUser = account.getCurrUser();
     /*
         Moves
      */
@@ -23,13 +25,7 @@ public class mainController extends baseController{
         FXMLLoader load = new FXMLLoader(getClass().getResource("tutorialScreen.fxml"));
         tutorial.getScene().setRoot(load.load());
     }
-    public void setUser(PlayerProfile user) {
-        if (user instanceof ParentProfile) { // IF MEMBER OF PARENTPROFILE (SUBCLASS) DECLARE IT AS SUCH
-            this.currentUser = (ParentProfile) user;
-        } else {
-            this.currentUser = user;
-        }
-    }
+
 
     public void testFunction() { // QUICK TEST FUNCTION TO MAKE SURE SAVING USER DATA WORKS
         if (currentUser != null){
