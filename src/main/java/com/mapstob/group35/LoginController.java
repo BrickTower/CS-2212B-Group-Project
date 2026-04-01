@@ -89,9 +89,9 @@ public class LoginController {
                     usernameField.clear();
                     passwordField.clear();
                 }
-        } catch (IOException e) {
+        } catch (IOException e) { // THROW RUNTIME EXCEPTION IF SPECIFICALLY IO
             throw new RuntimeException(e);
-        } catch (IllegalArgumentException e) {
+        } catch (IllegalArgumentException e) { // IF NATURAL CAUGHT ERROR, OUTPUT ERROR MESSAGE
             errorMessage.setText(e.getMessage()); // SET ERROR MESSAGE ON REGISTER
             if (!errorMessage.isVisible()) {
                 errorMessage.setVisible(true);
