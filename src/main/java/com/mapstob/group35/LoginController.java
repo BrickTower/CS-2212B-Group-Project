@@ -3,8 +3,10 @@ package com.mapstob.group35;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.mapstob.group35.core.ParentProfile;
 import com.mapstob.group35.core.PlayerProfile;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
 import javafx.scene.Node;
@@ -12,7 +14,7 @@ import javafx.scene.Node;
 import java.io.IOException;
 import java.util.List;
 
-public class LoginController {
+public class LoginController extends baseController {
 
     /// Field to enter account username
     @FXML
@@ -36,7 +38,59 @@ public class LoginController {
 
     @FXML
     private void handleLogin() {
-        System.out.println("Logging in as: " + usernameField.getText());
+        // GET TEXT FROM USERNAME AND PASSWORD FIELDS
+        String userName = usernameField.getText();
+        String passWord = passwordField.getText();
+
+        // CHECK IF FIELDS ARE ALL FILLED, THROW ERROR MESSAGE IF NOT
+        if (userName.isBlank() || passWord.isBlank()) {
+            errorMessage.setText("Not all fields are filled."); // SET ERROR MESSAGE ON REGISTER
+            if (!errorMessage.isVisible()) {
+                errorMessage.setVisible(true);
+            }
+            return; // END PROGRAM EARLY
+        }
+
+        try {
+            boolean userFoundInParent = false, userFoundInPlayer = false;
+            PlayerProfile foundUser = null;
+
+            List<ParentProfile> parents = DataManager.loadList("parents.json", new TypeReference<List<ParentProfile>>() {
+            });
+            List<PlayerProfile> players = DataManager.loadList("players.json", new TypeReference<List<PlayerProfile>>() {
+            });
+
+
+            for (ParentProfile parent : parents) { // CHECK PARENT PROFILES FIRST
+                if (parent.getUserName().equals(userName) && parent.getPassword().equals(passWord)) {
+                    userFoundInParent = true;
+                    foundUser = parent;
+                    break;
+                }
+            }
+            if (!userFoundInParent) { // IF NOT THERE, CHECK PLAYERS
+                for (PlayerProfile player : players) {
+                    if (player.getUserName().equals(userName) && player.getPassword().equals(passWord)) {
+                        userFoundInPlayer = true;
+                        foundUser = player;
+                        break;
+                    }
+                }
+            }
+
+            if (userFoundInPlayer || userFoundInParent) {
+                FXMLLoader load = new FXMLLoader(getClass().getResource("mainMenu.fxml"));
+                Parent root = load.load();
+                mainController control = load.getController();
+                control.setUser(foundUser);
+                backButton.getScene().setRoot(root);
+            }
+        } catch (IllegalArgumentException e) {
+            throw new RuntimeException(e);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
     }
 
     /**
@@ -101,7 +155,7 @@ public class LoginController {
     }
 
     @FXML
-    private void handleExit(javafx.event.ActionEvent event) throws IOException {
+    private void handleExit(ActionEvent event) throws IOException {
         FXMLLoader load = new FXMLLoader(getClass().getResource("baseMenu.fxml"));
         backButton.getScene().setRoot(load.load());
     }
