@@ -4,17 +4,21 @@ package com.mapstob.group35.core;
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 
 @JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY, getterVisibility = JsonAutoDetect.Visibility.NONE)
-public class PlayerProfile extends User {
+public class PlayerProfile {
     /** The player's current difficulty level.*/
     private int level;
     /** The current amount of coins the Player has.*/
     private int coins;
     /** A {@link Stats} representation of the current Statistics (WPM, accuracy, etc.)*/
     private Stats playerStats;
+    ///  Profile's username (i.e. egregor4)
+    private String userName;
+    ///  Profile's password
+    private String password;
 
     /** Empty version of PlayerProfile Constructor. Should only be used for Jackson compatibility.
      */
-    public PlayerProfile() {super();}
+    public PlayerProfile() {}
 
     /**
      Player constructor. Creates a new Player Profile object.
@@ -22,11 +26,11 @@ public class PlayerProfile extends User {
      @param userName String representing the login's userName
      @param password String representing the account's password
 
-     @see User
      @author Ethan Gregory
      */
     public PlayerProfile(String userName, String password) {
-        super(userName, password); // CALL INITIAL CONSTRUCTOR & INIT. CLASS-SPECIFIC VARIABLES
+        this.userName = userName; // INIT. CLASS-SPECIFIC VARIABLES
+        this.password = password;
         this.level = 1;
         this.coins = 0;
         this.playerStats = new Stats();
@@ -114,5 +118,25 @@ public class PlayerProfile extends User {
      */
     protected void resetStats() {
         this.playerStats = new Stats();
+    }
+
+    /**
+     * Returns a String representation of the username
+     * @return the Profile's userName, represented as a String
+     * @see String
+     * @author Ethan Gregory
+     */
+    public String getUserName() {
+        return this.userName;
+    }
+
+    /**
+     * Returns a String representation of the User's password
+     * @return the Profile's password, represented as a String
+     * @see String
+     * @author Ethan Gregory
+     */
+    public String getPassword() {
+        return this.password;
     }
 }
