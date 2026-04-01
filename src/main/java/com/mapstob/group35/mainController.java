@@ -15,7 +15,9 @@ public class mainController {
     @FXML
     private Button backButton;
 
+    // THIS LINE CREATES A CONNECTION TO THE LOGGED USER CLASS
     private loggedUser account = new loggedUser();
+    // THIS LINE PULLS THE CURRENTLY SAVED USER (WHICH SHOULD BE ESTABLISHED IN LOGIN) AND SAVES IT TO A VARIABLE
     private PlayerProfile currentUser = account.getCurrUser();
     /*
         Moves
