@@ -16,6 +16,12 @@ public class loggedUser {
     ///  The currently logged-in user. Either a {@link PlayerProfile} or a {@link ParentProfile}.
     private static PlayerProfile currUser;
 
+    /**
+     * Sets a {@link PlayerProfile} as the Current User program-wide. Should only be used in the
+     * {@link com.mapstob.group35.LoginController} class, due to it only being necessary when logging in.
+     * @param user A Valid {@link PlayerProfile} or {@link ParentProfile} class. The code will accomodate for both.
+     * @author Ethan Gregory
+     */
     public void setCurrUser(PlayerProfile user) {
         if (user instanceof ParentProfile) { // IF MEMBER OF PARENTPROFILE (SUBCLASS) DECLARE IT AS SUCH
             currUser = (ParentProfile) user;
@@ -24,6 +30,11 @@ public class loggedUser {
         }
     }
 
+    /**
+     * Returns the currently logged-in Profile
+     * @return either a {@link PlayerProfile} or {@link ParentProfile} Object, depending on class created.
+     * @author Ethan Gregory
+     */
     public PlayerProfile getCurrUser() {
         if (currUser instanceof ParentProfile) { // IF MEMBER OF PARENTPROFILE (SUBCLASS) DECLARE IT AS SUCH
             return (ParentProfile) currUser;
