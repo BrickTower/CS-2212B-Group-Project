@@ -6,7 +6,7 @@ import javafx.scene.control.Button;
 
 import java.io.IOException;
 
-public class tutorialController extends baseController {
+public class tutorialController {
     @FXML
     private Button backButton;
 

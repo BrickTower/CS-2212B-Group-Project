@@ -13,7 +13,7 @@ import javafx.scene.control.*;
 import java.io.IOException;
 import java.util.List;
 
-public class LoginController extends baseController {
+public class LoginController {
 
     /// Field to enter account username
     @FXML
