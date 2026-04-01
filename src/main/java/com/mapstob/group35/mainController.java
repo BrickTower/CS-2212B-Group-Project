@@ -9,7 +9,7 @@ import javafx.scene.control.Button;
 
 import java.io.IOException;
 
-public class mainController extends baseController{
+public class mainController {
     @FXML
     private Button tutorial;
     @FXML
