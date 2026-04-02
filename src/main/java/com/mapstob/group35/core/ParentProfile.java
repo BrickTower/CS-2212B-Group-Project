@@ -30,7 +30,7 @@ public class ParentProfile extends PlayerProfile { // Parents should be able to 
         if ((newPlayer instanceof ParentProfile)) {
             throw new IllegalArgumentException("Parents cannot be managed by other Parents.");
         }
-        else if (this.playersManaged.contains(newPlayer)) { // GUARD AGAINST PLAYER IF ALREADY MANAGED, AND IF PLAYER IS PARENT
+        else if (this.playersManaged.contains(newPlayer.getUserName())) { // GUARD AGAINST PLAYER IF ALREADY MANAGED, AND IF PLAYER IS PARENT
             throw new IllegalArgumentException("Player already exists in list.");
         } else {
             this.playersManaged.add(newPlayer.getUserName()); // ADD IF NOT IN LIST
@@ -43,10 +43,10 @@ public class ParentProfile extends PlayerProfile { // Parents should be able to 
      * @param player A valid Player who is managed by the calling Parent
      */
     public void removePlayer(PlayerProfile player) {
-        if (!this.playersManaged.contains(player)) { // GUARD AGAINST PLAYER IF ALREADY MANAGED, AND IS NOT PARENT AS WELL
+        if (!this.playersManaged.contains(player.getUserName())) { // GUARD AGAINST PLAYER IF ALREADY MANAGED, AND IS NOT PARENT AS WELL
             throw new IllegalArgumentException("Player is not managed by this Parent.");
         } else {
-            this.playersManaged.remove(player);
+            this.playersManaged.remove(player.getUserName());
         }
     }
 
@@ -56,7 +56,7 @@ public class ParentProfile extends PlayerProfile { // Parents should be able to 
      * @param player A valid Player who is managed by the calling Parent
      */
     public Stats getPlayerStats(PlayerProfile player) {
-        if (!this.playersManaged.contains(player)) { // CHECK TO SEE IF PLAYER IS MANAGED BY PARENT. IF NOT, THROW AN ERROR
+        if (!this.playersManaged.contains(player.getUserName())) { // CHECK TO SEE IF PLAYER IS MANAGED BY PARENT. IF NOT, THROW AN ERROR
             throw new IllegalArgumentException("Player is not managed by this Parent.");
         } else { // OTHERWISE, GET STATS
             return player.getPlayerStats();
@@ -69,7 +69,7 @@ public class ParentProfile extends PlayerProfile { // Parents should be able to 
      * @param player A valid Player who is managed by the calling Parent
      */
     public void resetPlayerStats(PlayerProfile player) {
-        if (!this.playersManaged.contains(player)) { // CHECK TO SEE IF PLAYER IS MANAGED BY PARENT. IF NOT, THROW AN ERROR
+        if (!this.playersManaged.contains(player.getUserName())) { // CHECK TO SEE IF PLAYER IS MANAGED BY PARENT. IF NOT, THROW AN ERROR
             throw new IllegalArgumentException("Player is not managed by this Parent.");
         } else { // OTHERWISE, RESET STATS
             player.resetStats();

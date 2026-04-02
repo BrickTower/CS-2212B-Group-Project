@@ -18,6 +18,7 @@ public class TextManager {
     private ArrayList<Integer> WPMTracker;
 
     public TextManager() {
+        this.textList = new ArrayList<TextUnit>();
         WPMTracker = new ArrayList<Integer>();
         WPM = 0;
         curTime = 0;
@@ -28,6 +29,7 @@ public class TextManager {
         wordsCompleted = 0;
     }
     public TextManager(int defaultWordSpawnTime,int wordDefaultTimeLeft) {
+        this.textList = new ArrayList<TextUnit>();
         WPMTracker = new ArrayList<Integer>();
         WPM = 0;
         curTime = 0;
