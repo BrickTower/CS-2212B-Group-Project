@@ -5,6 +5,7 @@ import com.mapstob.group35.core.PlayerProfile;
 import com.mapstob.group35.core.loggedUser;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.control.Button;
 
 import java.io.IOException;
@@ -60,7 +61,10 @@ public class mainController {
         } else {
             try {
                 FXMLLoader load = new FXMLLoader(getClass().getResource("parentalScreen.fxml"));
-                parentalButton.getScene().setRoot(load.load());
+                Parent root = load.load();
+                parentalController setup = load.getController();
+                setup.getParentsPlayers(); // POPULATE LIST WITH MAIN OPTIONS
+                parentalButton.getScene().setRoot(root);
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }

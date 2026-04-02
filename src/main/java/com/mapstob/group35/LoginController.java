@@ -82,8 +82,6 @@ public class LoginController {
                 // CHANGE TO MAIN MENU
                 FXMLLoader load = new FXMLLoader(getClass().getResource("mainMenu.fxml"));
                 Parent root = load.load();
-                mainController control = load.getController();
-
                 backButton.getScene().setRoot(root);
             } else {
                 throw new IllegalArgumentException("Incorrect username/password");

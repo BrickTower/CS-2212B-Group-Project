@@ -181,4 +181,12 @@ public class PlayerProfile {
     public String getPassword() {
         return this.password;
     }
+
+    /**
+     * Overloaded toString method for all Profiles
+     * @return the Profile's username
+     */
+    public String toString() {
+        return this.getUserName();
+    }
 }

@@ -9,6 +9,7 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.SortedList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.control.*;
 
 import java.io.IOException;
@@ -22,7 +23,7 @@ public class parentalController {
     private ParentProfile currentUser = (ParentProfile) (account.getCurrUser());
 
     @FXML
-    private ChoiceBox<PlayerProfile> playersManaged;
+    private ChoiceBox<PlayerProfile> managedPlayers;
     @FXML
     private Label leftError;
     @FXML
@@ -49,15 +50,14 @@ public class parentalController {
      * Only called when adding a new User and entering this screen (latter is why it's public)
      */
     public void getParentsPlayers() {
-
-
+        LinkedList<PlayerProfile> allPlayers = currentUser.getPlayersManaged();
         // CODE TO IMPLEMENT CHANGES TO COMBO BOX BASED OFF THIS (FIRST EXAMPLE): https://www.geeksforgeeks.org/java/javafx-combobox-with-examples/
-        SortedList<PlayerProfile> comboBox = new SortedList<PlayerProfile>(FXCollections.observableArrayList());
-
+        SortedList<PlayerProfile> comboBox = new SortedList<PlayerProfile>(FXCollections.observableArrayList(allPlayers));
+        managedPlayers.setItems(comboBox);
     }
 
     /**
-     * Adds a new Player to the game. They are saved to players.json, and then added to the Parent's list of managed Players.
+     * Adds a new Player to the game. They are located within the Parent's playersManaged.
      *
      * @author Ethan Gregory
      */
@@ -68,23 +68,40 @@ public class parentalController {
             String userName = newPlayerName.getText();
             String passWord = newPlayerPass.getText();
 
-            if (userName.isBlank() || passWord.isBlank()) {
+            if (userName.isBlank() || passWord.isBlank()) { // GUARD
                 throw new IllegalArgumentException("Fields are not fully filled");
             }
 
-            PlayerProfile newPlayer = new PlayerProfile(userName, passWord);
-            currentUser.addPlayer(newPlayer);
+            // ANOTHER GUARD
             List<ParentProfile> parents = DataManager.loadList("parents.json", new TypeReference<List<ParentProfile>>() {
             });
 
+            int counter = 0; // FIND INDEX IN FOR LOOP
+            for (ParentProfile parent : parents) {
+                int counter2 = 0;
+                List<PlayerProfile> players = parent.getPlayersManaged();
+                for (PlayerProfile player : players) {
+                    if (player.getUserName().equals(userName)) {
+                        throw new IllegalArgumentException("User already exists.");
+                    }
+                    counter2++;
+                }
+                counter++;
+            }
+            DataManager.saveList("parents.json", parents);
+
+            PlayerProfile newPlayer = new PlayerProfile(userName, passWord);
+            currentUser.addPlayer(newPlayer);
+
             newPlayerName.clear();
             newPlayerPass.clear();
+            getParentsPlayers(); // UPDATE COMBO BOX
 
         } catch (IllegalArgumentException e) {
             rightError.setVisible(true);
             rightError.setText(e.getMessage());
         } catch (Exception ex) {
-            ex.printStackTrace();
+            throw new RuntimeException(ex);
         }
     }
 }
