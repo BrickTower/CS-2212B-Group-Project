@@ -1,10 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #05001A;" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mapstob.group35.mainController">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #05001A;" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mapstob.group35.MainMenuController">
    <children>
       <Text fill="WHITE" layoutX="30.0" layoutY="67.0" strokeType="OUTSIDE" strokeWidth="0.0" text="BOTSPAM">
          <font>
@@ -13,25 +18,25 @@
       </Text>
       <VBox layoutX="24.0" layoutY="90.0" prefHeight="287.0" prefWidth="261.0">
          <children>
-            <Button mnemonicParsing="false" prefHeight="51.0" prefWidth="292.0" style="-fx-background-color: #062E50;" text="New Run" textFill="WHITE">
+            <Button fx:id="logIn" mnemonicParsing="false" prefHeight="51.0" prefWidth="292.0" style="-fx-background-color: #062E50;" text="Log In" textFill="WHITE" onAction="#onLogInClick">
                <font>
                   <Font name="Consolas Bold" size="24.0" />
                </font>
             </Button>
             <Pane prefHeight="6.0" prefWidth="240.0" />
-            <Button mnemonicParsing="false" prefHeight="51.0" prefWidth="445.0" style="-fx-background-color: #062E50;" text="Tutorial" textFill="WHITE" fx:id="tutorial" onAction="#goToTutorial">
+            <Button mnemonicParsing="false" prefHeight="51.0" prefWidth="445.0" style="-fx-background-color: #062E50;" text="Tutorial" textFill="WHITE">
                <font>
                   <Font name="Consolas Bold" size="24.0" />
                </font>
             </Button>
             <Pane prefHeight="6.0" prefWidth="240.0" />
-            <Button onAction="#testFunction" mnemonicParsing="false" prefHeight="51.0" prefWidth="411.0" style="-fx-background-color: #062E50;" text="Stats" textFill="WHITE">
+            <Button mnemonicParsing="false" prefHeight="51.0" prefWidth="411.0" style="-fx-background-color: #062E50;" text="Stats" textFill="WHITE">
                <font>
                   <Font name="Consolas Bold" size="24.0" />
                </font>
             </Button>
             <Pane prefHeight="6.0" prefWidth="240.0" />
-            <Button mnemonicParsing="false" prefHeight="51.0" prefWidth="397.0" style="-fx-background-color: #062E50;" text="Quit" textFill="WHITE" fx:id="backButton" onAction="#backToMainMenu">
+            <Button mnemonicParsing="false" prefHeight="51.0" prefWidth="397.0" style="-fx-background-color: #062E50;" text="Quit" textFill="WHITE">
                <font>
                   <Font name="Consolas Bold" size="24.0" />
                </font>
