@@ -1,5 +1,8 @@
 package com.mapstob.group35.Gameplay;
 
+import com.mapstob.group35.core.PlayerProfile;
+import com.mapstob.group35.core.loggedUser;
+
 /**
  * Manages overall game functionality. This class should always be active so long as they are in the game screen.
  * <br>
@@ -20,6 +23,8 @@ public class GameManager {
     private WaveManager waveManager;
     private TextManager textManager;
     private ShopManager shopManager;
+    private loggedUser account = new loggedUser();
+    private PlayerProfile player = account.getCurrUser();
 
     private int coins;
     private int defaultCoinGain;
@@ -125,13 +130,13 @@ public class GameManager {
      * Increases coins by an amount.
      * @param amount
      */
-    public void gainCoins(int amount){coins += amount;}
+    public void gainCoins(int amount){player.addCoins(amount);}
 
     /**
      * Gets coin amount.
      * @return coins
      */
-    public int getCoins() {return coins;}
+    public int getCoins() {return player.getCoins();}
 
     /**
      * Checks if coins can be used, and uses coins if it can. Returns whether coins have been used or not
@@ -139,11 +144,7 @@ public class GameManager {
      * @return if coins used
      */
     public boolean useCoins(int amount){
-        if (coins > amount){
-            coins -= amount;
-            return true;
-        }
-        return false;
+        return player.spendCoins(amount);
     }
     /// /// /// /// SHOP UPGRADES
     /**
