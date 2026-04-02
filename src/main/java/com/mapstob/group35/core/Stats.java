@@ -17,6 +17,18 @@ public class Stats {
     private double averageAccuracy;
     /** The total amount of games the Player has done.*/
     private int totalGamesPlayed;
+    /** The total amount of waves the Player has completed across all games */
+    private int totalWaves;
+    /** The highest amount of waves the Player has reached in a single run */
+    private int peakWaves;
+    /** The total amount of coins the Player has earned across all games */
+    private int totalCoins;
+    /** The highest amount of coins the Player has earned in a single run */
+    private int peakCoins;
+    /** The total amount of mistakes the Player has made across all games */
+    private int totalMistakes;
+    /** The lowest amount of mistakes the Player has made in a single run */
+    private int lowestMistakes;
 
     /**
      Stats constructor. Initializes a new Stats object.
@@ -30,6 +42,12 @@ public class Stats {
         this.totalGamesPlayed = 0;
         this.totalAccuSum = 0;
         this.averageAccuracy = 0;
+        this.totalWaves = 0;
+        this.peakWaves = 0;
+        this.totalCoins = 0;
+        this.peakCoins = 0;
+        this.totalMistakes = 0;
+        this.lowestMistakes = 0;
     }
 
     /**
@@ -42,7 +60,7 @@ public class Stats {
      * @param accuracy A percentage amount of words typed correctly over the course of the round (3 out of 4 typed correctly = 75.0)
      * @author Ethan Gregory
      */
-    public void updateStats(double wpm, double accuracy) {
+    public void updateStats(double wpm, double accuracy, int waves, int coins, int mistakes) {
         // INCREASE GAMES PLAYED
         if (wpm > this.peakWPM) {
             this.peakWPM = (float) wpm;
@@ -53,9 +71,17 @@ public class Stats {
         this.totalAccuSum += accuracy; // ADD ACCURACY SCORE TO TOTAL SUM
         this.totalWPM += wpm;
         this.averageAccuracy = (this.totalAccuSum / this.totalGamesPlayed) * 100; // DIVIDE BY GAMES PLAYED AND MULTIPLIED BY 100 TO GET ACCURACY
-        this.averageWPM = (this.totalWPM / this.totalGamesPlayed) * 100;
+        this.averageWPM = (wpm / 60);
 
+        //
+        this.totalWaves += waves;
+        if (waves > this.peakWaves) this.peakWaves = waves;
 
+        this.totalCoins += coins;
+        if (coins > this.peakCoins) this.peakCoins = coins;
+
+        this.totalMistakes += mistakes;
+        if (this.lowestMistakes == 0 || mistakes < this.lowestMistakes) this.lowestMistakes = mistakes;
     }
 
     /**
@@ -73,4 +99,48 @@ public class Stats {
     public double getAverageAccuracy() {
         return this.averageAccuracy;
     }
+
+    /**
+     * Returns the Player's highest recorded WPM across all games.
+     * @return A Double representation of the Player's peak WPM (i.e. 100.0)
+     * @author Amlan Tamaki Konan
+     */
+    public double getPeakWPM() { return this.peakWPM; }
+    /**
+     * Returns the total number of waves the Player has completed across all games.
+     * @return An Integer representation of the total waves completed
+     */
+    public int getTotalWaves() { return this.totalWaves; }
+
+    /**
+     * Returns the highest number of waves the Player has reached in a single run.
+     * @return An Integer representation of the peak waves reached
+     */
+    public int getPeakWaves() { return this.peakWaves; }
+
+    /**
+     * Returns the total number of coins the Player has earned across all games.
+     * @return An Integer representation of the total coins earned
+     */
+    public int getTotalCoins() { return this.totalCoins; }
+
+    /**
+     * Returns the highest number of coins the Player has earned in a single run.
+     * @return An Integer representation of the peak coins earned
+     */
+    public int getPeakCoins() { return this.peakCoins; }
+
+    /**
+     * Returns the total number of mistakes the Player has made across all games.
+     * @return An Integer representation of the total mistakes made
+     */
+    public int getTotalMistakes() { return this.totalMistakes; }
+
+    /**
+     * Returns the lowest number of mistakes the Player has made in a single run.
+     * @return An Integer representation of the lowest mistakes made in a single run
+     */
+    public int getLowestMistakes() { return this.lowestMistakes; }
 }
+
+
