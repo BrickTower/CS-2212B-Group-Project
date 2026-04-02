@@ -35,6 +35,10 @@ public class LoginController {
     @FXML
     private Label errorMessage;
 
+    /**
+     * Handles a login attempt, looking through the JSON file for any signs of correct account, and if so, pass into the Main
+     * @author Ethan Gregory
+     */
     @FXML
     private void handleLogin() {
         // GET TEXT FROM USERNAME AND PASSWORD FIELDS
