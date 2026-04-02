@@ -81,10 +81,10 @@ public class TextManager {
     }
 
     public int spellingAttempt(String input){
-        int mistakes = textList.getFirst().checkSpellingValidity(input);
+        int mistakes = textList.get(0).checkSpellingValidity(input);
         if (mistakes == 0){
             wordsCompleted++;
-            removeText(textList.getFirst());
+            removeText(textList.get(0));
             return 0;
         }
         else{
