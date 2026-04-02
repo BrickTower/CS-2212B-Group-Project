@@ -2,9 +2,12 @@ package com.mapstob.group35.core;
 
 
 import java.util.LinkedList; // IMPORT ARRAYLIST FOR PLAYER LIST
+import java.util.List;
 
 // FIX FOR JSON AUTO DETECT FROM GITHUB COPILOT: https://github.com/copilot/share/401d100a-4104-8407-9903-280fe41b405e. CODE FOLLOWING THIS ANNOTATION IS HUMAN WRITTEN
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.mapstob.group35.DataManager;
 
 @JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY, getterVisibility = JsonAutoDetect.Visibility.NONE)
 public class ParentProfile extends PlayerProfile { // Parents should be able to play
@@ -36,6 +39,7 @@ public class ParentProfile extends PlayerProfile { // Parents should be able to 
             throw new IllegalArgumentException("Player already exists in list.");
         } else {
             this.playersManaged.add(newPlayer); // ADD IF NOT IN LIST
+            this.updateSave();
         }
     }
 
@@ -74,5 +78,30 @@ public class ParentProfile extends PlayerProfile { // Parents should be able to 
      */
     public LinkedList<PlayerProfile> getPlayersManaged() {
         return this.playersManaged;
+    }
+
+    /**
+     *  Updates the JSON file (parents.json) with any major changes (when coins are added or removed, Stats are modified, etc.)
+     *  Only called within its class, and slightly modified to accomodate for different way of accessing
+     *
+     * @author Ethan Gregory
+     */
+    private void updateSave() {
+        try {
+            List<ParentProfile> parents = DataManager.loadList("parents.json", new TypeReference<List<ParentProfile>>() {
+            });
+
+            int counter = 0; // FIND INDEX IN FOR LOOP
+            for (ParentProfile parent : parents) {
+                if (parent.getUserName().equals(this.getUserName())) {
+                    parents.set(counter, (ParentProfile) (this));
+                    break;
+                }
+                counter++;
+            }
+            DataManager.saveList("parents.json", parents);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 }

@@ -19,7 +19,7 @@ import java.util.List;
 
 public class parentalController {
     private loggedUser account = new loggedUser();
-    private ParentProfile currentUser = (ParentProfile)(account.getCurrUser());
+    private ParentProfile currentUser = (ParentProfile) (account.getCurrUser());
 
     @FXML
     private ChoiceBox<PlayerProfile> playersManaged;
@@ -58,6 +58,7 @@ public class parentalController {
 
     /**
      * Adds a new Player to the game. They are saved to players.json, and then added to the Parent's list of managed Players.
+     *
      * @author Ethan Gregory
      */
     @FXML
@@ -75,16 +76,6 @@ public class parentalController {
             currentUser.addPlayer(newPlayer);
             List<ParentProfile> parents = DataManager.loadList("parents.json", new TypeReference<List<ParentProfile>>() {
             });
-
-            int counter = 0; // FIND INDEX IN FOR LOOP
-            for (ParentProfile parent : parents) {
-                if (parent.getUserName().equals(currentUser.getUserName())) {
-                    parents.set(counter, currentUser);
-                    break;
-                }
-                counter++;
-            }
-            DataManager.saveList("parents.json", parents);
 
             newPlayerName.clear();
             newPlayerPass.clear();

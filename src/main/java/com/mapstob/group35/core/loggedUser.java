@@ -1,7 +1,5 @@
 package com.mapstob.group35.core;
 
-import java.util.List;
-
 /**
  * This Class is used simply to store and retrieve whatever User,
  * whether it's a {@link PlayerProfile} or {@link ParentProfile},

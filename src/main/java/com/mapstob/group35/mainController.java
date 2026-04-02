@@ -42,7 +42,7 @@ public class mainController {
 
     public void testFunction() { // QUICK TEST FUNCTION TO MAKE SURE SAVING USER DATA WORKS
         if (currentUser != null) {
-            System.out.println(currentUser.getUserName());
+            currentUser.addCoins(15);
         }
     }
 
