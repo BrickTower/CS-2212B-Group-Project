@@ -1,21 +1,32 @@
 package com.mapstob.group35.core;
 
-// FIX FOR JSON AUTO DETECT FROM GITHUB COPILOT: https://github.com/copilot/share/401d100a-4104-8407-9903-280fe41b405e. CODE FOLLOWING THIS ANNOTATION IS HUMAN WRITTEN
+// FIX FOR JSON AUTO DETECT FROM GITHUB COPILOT: https://github.com/copilot/share/c03d4088-4924-8c05-b150-284ec451014e. CODE THAT IS NOT ANNOTATIONS IS HUMAN WRITTEN
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
-@JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY, getterVisibility = JsonAutoDetect.Visibility.NONE)
+@JsonAutoDetect(
+        fieldVisibility = JsonAutoDetect.Visibility.ANY,
+        getterVisibility = JsonAutoDetect.Visibility.NONE,
+        setterVisibility = JsonAutoDetect.Visibility.NONE // ADD THIS
+)
 public class Stats {
     /** A sum of all WPM entered by the Player during games*/
+    @JsonProperty("totalWPM")
     private double totalWPM;
     /** The average WPM entered throughout all the player's games */
+    @JsonProperty("avgWPM")
     private double averageWPM;
     /** The highest WPM the Player has managed to achieve*/
+    @JsonProperty("peakWPM")
     private double peakWPM;
     /** A sum of all the accuracy scores the Player achieved during their game*/
+    @JsonProperty("accuSum")
     private double totalAccuSum;
     /** The Accuracy of the Player achieved during the games they've played */
+    @JsonProperty("averageAccuracy")
     private double averageAccuracy;
     /** The total amount of games the Player has done.*/
+    @JsonProperty("gamesPlayed")
     private int totalGamesPlayed;
 
     /**
