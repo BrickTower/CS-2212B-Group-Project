@@ -9,7 +9,7 @@ import com.fasterxml.jackson.annotation.JsonAutoDetect;
 @JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY, getterVisibility = JsonAutoDetect.Visibility.NONE)
 public class ParentProfile extends PlayerProfile { // Parents should be able to play
     /** A list of all Players currently managed by this Parent, listed by UserName*/
-    private LinkedList<String> playersManaged;
+    private LinkedList<PlayerProfile> playersManaged;
 
     /** Empty version of ParentProfile Constructor. Should only be used for Jackson compatibility.
      * @author Ethan Gregory
@@ -18,7 +18,7 @@ public class ParentProfile extends PlayerProfile { // Parents should be able to 
 
     public ParentProfile(String userName, String password) {
         super(userName, password);
-        this.playersManaged = new LinkedList<String>();
+        this.playersManaged = new LinkedList<PlayerProfile>();
     }
 
     /**
@@ -35,7 +35,7 @@ public class ParentProfile extends PlayerProfile { // Parents should be able to 
         else if (this.playersManaged.contains(newPlayer)) { // GUARD AGAINST PLAYER IF ALREADY MANAGED, AND IF PLAYER IS PARENT
             throw new IllegalArgumentException("Player already exists in list.");
         } else {
-            this.playersManaged.add(newPlayer.getUserName()); // ADD IF NOT IN LIST
+            this.playersManaged.add(newPlayer); // ADD IF NOT IN LIST
         }
     }
 
@@ -72,7 +72,7 @@ public class ParentProfile extends PlayerProfile { // Parents should be able to 
      * @return All Usernames of every {@link PlayerProfile} added to the list.
      * @author Ethan Gregory
      */
-    public LinkedList<String> getPlayersManaged() {
+    public LinkedList<PlayerProfile> getPlayersManaged() {
         return this.playersManaged;
     }
 }
