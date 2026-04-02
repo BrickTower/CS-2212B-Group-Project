@@ -8,11 +8,8 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 /**
- * Interface for opening BotSpam. This should open directly to the main menu.
- * <br><br>
- * Implementation is a slightly modified InteliJ JavaFX Hello World Preset, created when initializing the project.
- * @author InteliJ, Ethan Gregory
- *
+ * Test launcher for gameplay.
+ * @author Shaun
  */
 public class GameLauncher extends Application{
     static GameGUIManager GUI;
