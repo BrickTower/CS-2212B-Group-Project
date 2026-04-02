@@ -2,6 +2,10 @@ package com.mapstob.group35.core;
 
 // FIX FOR JSON AUTO DETECT FROM GITHUB COPILOT: https://github.com/copilot/share/401d100a-4104-8407-9903-280fe41b405e. CODE FOLLOWING THIS ANNOTATION IS HUMAN WRITTEN
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.mapstob.group35.DataManager;
+
+import java.util.List;
 
 @JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY, getterVisibility = JsonAutoDetect.Visibility.NONE)
 public class PlayerProfile {
@@ -46,6 +50,42 @@ public class PlayerProfile {
             throw new IllegalArgumentException("Coin amount not possible to add.");
         } // END OF IF STATEMENT
         this.coins += amount;
+        this.updateSave();
+    }
+
+    /**
+     *  Updates the JSON file (parents.json) with any major changes (when coins are added or removed, Stats are modified, etc.)
+     *  Only called within its class
+     *
+     * @author Ethan Gregory
+     */
+    private void updateSave() {
+        try {
+            List<ParentProfile> parents = DataManager.loadList("parents.json", new TypeReference<List<ParentProfile>>() {
+            });
+
+            int counter = 0; // FIND INDEX IN FOR LOOP
+            boolean foundPlayer = false;
+            for (ParentProfile parent : parents) {
+                int counter2 = 0;
+                List<PlayerProfile> players = parent.getPlayersManaged();
+                for (PlayerProfile player : players) {
+                    if (player.getUserName().equals(this.getUserName())) {
+                        players.set(counter2, this);
+                        foundPlayer = true;
+                        break;
+                    }
+                    counter2++;
+                }
+                if (foundPlayer) { // IF PLAYER WAS FOUND, BREAK OUT OF ORIGINAL FOR LOOP
+                    break;
+                }
+                counter++;
+            }
+            DataManager.saveList("parents.json", parents);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 
     /**
@@ -58,6 +98,7 @@ public class PlayerProfile {
             return false;
         } else { // IF WE HAVE ENOUGH, SUBTRACT FROM PROFILE AND RETURN TRUE
             this.coins -= amount;
+            this.updateSave();
             return true;
         } // END OF IF/ELSE
     }
@@ -69,6 +110,7 @@ public class PlayerProfile {
      */
     public void levelUp() {
         this.level++; // INCREASE LEVEL
+        this.updateSave();
     }
 
     /**
@@ -78,8 +120,8 @@ public class PlayerProfile {
      */
     public void resetLevel() {
         this.level = 1;
+        this.updateSave();
     }
-    // SIMPLE GETTERS
 
     /**
      * Returns an Integer representation of the Player's current difficulty level
@@ -90,6 +132,7 @@ public class PlayerProfile {
     public int getLevel() {
         return this.level;
     }
+
 
     /**
      * Returns an Integer representation of the amount of coins the Player currently has.
@@ -138,5 +181,23 @@ public class PlayerProfile {
      */
     public String getPassword() {
         return this.password;
+    }
+
+    /**
+     * Sets the Player's password to the provided String
+     * @param newPassword A {@link String} representation of the password.
+     * @author Ethan Gregory
+     */
+    public void setPassword(String newPassword) {
+        this.password = newPassword;
+        this.updateSave();
+    }
+
+    /**
+     * Overloaded toString method for all Profiles
+     * @return the Profile's username
+     */
+    public String toString() {
+        return this.getUserName();
     }
 }

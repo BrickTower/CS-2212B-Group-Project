@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #05001A;" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mapstob.group35.parentalController">
+   <children>
+      <BorderPane prefHeight="89.0" prefWidth="600.0" style="-fx-background-color: #062E50;">
+         <left>
+            <Button fx:id="backButton" onAction="#returnToMainMenu" style="-fx-background-color: #7D8570; -fx-text-fill: #FBFAF3;" text="EXIT" BorderPane.alignment="CENTER_LEFT" />
+         </left>
+         <center>
+            <Label style="-fx-text-fill: #FBFAF3; -fx-font-size: 40px; -fx-font-weight: bold;" text="PARENTAL CONTROLS" />
+         </center>
+         <padding>
+            <Insets bottom="15" left="20" right="20" top="15" />
+         </padding>
+      </BorderPane>
+      <HBox layoutX="14.0" layoutY="89.0" prefHeight="310.0" prefWidth="583.0" spacing="30.0">
+         <children>
+            <Pane prefHeight="200.0" prefWidth="250.0" style="-fx-background-color: #062E50;">
+               <padding>
+                  <Insets top="20.0" />
+               </padding>
+               <children>
+                  <Label layoutX="29.0" layoutY="14.0" text="MANAGE PLAYERS" textAlignment="CENTER" textFill="WHITE">
+                     <font>
+                        <Font name="Consolas Bold" size="25.0" />
+                     </font>
+                  </Label>
+                  <ChoiceBox fx:id="managedPlayers" layoutX="28.0" layoutY="60.0" prefHeight="25.0" prefWidth="192.0" style="-fx-background-color: #FBFAF3; -fx-background-radius: 10;" />
+                  <Button layoutX="70.0" layoutY="99.0" mnemonicParsing="false" text="Reset User's Stats" />
+                  <Button  layoutX="50.0" layoutY="242.0" mnemonicParsing="false" text="Reset All High Score Data" />
+                  <PasswordField fx:id="resetField" layoutX="28.0" layoutY="141.0" prefHeight="25.0" prefWidth="192.0" promptText="New Password..." style="-fx-background-color: #FBFAF3; -fx-background-radius: 10;" />
+                  <Button layoutX="58.0" layoutY="178.0" mnemonicParsing="false" onAction="#resetPlayersPassword" text="Reset User's Password" />
+                  <Label fx:id="leftError" layoutX="109.0" layoutY="215.0" style="-fx-text-fill: #7D8570; -fx-font-weight: bold;" text="Label" />
+               </children></Pane>
+            <Pane prefHeight="298.0" prefWidth="259.0" style="-fx-background-color: #062E50;">
+               <children>
+                  <Label fx:id="rightError" layoutX="115.0" layoutY="216.0" style="-fx-text-fill: #7D8570; -fx-font-weight: bold;" text="Label" />
+                  <Label layoutX="33.0" layoutY="14.0" text="ADD NEW PLAYER" textAlignment="CENTER" textFill="WHITE">
+                     <font>
+                        <Font name="Consolas Bold" size="25.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="newPlayerName" layoutX="34.0" layoutY="66.0" prefHeight="25.0" prefWidth="192.0" promptText="Player's Username..." style="-fx-background-color: #FBFAF3; -fx-background-radius: 10;" />
+                  <PasswordField fx:id="newPlayerPass" layoutX="34.0" layoutY="141.0" prefHeight="25.0" prefWidth="192.0" promptText="Player's Password..." style="-fx-background-color: #FBFAF3; -fx-background-radius: 10;" />
+                  <Button layoutX="80.0" layoutY="242.0" mnemonicParsing="false" onAction="#addPlayer" text="Add New Player" />
+               </children></Pane>
+         </children>
+         <padding>
+            <Insets bottom="15.0" left="17.5" top="15.0" />
+         </padding></HBox>
+   </children>
+</AnchorPane>
