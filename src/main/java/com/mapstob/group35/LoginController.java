@@ -51,33 +51,30 @@ public class LoginController {
         }
 
         try {
-            boolean userFoundInParent = false, userFoundInPlayer = false;
+            boolean userFound = false;
             PlayerProfile foundUser = null;
 
             List<ParentProfile> parents = DataManager.loadList("parents.json", new TypeReference<List<ParentProfile>>() {
             });
-            List<PlayerProfile> players = DataManager.loadList("players.json", new TypeReference<List<PlayerProfile>>() {
-            });
-
 
             for (ParentProfile parent : parents) { // CHECK PARENT PROFILES FIRST
                 if (parent.getUserName().equals(userName) && parent.getPassword().equals(passWord)) {
-                    userFoundInParent = true;
+                    userFound = true;
                     foundUser = parent;
                     break;
-                }
-            }
-            if (!userFoundInParent) { // IF NOT THERE, CHECK PLAYERS
-                for (PlayerProfile player : players) {
-                    if (player.getUserName().equals(userName) && player.getPassword().equals(passWord)) {
-                        userFoundInPlayer = true;
-                        foundUser = player;
-                        break;
+                } else if (!parent.getPlayersManaged().isEmpty()) {
+                    List<PlayerProfile> players = parent.getPlayersManaged();
+                    for (PlayerProfile player : players) {
+                        if (player.getUserName().equals(userName) && player.getPassword().equals(passWord)) {
+                            userFound = true;
+                            foundUser = player;
+                            break;
+                        }
                     }
                 }
             }
 
-            if (userFoundInPlayer || userFoundInParent) {
+            if (userFound) {
                 // SAVE USER TO OUR GLOBAL LOGGED USER BEFORE CHANGING SCENES
                 loggedUser account = new loggedUser();
                 account.setCurrUser(foundUser);
