@@ -5,8 +5,6 @@ import com.fasterxml.jackson.annotation.JsonAutoDetect;
 
 @JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY, getterVisibility = JsonAutoDetect.Visibility.NONE)
 public class Stats {
-    /** A sum of all WPM entered by the Player during games*/
-    private double totalWPM;
     /** The average WPM entered throughout all the player's games */
     private double averageWPM;
     /** The highest WPM the Player has managed to achieve*/
@@ -24,7 +22,6 @@ public class Stats {
      @author Ethan Gregory
      */
     public Stats() {
-        this.totalWPM = 0;
         this.averageWPM = 0;
         this.peakWPM = 0;
         this.totalGamesPlayed = 0;
@@ -51,9 +48,8 @@ public class Stats {
         // UPDATE AVERAGES
         this.totalGamesPlayed++;
         this.totalAccuSum += accuracy; // ADD ACCURACY SCORE TO TOTAL SUM
-        this.totalWPM += wpm;
         this.averageAccuracy = (this.totalAccuSum / this.totalGamesPlayed) * 100; // DIVIDE BY GAMES PLAYED AND MULTIPLIED BY 100 TO GET ACCURACY
-        this.averageWPM = (this.totalWPM / this.totalGamesPlayed);
+        this.averageWPM = (wpm / 60);
 
 
     }
