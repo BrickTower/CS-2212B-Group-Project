@@ -20,6 +20,7 @@ public class mainApp extends Application{
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("baseMenu.fxml")); // LOAD MAIN MENU FROM FXML
         Scene scene = new Scene(fxmlLoader.load(), 600, 400); // LOAD OUR FXML AS A SCENE
         stage.setTitle("BotSpam");
+        stage.setResizable(false);
         stage.setScene(scene); // SHOW SCENE
         stage.show();
     }

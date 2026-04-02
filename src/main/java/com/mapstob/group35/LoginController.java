@@ -35,6 +35,10 @@ public class LoginController {
     @FXML
     private Label errorMessage;
 
+    /**
+     * Handles a login attempt, looking through the JSON file for any signs of correct account, and if so, pass into the Main
+     * @author Ethan Gregory
+     */
     @FXML
     private void handleLogin() {
         // GET TEXT FROM USERNAME AND PASSWORD FIELDS
@@ -51,33 +55,30 @@ public class LoginController {
         }
 
         try {
-            boolean userFoundInParent = false, userFoundInPlayer = false;
+            boolean userFound = false;
             PlayerProfile foundUser = null;
 
             List<ParentProfile> parents = DataManager.loadList("parents.json", new TypeReference<List<ParentProfile>>() {
             });
-            List<PlayerProfile> players = DataManager.loadList("players.json", new TypeReference<List<PlayerProfile>>() {
-            });
-
 
             for (ParentProfile parent : parents) { // CHECK PARENT PROFILES FIRST
                 if (parent.getUserName().equals(userName) && parent.getPassword().equals(passWord)) {
-                    userFoundInParent = true;
+                    userFound = true;
                     foundUser = parent;
                     break;
-                }
-            }
-            if (!userFoundInParent) { // IF NOT THERE, CHECK PLAYERS
-                for (PlayerProfile player : players) {
-                    if (player.getUserName().equals(userName) && player.getPassword().equals(passWord)) {
-                        userFoundInPlayer = true;
-                        foundUser = player;
-                        break;
+                } else if (!parent.getPlayersManaged().isEmpty()) {
+                    List<PlayerProfile> players = parent.getPlayersManaged();
+                    for (PlayerProfile player : players) {
+                        if (player.getUserName().equals(userName) && player.getPassword().equals(passWord)) {
+                            userFound = true;
+                            foundUser = player;
+                            break;
+                        }
                     }
                 }
             }
 
-            if (userFoundInPlayer || userFoundInParent) {
+            if (userFound) {
                 // SAVE USER TO OUR GLOBAL LOGGED USER BEFORE CHANGING SCENES
                 loggedUser account = new loggedUser();
                 account.setCurrUser(foundUser);
@@ -85,8 +86,6 @@ public class LoginController {
                 // CHANGE TO MAIN MENU
                 FXMLLoader load = new FXMLLoader(getClass().getResource("mainMenu.fxml"));
                 Parent root = load.load();
-                mainController control = load.getController();
-
                 backButton.getScene().setRoot(root);
             } else {
                 throw new IllegalArgumentException("Incorrect username/password");
