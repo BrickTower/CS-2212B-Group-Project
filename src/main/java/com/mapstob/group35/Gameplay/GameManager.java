@@ -85,7 +85,7 @@ public class GameManager {
     public void gainCoins(int amount){coins += amount;}
     public int getCoins() {return coins;}
     public boolean useCoins(int amount){
-        if (coins > amount){
+        if (coins >= amount){
             coins -= amount;
             return true;
         }

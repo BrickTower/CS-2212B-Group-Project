@@ -9,7 +9,7 @@ import org.junit.jupiter.api.DisplayName;
 import static org.junit.jupiter.api.Assertions.*;
 
 /**
- * Unit tests for the loggedUser class using actual Profile implementations.
+ * Unit tests for the loggedUser class
  */
 public class loggedUserTest {
 
