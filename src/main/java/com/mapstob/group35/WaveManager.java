@@ -1,7 +1,6 @@
 package com.mapstob.group35;
 
 import java.util.ArrayList;
-import java.util.Dictionary;
 
 public class WaveManager {
     private int wave;
@@ -10,7 +9,7 @@ public class WaveManager {
     private int defaultWaveTime;
 
 
-    private ArrayList<String> buffList;
+    private ArrayList<BuffItem> buffList;
     /*  BUFF TYPES
     *   increase text time for x waves
     *   lower wave time for x waves
@@ -30,13 +29,24 @@ public class WaveManager {
     public void setWaveTime(int waveTime){this.waveTime = waveTime;}
     public double getWaveTimeLeft () {return waveTime - curTime;}
 
+    public ArrayList<BuffItem> getBuffList(){return buffList;}
+    public void addBuff(BuffItem buff){buffList.add(buff);}
+
 
     public void waveOver(){
         incWave();
+        // go through buffs, see if any are used up
+        for(int i = 0; i < buffList.size(); i++){
+            if (buffList.get(i).decLength()){
+                buffList.remove(buffList.get(i));
+                i--;
+            }
+        }
     }
+
     public void startWave(){
         curTime = 0;
-        setWaveTime(defaultWaveTime);
+        setWaveTime((int) (defaultWaveTime * getWaveTimeModifier()));
     }
     public boolean incTime(){
         curTime++;
@@ -46,8 +56,48 @@ public class WaveManager {
         }
         return false;
     }
+
     // for the timer icon
     public float waveCompletionPercent(){
         return (float) curTime / (float) waveTime;
+    }
+
+    private float getWaveTimeModifier(){
+        float reduction = 1;
+        for(int i = 0; i < buffList.size(); i++){
+            if (buffList.get(i).getName().equals("Wave Length Decrease")){
+                reduction = reduction / (float) buffList.get(i).getPower();
+            }
+        }
+        return reduction;
+    }
+    public int getHealAmount(){
+        int amount = 0;
+        for(int i = 0; i < buffList.size(); i++){
+            if (buffList.get(i).getName().equals("Regeneration")){
+                amount += buffList.get(i).getPower();
+            }
+        }
+        return amount;
+    }
+
+    public float getWordTimeModifier(){
+        float increase = 1;
+        for(int i = 0; i < buffList.size(); i++){
+            if (buffList.get(i).getName().equals("Word Time Increase")){
+                increase = increase * (1 + 1/(float) buffList.get(i).getPower());
+            }
+        }
+        return increase;
+    }
+
+    public float getCoinGainModifier(){
+        float increase = 1;
+        for(int i = 0; i < buffList.size(); i++){
+            if (buffList.get(i).getName().equals("Coin Gain Increase")){
+                increase = increase * (1 + 1/(float) buffList.get(i).getPower());
+            }
+        }
+        return increase;
     }
 }

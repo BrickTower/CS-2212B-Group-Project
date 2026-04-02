@@ -8,6 +8,7 @@ import java.util.LinkedList;
 public class GameManager {
     private WaveManager waveManager;
     private TextManager textManager;
+    private ShopManager shopManager;
 
     private int coins;
     private int defaultCoinGain;
@@ -34,6 +35,7 @@ public class GameManager {
 
         waveManager = new WaveManager(0,30);
         textManager = new TextManager();
+        shopManager = new ShopManager(this);
         died = false;
     }
     //if loading data
@@ -45,6 +47,8 @@ public class GameManager {
 
         this.waveManager = new WaveManager(wave,waveTime);
         this.textManager = new TextManager();
+        shopManager = new ShopManager(this);
+        //due to how loading this works you can savescum shop items until you get a good one but like oh well
         died = false;
     }
     /// /// /// /// PROCESS
@@ -56,6 +60,8 @@ public class GameManager {
             textManager.clear();
             saveInfo();
         }
+
+        heal( waveManager.getHealAmount() );
 
     }
 
@@ -89,6 +95,10 @@ public class GameManager {
             return true;
         }
         return false;
+    }
+    /// /// /// /// SHOP UPGRADES
+    public void addBuff(BuffItem shopitem){
+        waveManager.addBuff(shopitem);
     }
 
     /// /// /// /// HEALTH
