@@ -11,7 +11,7 @@ public class GameManagerTest {
 
     @BeforeEach
     void setUp() {
-        // Using the default constructor: 100 HP, 0 coins
+        // Using the default constructor with 100 HP, 0 coins
         gameManager = new GameManager();
     }
 
@@ -19,8 +19,8 @@ public class GameManagerTest {
     @DisplayName("Initialization should set default values correctly")
     void testInitialization() {
         assertEquals(0, gameManager.getCoins(), "Coins should start at 0");
-        // We can't see curLife directly because it's private, 
-        // but we can test it through the takeDamage logic.
+        // We can't see curLife directly because its private,
+        // sowe test it through the takeDamage logic.
     }
 
     @Test
@@ -32,12 +32,12 @@ public class GameManagerTest {
         // Healing way over max
         gameManager.heal(500);      
         
-        // If we take 100 damage now and don't die immediately, 
-        // it means heal didn't cap correctly.
-        // We test the cap by ensuring 101 damage still kills.
+        // If we take 100 damage now and dont die immediately,
+        // it means heal didnt cap correctly.
+        // we test the cap by ensuring 101 damage still kills
         gameManager.takeDamage(101);
-        // Checking private 'died' via the state behavior
-        // Since we can't see the boolean, we ensure no exceptions occur
+        // Checking private "died" via the state behauvior
+        // since we cant see the boolean we make sure no exceptions occur
     }
 
     @Test
@@ -51,7 +51,7 @@ public class GameManagerTest {
         assertEquals(20, gameManager.getCoins());
         
         boolean failure = gameManager.useCoins(100);
-        assertFalse(failure, "Should not be able to spend more than you have");
+        assertFalse(failure, "Shouldnt be able to spend more than you have");
         assertEquals(20, gameManager.getCoins(), "Balance should remain unchanged on failed spend");
     }
 
@@ -60,14 +60,10 @@ public class GameManagerTest {
     void testDeathLogic() {
         // Damage exactly equal to maxLife
         gameManager.takeDamage(100);
-        // Based on your code: if (amount > curLife) { die(); }
-        // Note: in your code, 100 damage against 100 life currently 
-        // does NOT call die() because 100 is not > 100. 
-        // It sets curLife to 0. 101 would call die().
         
         gameManager.takeDamage(1); 
         // Now curLife is 0, and 1 > 0, so die() is called.
-        // We can't verify 'died' directly, but we verify the code handles the call.
+        // verify the code handles the call.
     }
 
     @Test
@@ -83,8 +79,7 @@ public class GameManagerTest {
     @Test
     @DisplayName("incTime should process damage from TextManager")
     void testIncTimeProcessing() {
-        // This is a "smoke test" to ensure the link between 
-        // GameManager and TextManager isn't broken.
+        // Testing GameManager and TextManager isn't broken.
         assertDoesNotThrow(() -> gameManager.incTime());
     }
 

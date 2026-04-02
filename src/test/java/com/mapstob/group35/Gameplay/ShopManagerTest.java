@@ -19,10 +19,10 @@ public class ShopManagerTest {
     @Test
     @DisplayName("Shop should initialize with exactly 3 items")
     void testInitialShopItems() throws Exception {
-        // Since shopItems is private, we verify it through reset logic
+        // Since shopItems is private we verify it through reset logic
         assertDoesNotThrow(() -> shopManager.resetShopItems());
         
-        // We can create an item to verify the shop's factory method works
+        // We can create an item to verify the shop factory method works
         BuffItem item = shopManager.createShopItem();
         assertNotNull(item, "Shop should be able to generate BuffItems");
     }
@@ -31,7 +31,7 @@ public class ShopManagerTest {
     @DisplayName("Buyable should return true only if player has enough coins")
     void testBuyableLogic() {
         BuffItem expensiveItem = shopManager.createShopItem();
-        // Ensure player has 0 coins
+        // CHeck player has 0 coins
         assertFalse(shopManager.Buyable(expensiveItem), "Should not be buyable with 0 coins");
         
         // Give player enough coins for the specific item
@@ -42,7 +42,7 @@ public class ShopManagerTest {
     @Test
     @DisplayName("Buying a Heal item should trigger healing in GameManager")
     void testBuyHealItem() {
-        // We need to find or force a Heal item
+        // We need to find a healing item
         BuffItem healItem = null;
         // Keep generating until we get a Heal item for the test
         while (healItem == null || !healItem.getName().equals("Heal")) {
@@ -52,8 +52,7 @@ public class ShopManagerTest {
         gameManager.takeDamage(50); // Drop health to 50
         shopManager.buyShopItem(healItem);
         
-        // If heal worked, taking 50 damage again shouldn't result in 0 HP 
-        // (This is an indirect way to test private health state)
+        // If heal worked, taking 50 damage again shouldn't result in 0 HP
         assertDoesNotThrow(() -> gameManager.takeDamage(10));
     }
 
@@ -61,12 +60,12 @@ public class ShopManagerTest {
     @DisplayName("Buying a buff should call addBuff in GameManager")
     void testBuyBuffItem() {
         BuffItem buffItem = null;
-        // Keep generating until we get a non-Heal item
+        // Keep generating until we getnot a Heal item
         while (buffItem == null || buffItem.getName().equals("Heal")) {
             buffItem = shopManager.createShopItem();
         }
 
-        // Ensuring the process of adding a buff doesn't crash the manager chain
+        // Making sure the process of adding a buff dont crash the manager chain
         shopManager.buyShopItem(buffItem);
     }
 
@@ -76,8 +75,8 @@ public class ShopManagerTest {
         BuffItem item = shopManager.createShopItem();
         shopManager.buyShopItem(item);
         
-        // The logic in your buyShopItem calls resetShopItems() at the end.
-        // This ensures the player always sees a fresh set of 3 items after a purchase.
+        // The logic buyShopItem calls resetShopItems() at the end.
+        // This makes ure the player always sees a fresh set of 3 items after a purchase.
         assertDoesNotThrow(() -> shopManager.resetShopItems());
     }
 }

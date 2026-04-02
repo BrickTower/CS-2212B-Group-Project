@@ -21,7 +21,7 @@ public class WaveManagerTest {
     @DisplayName("Should initialize with correct wave and time")
     void testInitialization() {
         assertEquals(1, waveManager.getWave());
-        assertEquals(DEFAULT_TIME, waveManager.getWaveTimeLeft(), 0.001);
+        assertEquals(DEFAULT_TIME, waveManager.getWaveTimeLeft());
     }
 
     @Test
@@ -40,14 +40,11 @@ public class WaveManagerTest {
     @Test
     @DisplayName("Regeneration buffs should accumulate in getHealAmount")
     void testRegenerationBuffs() {
-        // We can't easily mock BuffItem since it's random, but we can 
-        // rely on the fact that your BuffItem class exists.
-        // For testing purposes, we'll look for a Regen buff in the loop or 
-        // just verify the list starts empty.
+        // For testing purposes we look for a Regen buff in the loop or
+        // just verify the list starts empty
         assertEquals(0, waveManager.getHealAmount());
-        
-        // Note: To test specific values here, you'd ideally have a way to 
-        // create a specific BuffItem. Since your BuffItem is random, 
+
+        // create a specific BuffItem since it is random
         // this test ensures the loop logic doesn't crash.
         assertNotNull(waveManager.getBuffList());
     }
@@ -67,7 +64,7 @@ public class WaveManagerTest {
             waveManager.waveOver();
         }
 
-        // The buff should eventually be removed from the list
+        // The buff should be removed from the list after some time
         assertTrue(waveManager.getBuffList().size() < initialSize || item.getLength() > 0);
     }
 
@@ -81,21 +78,21 @@ public class WaveManagerTest {
         }
         
         // Should be roughly 0.5 at half time
-        assertEquals(0.5f, waveManager.waveCompletionPercent(), 0.01f);
+        assertEquals(0.5f, waveManager.waveCompletionPercent());
     }
 
     @Test
     @DisplayName("startWave should apply Wave Length Decrease modifiers")
     void testWaveTimeModifier() {
-        // We test that startWave executes without crashing.
-        // Your logic: waveTime = defaultWaveTime * getWaveTimeModifier()
+        // Test for startWave executes without crashing
+        // waveTime = defaultWaveTime * getWaveTimeModifier()
         assertDoesNotThrow(() -> waveManager.startWave());
     }
 
     @Test
     @DisplayName("Modifiers should return 1.0 when no buffs are present")
     void testDefaultModifiers() {
-        assertEquals(1.0f, waveManager.getWordTimeModifier(), 0.001f);
-        assertEquals(1.0f, waveManager.getCoinGainModifier(), 0.001f);
+        assertEquals(1.0f, waveManager.getWordTimeModifier());
+        assertEquals(1.0f, waveManager.getCoinGainModifier());
     }
 }
