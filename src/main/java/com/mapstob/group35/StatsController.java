@@ -86,6 +86,7 @@ public class StatsController {
      * <p>
      * Called automatically by JavaFX when the FXML is loaded.
      * </p>
+     * @author Tamaki Konan
      */
     @FXML
     public void initialize() {

@@ -39,10 +39,10 @@
 
             <Button onAction="#handleLogin" prefWidth="150" style="-fx-background-color: #062E50; -fx-text-fill: #FBFAF3; -fx-background-radius: 8;" text="LOGIN" />
 
-            <Button fx:id="registerButton" onAction="#handleRegister" prefWidth="150" style="-fx-background-color: #062E50; -fx-text-fill: #FBFAF3; -fx-background-radius: 8;" text="REGISTER" />
+            <Button fx:id="registerButton" onAction="#handleRegister" prefWidth="150" style="-fx-background-color: #062E50; -fx-text-fill: #FBFAF3; -fx-background-radius: 8;" text="REGISTER PARENT" wrapText="true" />
 
             <VBox alignment="CENTER_LEFT" spacing="2">
-            <CheckBox fx:id="newParentBox" mnemonicParsing="false" style="-fx-text-fill: #FBFAF3; -fx-font-weight: bold;" text="New Parent Account" />
+            <CheckBox fx:id="newParentBox" mnemonicParsing="false" style="-fx-text-fill: #FBFAF3; -fx-font-weight: bold;" text="I am a Parent" />
             </VBox>
 
         </HBox>

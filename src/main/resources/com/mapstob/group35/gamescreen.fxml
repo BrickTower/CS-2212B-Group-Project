@@ -7,7 +7,7 @@
 <?import javafx.scene.shape.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #062E50;" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mapstob.group35.HelloApplication">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #062E50;" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mapstob.group35.GameGUIManager">
    <Button id="SHOP_BUTTON" layoutX="11.0" layoutY="299.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="120.0" style="-fx-background-color: #7D8570;" text="Shop" textFill="WHITE">
       <font>
          <Font size="16.0" />
@@ -190,7 +190,7 @@
          <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="MISTAKES: #" wrappingWidth="120.00000000000006" />
          <Text fill="WHITE" layoutX="10.0" layoutY="39.0" strokeType="OUTSIDE" strokeWidth="0.0" text="WORDS THIS SESSION: #" wrappingWidth="120.00000000000006" />
          <Pane prefHeight="12.0" prefWidth="55.0" />
-         <Text fx:id="SCORE_CONTAINER" fill="WHITE" layoutX="10.0" layoutY="93.0" strokeType="OUTSIDE" strokeWidth="0.0" text="HIGHEST WPM: #" wrappingWidth="120.00000000000006" />
+         <Text fx:id="WPM_CONTAINER" fill="WHITE" layoutX="10.0" layoutY="93.0" strokeType="OUTSIDE" strokeWidth="0.0" text="HIGHEST WPM: #" wrappingWidth="120.00000000000006" />
          <Text fill="WHITE" layoutX="10.0" layoutY="57.0" strokeType="OUTSIDE" strokeWidth="0.0" text="HIGHEST WAVE: #" wrappingWidth="120.00000000000006" />
       </children>
    </VBox>

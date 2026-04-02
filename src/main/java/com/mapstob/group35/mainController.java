@@ -1,5 +1,6 @@
 package com.mapstob.group35;
 
+import com.mapstob.group35.Gameplay.GameManager;
 import com.mapstob.group35.core.ParentProfile;
 import com.mapstob.group35.core.PlayerProfile;
 import com.mapstob.group35.core.loggedUser;
@@ -40,10 +41,26 @@ public class mainController {
         }
     }
 
+    @FXML
+    protected void startGame() {
+        try {
+            FXMLLoader load = new FXMLLoader(getClass().getResource("gamescreen.fxml"));
+            Parent root = load.load();
+            GameGUIManager gui = load.getController();
+            newGame.getScene().setRoot(root);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
 
-    public void testFunction() { // QUICK TEST FUNCTION TO MAKE SURE SAVING USER DATA WORKS
-        if (currentUser != null) {
-            currentUser.addCoins(15);
+    @FXML
+    protected void goToStats() {
+        try {
+            FXMLLoader load = new FXMLLoader(getClass().getResource("stats.fxml"));
+            Parent root = load.load();
+            statsButton.getScene().setRoot(root);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
         }
     }
 
