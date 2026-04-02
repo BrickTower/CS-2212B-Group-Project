@@ -22,29 +22,17 @@
       </Text>
       <VBox layoutX="24.0" layoutY="90.0" prefHeight="287.0" prefWidth="261.0">
          <children>
-<<<<<<< HEAD
-<<<<<<< HEAD
+
             <Button mnemonicParsing="false" prefHeight="51.0" prefWidth="292.0" style="-fx-background-color: #062E50;" text="New Run" textFill="WHITE">
-=======
-            <Button mnemonicParsing="false" prefHeight="51.0" prefWidth="292.0" style="-fx-background-color: #062E50;" text="Log In" textFill="WHITE">
->>>>>>> 67a226c (Designed main menu GUI)
-=======
-            <Button mnemonicParsing="false" prefHeight="51.0" prefWidth="292.0" style="-fx-background-color: #062E50;" text="Log In" textFill="WHITE">
->>>>>>> cab25216a6e73e5f97faa8ba08c8b7ad5f35eadd
+
                <font>
                   <Font name="Consolas Bold" size="24.0" />
                </font>
             </Button>
             <Pane prefHeight="6.0" prefWidth="240.0" />
-<<<<<<< HEAD
-<<<<<<< HEAD
+
             <Button mnemonicParsing="false" prefHeight="51.0" prefWidth="445.0" style="-fx-background-color: #062E50;" text="Tutorial" textFill="WHITE" fx:id="tutorial" onAction="#goToTutorial">
-=======
-            <Button mnemonicParsing="false" prefHeight="51.0" prefWidth="445.0" style="-fx-background-color: #062E50;" text="Tutorial" textFill="WHITE">
->>>>>>> 67a226c (Designed main menu GUI)
-=======
-            <Button mnemonicParsing="false" prefHeight="51.0" prefWidth="445.0" style="-fx-background-color: #062E50;" text="Tutorial" textFill="WHITE">
->>>>>>> cab25216a6e73e5f97faa8ba08c8b7ad5f35eadd
+
                <font>
                   <Font name="Consolas Bold" size="24.0" />
                </font>
@@ -56,15 +44,9 @@
                </font>
             </Button>
             <Pane prefHeight="6.0" prefWidth="240.0" />
-<<<<<<< HEAD
-<<<<<<< HEAD
+
             <Button mnemonicParsing="false" prefHeight="51.0" prefWidth="397.0" style="-fx-background-color: #062E50;" text="Quit" textFill="WHITE" fx:id="backButton" onAction="#backToMainMenu">
-=======
-            <Button mnemonicParsing="false" prefHeight="51.0" prefWidth="397.0" style="-fx-background-color: #062E50;" text="Quit" textFill="WHITE">
->>>>>>> 67a226c (Designed main menu GUI)
-=======
-            <Button mnemonicParsing="false" prefHeight="51.0" prefWidth="397.0" style="-fx-background-color: #062E50;" text="Quit" textFill="WHITE">
->>>>>>> cab25216a6e73e5f97faa8ba08c8b7ad5f35eadd
+
                <font>
                   <Font name="Consolas Bold" size="24.0" />
                </font>
