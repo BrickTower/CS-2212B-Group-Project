@@ -38,7 +38,7 @@ public class Stats {
      * - If WPM exceeds any current previous WPM value, update peakWPM.<br>
      * - Update the averages for Accuracy and WPM<br><br>
      * This function should only be called <b>once</b> after Game end, as it updates a counter of games played for the accuracy calculations.
-     * @param wpm A Double representation of words typed per minute (i.e. 25.3 WPM)
+     * @param wpm A {@link Double} representation of words typed per minute (i.e. 25.3 WPM)
      * @param accuracy A percentage amount of words typed correctly over the course of the round (3 out of 4 typed correctly = 75.0)
      * @author Ethan Gregory
      */
@@ -49,11 +49,11 @@ public class Stats {
         }
 
         // UPDATE AVERAGES
+        this.totalWPM += wpm;
         this.totalGamesPlayed++;
         this.totalAccuSum += accuracy; // ADD ACCURACY SCORE TO TOTAL SUM
-        this.totalWPM += wpm;
         this.averageAccuracy = (this.totalAccuSum / this.totalGamesPlayed) * 100; // DIVIDE BY GAMES PLAYED AND MULTIPLIED BY 100 TO GET ACCURACY
-        this.averageWPM = (this.totalWPM / this.totalGamesPlayed) * 100;
+        this.averageWPM = (wpm / 60);
 
 
     }

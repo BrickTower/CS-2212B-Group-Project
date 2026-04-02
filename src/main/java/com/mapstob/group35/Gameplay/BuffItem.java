@@ -1,5 +1,15 @@
 package com.mapstob.group35.Gameplay;
 
+
+/**
+ * Instantiates itself with a random buff type, power, and duration.
+ * Both WaveManager and ShopManager use this information for either display or use.
+ *
+ * @author Shaun
+ * @see ShopManager
+ * @see WaveManager
+ */
+
 public class BuffItem {
     static private String[] possibleBuffs = {
             "Heal","Coin Gain Increase", "Wave Length Decrease","Word Time Increase","Regeneration"
@@ -11,18 +21,51 @@ public class BuffItem {
     private int length;
     private String description;
 
+    /**
+     * Constructor
+     * Automatically chooses its own buff type and power/duration.
+     */
     public BuffItem() {
         determineItem();
         setItemInfo(name);
         cost = 10 * power * length;
         setDescription(name);
     }
+
+    /**
+     * Get name of buff. When checking buff type, it will check the name.
+     * @return name
+     */
     public String getName() {return name;}
+
+    /**
+     * Get cost of item.
+     * @return cost
+     */
     public int getCost() {return cost;}
+
+    /**
+     * Get power of item.
+     * @return power
+     */
     public int getPower() {return power;}
+
+    /**
+     * Get duration of item. Instant use items, like heal, will have a value of one.
+     * @return duration
+     */
     public int getLength() {return length;}
+
+    /**
+     * Get description of item. Only used in shop for display purposes.
+     * @return description
+     */
     public String getDescription() {return description;}
 
+    /**
+     * Decrements length. Should only be done by WaveManager.
+     * @return If item is used up
+     */
     public boolean decLength(){
         length --;
         return length <= 0;
@@ -70,6 +113,11 @@ public class BuffItem {
             case "Word Time Increase" -> {
                 description = "Costs " + Integer.toString(cost) + ".\n";
                 description = description + "Increases word countdown length by +" + Integer.toString(power) + "% for ";
+                description = description + Integer.toString(length) + " waves.";
+            }
+            case "Regeneration" -> {
+                description = "Costs " + Integer.toString(cost) + ".\n";
+                description = description + "Regenerates " + Integer.toString(power)+ "HP after every turn for ";
                 description = description + Integer.toString(length) + " waves.";
             }
         }

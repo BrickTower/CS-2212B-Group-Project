@@ -22,37 +22,31 @@
       </Text>
       <VBox layoutX="24.0" layoutY="90.0" prefHeight="287.0" prefWidth="261.0">
          <children>
-
-            <Button mnemonicParsing="false" prefHeight="51.0" prefWidth="292.0" style="-fx-background-color: #062E50;" text="New Run" textFill="WHITE">
-
+            <Button fx:id="newGame" mnemonicParsing="false" prefHeight="51.0" prefWidth="292.0" style="-fx-background-color: #062E50;" text="New Run" textFill="WHITE">
                <font>
                   <Font name="Consolas Bold" size="24.0" />
                </font>
             </Button>
             <Pane prefHeight="6.0" prefWidth="240.0" />
-
-            <Button mnemonicParsing="false" prefHeight="51.0" prefWidth="445.0" style="-fx-background-color: #062E50;" text="Tutorial" textFill="WHITE" fx:id="tutorial" onAction="#goToTutorial">
-
+            <Button fx:id="tutorial" mnemonicParsing="false" onAction="#goToTutorial" prefHeight="51.0" prefWidth="445.0" style="-fx-background-color: #062E50;" text="Tutorial" textFill="WHITE">
                <font>
                   <Font name="Consolas Bold" size="24.0" />
                </font>
             </Button>
             <Pane prefHeight="6.0" prefWidth="240.0" />
-            <Button mnemonicParsing="false" prefHeight="51.0" prefWidth="411.0" style="-fx-background-color: #062E50;" text="Stats" textFill="WHITE">
+            <Button fx:id="statsButton" mnemonicParsing="false" onAction="#testFunction" prefHeight="51.0" prefWidth="411.0" style="-fx-background-color: #062E50;" text="Stats" textFill="WHITE">
                <font>
                   <Font name="Consolas Bold" size="24.0" />
                </font>
             </Button>
             <Pane prefHeight="6.0" prefWidth="240.0" />
-
-            <Button mnemonicParsing="false" prefHeight="51.0" prefWidth="397.0" style="-fx-background-color: #062E50;" text="Quit" textFill="WHITE" fx:id="backButton" onAction="#backToMainMenu">
-
+            <Button fx:id="backButton" mnemonicParsing="false" onAction="#backToMainMenu" prefHeight="51.0" prefWidth="397.0" style="-fx-background-color: #062E50;" text="Back" textFill="WHITE">
                <font>
                   <Font name="Consolas Bold" size="24.0" />
                </font>
             </Button>
             <Pane prefHeight="6.0" prefWidth="240.0" />
-            <Button layoutX="10.0" layoutY="164.0" mnemonicParsing="false" prefHeight="51.0" prefWidth="329.0" style="-fx-background-color: #7c7c7c;" text="Parental Controls" textFill="WHITE">
+            <Button fx:id="parentalButton" layoutX="10.0" layoutY="164.0" mnemonicParsing="false" onAction="#goToParentalControls" prefHeight="51.0" prefWidth="329.0" style="-fx-background-color: #7c7c7c;" text="Parental Controls" textFill="WHITE" wrapText="true">
                <font>
                   <Font name="Consolas Bold" size="24.0" />
                </font>
