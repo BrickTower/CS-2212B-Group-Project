@@ -53,6 +53,17 @@ public class mainController {
         }
     }
 
+    @FXML
+    protected void goToStats() {
+        try {
+            FXMLLoader load = new FXMLLoader(getClass().getResource("stats.fxml"));
+            Parent root = load.load();
+            statsButton.getScene().setRoot(root);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
     /**
      * GUI Transition to Parental Controls screen. This function will only work if the currentUser is a {@link ParentProfile}.
      * Otherwise, throw a unique error message over text for a couple seconds.
