@@ -1,5 +1,6 @@
-package com.mapstob.group35;
+package com.mapstob.group35.Gameplay;
 
+import com.mapstob.group35.GameGUIManager;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;

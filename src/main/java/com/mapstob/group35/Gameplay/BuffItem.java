@@ -1,4 +1,4 @@
-package com.mapstob.group35;
+package com.mapstob.group35.Gameplay;
 
 public class BuffItem {
     static private String[] possibleBuffs = {

@@ -1,9 +1,4 @@
-package com.mapstob.group35;
-
-import java.lang.reflect.Array;
-import java.lang.reflect.Constructor;
-import java.util.ArrayList;
-import java.util.LinkedList;
+package com.mapstob.group35.Gameplay;
 
 public class GameManager {
     private WaveManager waveManager;
