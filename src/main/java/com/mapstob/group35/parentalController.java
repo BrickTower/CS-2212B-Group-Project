@@ -14,10 +14,12 @@ import javafx.scene.control.*;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.List;
 
 public class parentalController {
     private loggedUser account = new loggedUser();
+    private ParentProfile currentUser = (ParentProfile)(account.getCurrUser());
 
     @FXML
     private ChoiceBox<PlayerProfile> playersManaged;
@@ -47,16 +49,11 @@ public class parentalController {
      * Only called when adding a new User and entering this screen (latter is why it's public)
      */
     public void getParentsPlayers() {
-        Iterator<PlayerProfile> iterator = account.getPlayersManaged().iterator();
-        ArrayList<PlayerProfile> allPlayers = new ArrayList<>();
-        while (iterator.hasNext()) {
-            allPlayers.add(iterator.next());
-        }
+
 
         // CODE TO IMPLEMENT CHANGES TO COMBO BOX BASED OFF THIS (FIRST EXAMPLE): https://www.geeksforgeeks.org/java/javafx-combobox-with-examples/
-        SortedList<PlayerProfile> comboBox = new SortedList<PlayerProfile>(FXCollections.observableArrayList(allPlayers));
+        SortedList<PlayerProfile> comboBox = new SortedList<PlayerProfile>(FXCollections.observableArrayList());
 
-        playersManaged.setItems(comboBox);
     }
 
     /**
@@ -75,9 +72,18 @@ public class parentalController {
             }
 
             PlayerProfile newPlayer = new PlayerProfile(userName, passWord);
-            account.addPlayer(newPlayer);
+            currentUser.addPlayer(newPlayer);
             List<ParentProfile> parents = DataManager.loadList("parents.json", new TypeReference<List<ParentProfile>>() {
             });
+
+            int counter = 0; // FIND INDEX IN FOR LOOP
+            for (ParentProfile parent : parents) {
+                if (parent.getUserName().equals(currentUser.getUserName())) {
+                    parents.set(counter, currentUser);
+                    break;
+                }
+                counter++;
+            }
             DataManager.saveList("parents.json", parents);
 
             newPlayerName.clear();
