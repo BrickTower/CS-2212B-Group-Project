@@ -53,7 +53,7 @@ public class Stats {
         this.totalAccuSum += accuracy; // ADD ACCURACY SCORE TO TOTAL SUM
         this.totalWPM += wpm;
         this.averageAccuracy = (this.totalAccuSum / this.totalGamesPlayed) * 100; // DIVIDE BY GAMES PLAYED AND MULTIPLIED BY 100 TO GET ACCURACY
-        this.averageWPM = (this.totalWPM / this.totalGamesPlayed) * 100;
+        this.averageWPM = (this.totalWPM / this.totalGamesPlayed);
 
 
     }
