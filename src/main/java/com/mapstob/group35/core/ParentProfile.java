@@ -38,19 +38,6 @@ public class ParentProfile extends PlayerProfile { // Parents should be able to 
     }
 
     /**
-     * Removes a Player from the list of Players managed by the Parent
-     * @throws IllegalArgumentException if the Player is not already managed by the Parent calling the function
-     * @param player A valid Player who is managed by the calling Parent
-     */
-    public void removePlayer(PlayerProfile player) {
-        if (!this.playersManaged.contains(player)) { // GUARD AGAINST PLAYER IF ALREADY MANAGED, AND IS NOT PARENT AS WELL
-            throw new IllegalArgumentException("Player is not managed by this Parent.");
-        } else {
-            this.playersManaged.remove(player);
-        }
-    }
-
-    /**
      * Retrieves the Stats associated with a Player managed by the Parent
      * @throws IllegalArgumentException if the Player is not managed by the Parent calling the function
      * @param player A valid Player who is managed by the calling Parent
