@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #05001A;" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mapstob.group35.MainMenuApp">
+   <children>
+      <Pane prefHeight="100.0" prefWidth="600.0" style="-fx-background-color: #062e50;">
+         <children>
+            <Text fill="WHITE" layoutX="212.0" layoutY="71.0" strokeType="OUTSIDE" strokeWidth="0.0" text="STATS" textAlignment="CENTER">
+               <font>
+                  <Font name="Consolas Bold" size="64.0" />
+               </font>
+            </Text>
+            <Button layoutX="14.0" layoutY="13.0" mnemonicParsing="false" style="-fx-background-color: #7D8570; -fx-border-color: white;" text="EXIT" textFill="WHITE" />
+            <Text fill="WHITE" layoutX="403.0" layoutY="85.0" strokeType="OUTSIDE" strokeWidth="0.0" text="PLAYERNAME" textAlignment="RIGHT" wrappingWidth="184.75308227539062">
+               <font>
+                  <Font name="Consolas" size="24.0" />
+               </font>
+            </Text>
+         </children>
+      </Pane>
+      <ScrollPane hbarPolicy="NEVER" layoutX="22.0" layoutY="100.0" prefHeight="299.0" prefWidth="556.0" style="-fx-background-color: #05001A;">
+         <content>
+            <AnchorPane prefHeight="452.0" prefWidth="556.0" style="-fx-background-color: #05001A;">
+               <children>
+                  <VBox layoutX="40.0" prefHeight="1060.0" prefWidth="473.0">
+                     <children>
+                        <Pane prefHeight="17.0" prefWidth="474.0" />
+                        <Text fill="WHITE" layoutX="10.0" layoutY="54.0" strokeType="OUTSIDE" strokeWidth="0.0" text="STATISTICS">
+                           <font>
+                              <Font name="Consolas Bold" size="36.0" />
+                           </font>
+                        </Text>
+                        <HBox prefHeight="30.0" prefWidth="473.0">
+                           <children>
+                              <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="WAVES" wrappingWidth="389.58124923706055">
+                                 <font>
+                                    <Font name="Consolas" size="24.0" />
+                                 </font>
+                              </Text>
+                              <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-text-alignment: right;" text="###" textAlignment="RIGHT" wrappingWidth="82.78594970703125">
+                                 <font>
+                                    <Font name="Consolas" size="24.0" />
+                                 </font>
+                              </Text>
+                           </children>
+                        </HBox>
+                        <HBox prefHeight="30.0" prefWidth="473.0">
+                           <children>
+                              <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="WPM (Words Per Minute)" wrappingWidth="389.58124923706055">
+                                 <font>
+                                    <Font name="Consolas" size="24.0" />
+                                 </font>
+                              </Text>
+                              <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-text-alignment: right;" text="###" textAlignment="RIGHT" wrappingWidth="82.78594970703125">
+                                 <font>
+                                    <Font name="Consolas" size="24.0" />
+                                 </font>
+                              </Text>
+                           </children>
+                        </HBox>
+                        <HBox prefHeight="30.0" prefWidth="473.0">
+                           <children>
+                              <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="MISTAKES" wrappingWidth="389.58124923706055">
+                                 <font>
+                                    <Font name="Consolas" size="24.0" />
+                                 </font>
+                              </Text>
+                              <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-text-alignment: right;" text="###" textAlignment="RIGHT" wrappingWidth="82.78594970703125">
+                                 <font>
+                                    <Font name="Consolas" size="24.0" />
+                                 </font>
+                              </Text>
+                           </children>
+                        </HBox>
+                        <Pane prefHeight="17.0" prefWidth="474.0" />
+                        <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="ALL TIME HIGHSCORES">
+                           <font>
+                              <Font name="Consolas Bold" size="36.0" />
+                           </font>
+                        </Text>
+                        <HBox prefHeight="30.0" prefWidth="473.0">
+                           <children>
+                              <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="WPM (Words Per Minute)" wrappingWidth="389.58124923706055">
+                                 <font>
+                                    <Font name="Consolas" size="24.0" />
+                                 </font>
+                              </Text>
+                              <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-text-alignment: right;" text="###" textAlignment="RIGHT" wrappingWidth="82.78594970703125">
+                                 <font>
+                                    <Font name="Consolas" size="24.0" />
+                                 </font>
+                              </Text>
+                           </children>
+                        </HBox>
+                        <HBox prefHeight="30.0" prefWidth="473.0">
+                           <children>
+                              <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="WAVES" wrappingWidth="389.58124923706055">
+                                 <font>
+                                    <Font name="Consolas" size="24.0" />
+                                 </font>
+                              </Text>
+                              <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-text-alignment: right;" text="###" textAlignment="RIGHT" wrappingWidth="82.78594970703125">
+                                 <font>
+                                    <Font name="Consolas" size="24.0" />
+                                 </font>
+                              </Text>
+                           </children>
+                        </HBox>
+                        <HBox prefHeight="30.0" prefWidth="473.0">
+                           <children>
+                              <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="COINS" wrappingWidth="389.58124923706055">
+                                 <font>
+                                    <Font name="Consolas" size="24.0" />
+                                 </font>
+                              </Text>
+                              <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-text-alignment: right;" text="###" textAlignment="RIGHT" wrappingWidth="82.78594970703125">
+                                 <font>
+                                    <Font name="Consolas" size="24.0" />
+                                 </font>
+                              </Text>
+                           </children>
+                        </HBox>
+                        <HBox prefHeight="30.0" prefWidth="473.0">
+                           <children>
+                              <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="MISTAKES" wrappingWidth="389.58124923706055">
+                                 <font>
+                                    <Font name="Consolas" size="24.0" />
+                                 </font>
+                              </Text>
+                              <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-text-alignment: right;" text="###" textAlignment="RIGHT" wrappingWidth="82.78594970703125">
+                                 <font>
+                                    <Font name="Consolas" size="24.0" />
+                                 </font>
+                              </Text>
+                           </children>
+                        </HBox>
+                        <Pane layoutX="10.0" layoutY="10.0" prefHeight="17.0" prefWidth="474.0" />
+                        <Text fill="WHITE" layoutX="10.0" layoutY="61.0" strokeType="OUTSIDE" strokeWidth="0.0" text="CURRENT RUN HIGHSCORES">
+                           <font>
+                              <Font name="Consolas Bold" size="36.0" />
+                           </font>
+                        </Text>
+                        <HBox prefHeight="30.0" prefWidth="473.0">
+                           <children>
+                              <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="WPM (Words Per Minute)" wrappingWidth="389.58124923706055">
+                                 <font>
+                                    <Font name="Consolas" size="24.0" />
+                                 </font>
+                              </Text>
+                              <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-text-alignment: right;" text="###" textAlignment="RIGHT" wrappingWidth="82.78594970703125">
+                                 <font>
+                                    <Font name="Consolas" size="24.0" />
+                                 </font>
+                              </Text>
+                           </children>
+                        </HBox>
+                        <HBox prefHeight="30.0" prefWidth="473.0">
+                           <children>
+                              <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="WAVES" wrappingWidth="389.58124923706055">
+                                 <font>
+                                    <Font name="Consolas" size="24.0" />
+                                 </font>
+                              </Text>
+                              <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-text-alignment: right;" text="###" textAlignment="RIGHT" wrappingWidth="82.78594970703125">
+                                 <font>
+                                    <Font name="Consolas" size="24.0" />
+                                 </font>
+                              </Text>
+                           </children>
+                        </HBox>
+                        <HBox prefHeight="30.0" prefWidth="473.0">
+                           <children>
+                              <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="COINS" wrappingWidth="389.58124923706055">
+                                 <font>
+                                    <Font name="Consolas" size="24.0" />
+                                 </font>
+                              </Text>
+                              <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-text-alignment: right;" text="###" textAlignment="RIGHT" wrappingWidth="82.78594970703125">
+                                 <font>
+                                    <Font name="Consolas" size="24.0" />
+                                 </font>
+                              </Text>
+                           </children>
+                        </HBox>
+                        <HBox prefHeight="30.0" prefWidth="473.0">
+                           <children>
+                              <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="MISTAKES" wrappingWidth="389.58124923706055">
+                                 <font>
+                                    <Font name="Consolas" size="24.0" />
+                                 </font>
+                              </Text>
+                              <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-text-alignment: right;" text="###" textAlignment="RIGHT" wrappingWidth="82.78594970703125">
+                                 <font>
+                                    <Font name="Consolas" size="24.0" />
+                                 </font>
+                              </Text>
+                           </children>
+                        </HBox>
+                     </children>
+                  </VBox>
+               </children>
+            </AnchorPane>
+         </content>
+      </ScrollPane>
+   </children>
+</AnchorPane>

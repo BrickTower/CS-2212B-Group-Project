@@ -1,4 +1,4 @@
-package com.mapstob.group35;
+package com.mapstob.group35.Gameplay;
 
 public class TextUnit {
     private String text;
