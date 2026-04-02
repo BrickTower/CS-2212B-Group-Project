@@ -31,6 +31,8 @@ public class parentalController {
     @FXML
     private TextField newPlayerName;
     @FXML
+    private PasswordField resetField;
+    @FXML
     private PasswordField newPlayerPass;
     @FXML
     private Button backButton;
@@ -42,6 +44,21 @@ public class parentalController {
             backButton.getScene().setRoot(load.load());
         } catch (IOException e) {
             throw new RuntimeException(e);
+        }
+    }
+
+    @FXML
+    protected void resetPlayersPassword() {
+        String newPassword = resetField.getText();
+        if (managedPlayers.getValue() == null) { // MAKE SURE USER IS SELECTED
+            leftError.setVisible(true);
+            leftError.setText("User not selected.");
+        } else if (newPassword.isBlank()) { // MAKE SURE PASSWORD IS ENTERED
+            leftError.setVisible(true);
+            leftError.setText("Password not entered");
+        } else {
+            PlayerProfile student = managedPlayers.getValue();
+            student.setPassword(newPassword);
         }
     }
 

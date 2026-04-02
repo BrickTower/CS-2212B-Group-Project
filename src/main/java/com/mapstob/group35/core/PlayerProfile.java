@@ -133,6 +133,7 @@ public class PlayerProfile {
         return this.level;
     }
 
+
     /**
      * Returns an Integer representation of the amount of coins the Player currently has.
      * @return the Player's current amount of coins, represented as a Integer
@@ -180,6 +181,16 @@ public class PlayerProfile {
      */
     public String getPassword() {
         return this.password;
+    }
+
+    /**
+     * Sets the Player's password to the provided String
+     * @param newPassword A {@link String} representation of the password.
+     * @author Ethan Gregory
+     */
+    public void setPassword(String newPassword) {
+        this.password = newPassword;
+        this.updateSave();
     }
 
     /**
