@@ -30,7 +30,7 @@ public class mainController {
     private PlayerProfile currentUser = account.getCurrUser();
 
     //temporary var
-    private boolean runExists = (currentUser.getCoins() > 0);
+    private boolean runExists = (currentUser.getPlayerStats().getCurrentWave() > 0);
 
     @FXML
     private void initialize() {
