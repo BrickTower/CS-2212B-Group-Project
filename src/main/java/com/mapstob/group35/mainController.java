@@ -74,10 +74,12 @@ public class mainController {
         }
     }
 
-
-    public void testFunction() { // QUICK TEST FUNCTION TO MAKE SURE SAVING USER DATA WORKS
-        if (currentUser != null) {
-            currentUser.addCoins(15);
+    @FXML
+    protected void goToStats() {
+        try {
+            SceneManager.loadStats();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
         }
     }
 
