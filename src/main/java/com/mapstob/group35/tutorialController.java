@@ -11,11 +11,6 @@ public class tutorialController {
     private Button backButton;
 
     @FXML
-    protected void backToMainMenu() throws IOException {
-        SceneManager.loadMainMenu();
-    }
-
-    @FXML
     protected void EXIT_BUTTON_CLICKED()  {
         try {
             SceneManager.loadMainMenu();

@@ -28,6 +28,9 @@ public class Stats {
     /** The total amount of games the Player has done.*/
     @JsonProperty("gamesPlayed")
     private int totalGamesPlayed;
+    /** The current wave of the player's current game */
+    @JsonProperty("currentWave")
+    private int currentWave;
     /** The total amount of waves the Player has completed across all games */
     @JsonProperty("totalWaves")
     private int totalWaves;
@@ -59,6 +62,7 @@ public class Stats {
         this.totalGamesPlayed = 0;
         this.totalAccuSum = 0;
         this.averageAccuracy = 0;
+        this.currentWave = 0;
         this.totalWaves = 0;
         this.peakWaves = 0;
         this.totalCoins = 0;
@@ -99,6 +103,24 @@ public class Stats {
 
         this.totalMistakes += mistakes;
         if (this.lowestMistakes == 0 || mistakes < this.lowestMistakes) this.lowestMistakes = mistakes;
+    }
+
+    /**
+     * Returns the Player's current wave of the game
+     * @return An Integer representation of the current wave (defaults to 0 if dead)
+     * @author Ethan Gregory
+     */
+    public int getCurrentWave() {
+        return this.currentWave;
+    }
+
+    /**
+     * Sets the Player's current wave in the game. Should be used for saving, and when the player dies, it should be set back to 0.
+     * @param newWave Integer value showing the current wave that the Player is on.
+     * @author Ethan Gregory
+     */
+    public void setCurrWave(int newWave) {
+        this.currentWave = newWave;
     }
 
     /**

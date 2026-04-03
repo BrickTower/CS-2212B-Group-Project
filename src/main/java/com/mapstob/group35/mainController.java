@@ -30,8 +30,12 @@ public class mainController {
     private PlayerProfile currentUser = account.getCurrUser();
 
     //temporary var
-    private boolean runExists = false;
+    private boolean runExists = (currentUser.getPlayerStats().getCurrentWave() > 0);
 
+    @FXML
+    private void initialize() {
+        runButtonText();
+    }
 
     private void runButtonText(){
         if (runExists){
