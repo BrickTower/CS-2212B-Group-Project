@@ -301,7 +301,7 @@ public class GameManager {
      */
     private void saveInfo(){
         //TODO save information
-        //player.setCoins(coins);
+        player.setCoins(coins);
         System.out.println("saved");
     }
 

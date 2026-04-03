@@ -155,7 +155,7 @@ public class PlayerProfile {
     }
 
     /**
-     *
+     * Sets the amount of coins present
      * @param coins
      */
     public void setCoins(int coins) {this.coins=coins;}
