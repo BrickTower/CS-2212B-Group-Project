@@ -43,7 +43,13 @@ public class SceneManager {
 
     //TODO Below!!!
     static public void loadStats() throws IOException{
-
+        try {
+            FXMLLoader load = new FXMLLoader(SceneManager.class.getResource("/com/mapstob/group35/stats.fxml"));
+            Parent root = load.load();
+            BaseScene.setRoot(root);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
     static public tutorialController loadTutorial() throws IOException{
         FXMLLoader fxmlLoader = new FXMLLoader(SceneManager.class.getResource("/com/mapstob/group35/tutorialScreen.fxml"));
