@@ -36,9 +36,9 @@ public class TextManager {
         WPMTracker = new ArrayList<Integer>();
         WPM = 0;
         curTime = 0;
-        defaultWordSpawnTime = 4;
+        defaultWordSpawnTime = 6;
         wordSpawnTime = defaultWordSpawnTime;
-        wordDefaultTimeLeft = 15;
+        wordDefaultTimeLeft = 20;
         mistakes = 0;
         wordsCompleted = 0;
     }
@@ -110,7 +110,7 @@ public class TextManager {
      * Adds a new word to the text list.
      */
     public void makeText() {
-        TextUnit newTextUnit = new TextUnit("AAA",wordDefaultTimeLeft);
+        TextUnit newTextUnit = new TextUnit(WordList.randWord(),wordDefaultTimeLeft);
         textList.add(newTextUnit);
     }
     private void removeText(TextUnit text){
