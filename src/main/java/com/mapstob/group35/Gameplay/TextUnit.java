@@ -84,6 +84,7 @@ public class TextUnit {
                 mistakes++;
             }
         }
+        System.out.println("mistakes: " + mistakes);
         return mistakes;
     }
 

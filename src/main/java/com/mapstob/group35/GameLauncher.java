@@ -1,6 +1,7 @@
 package com.mapstob.group35;
 
 import com.mapstob.group35.Gameplay.GameGUIManager;
+import com.mapstob.group35.Gameplay.GameManager;
 import com.mapstob.group35.Gameplay.TextUnit;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -15,9 +16,11 @@ import java.util.ArrayList;
  */
 public class GameLauncher extends Application{
     static GameGUIManager GUI;
+    static GameManager gameManager;
 
     public static void main(String[] args) {
         Application.launch(GameLauncher.class, args);
+
 
     }
 
@@ -25,14 +28,18 @@ public class GameLauncher extends Application{
     public void start(Stage stage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("gamescreen.fxml")); // LOAD MAIN MENU FROM FXML
         Scene scene = new Scene(fxmlLoader.load(), 600, 400); // LOAD OUR FXML AS A SCENE
+
         GUI = fxmlLoader.getController();
+        gameManager = new GameManager();
+        gameManager.initGUI(GUI);
+        GUI.setGameManager(gameManager);
 
         stage.setTitle("BotSpam");
         stage.setResizable(false);
         stage.setScene(scene); // SHOW SCENE
         stage.show();
 
-        test();
+        //stest();
     }
 
 

@@ -58,6 +58,8 @@ public class WaveManager {
      * @return Time left
      */
     public double getWaveTimeLeft () {return waveTime - curTime;}
+    public int getWaveTime(){return waveTime;}
+    public int getCurTime(){return curTime;}
 
     /**
      * Gets list of current buffs.
@@ -101,6 +103,10 @@ public class WaveManager {
             return true;
         }
         return false;
+    }
+
+    public void resetTime(){
+        curTime = 0;
     }
 
     /**

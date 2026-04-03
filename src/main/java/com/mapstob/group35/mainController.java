@@ -74,7 +74,7 @@ public class mainController {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("tutorialScreen.fxml"));
             tutorial.getScene().setRoot(fxmlLoader.load());
             GUI = fxmlLoader.getController();
-            gm.setGUI(GUI);
+            gm.initGUI(GUI);
             GUI.setGameManager(gm);
 
         } catch (IOException e) {

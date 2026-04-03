@@ -3,6 +3,8 @@ package com.mapstob.group35.Gameplay;
 import com.mapstob.group35.core.PlayerProfile;
 import com.mapstob.group35.core.loggedUser;
 
+import java.util.ArrayList;
+
 /**
  * Manages overall game functionality. This class should always be active so long as they are in the game screen.
  * <br>
@@ -52,6 +54,7 @@ public class GameManager {
         waveManager = new WaveManager(0,30);
         textManager = new TextManager();
         died = false;
+        downtime = true;
     }
 
     /**
@@ -76,6 +79,36 @@ public class GameManager {
         downtime = true;
     }
     /// /// /// /// PROCESS
+
+    // taken from https://stackoverflow.com/questions/17758411/java-creating-a-new-thread
+    // new thread required so that the thread.sleep doesnt stop the entire program
+    Thread gameThread = new Thread(new Runnable() {
+        @Override
+        public void run() {
+            while(!incTime() && !died){
+                try {
+                    gameThread.sleep(1000);
+                } catch (InterruptedException e) {
+                    throw new RuntimeException(e);
+                }
+                System.out.println("Process loop");
+            }
+
+            if (!died){
+                textManager.clear();
+                resetTime();
+                heal( waveManager.getHealAmount() );
+                saveInfo();
+                downtime = true;
+                GUI.buttonValid(downtime);
+                GUI.nextWaveText();
+                GUI.setWaveText(waveManager.getWave());
+                GUI.setTIME_BAR(waveManager.getCurTime(),waveManager.getWaveTime());
+                displayText(textManager.getTextList());
+            }
+            gameThread.interrupt();
+        }
+    });
     /**
      * This function is the main function that counts time.
      * Waits 1 second, then calls the increment time function for all other managers.
@@ -86,25 +119,25 @@ public class GameManager {
     public void process() throws InterruptedException {
         downtime = false;
         GUI.buttonValid(downtime);
-        while(!incTime() && !died){
-            Thread.sleep(1000);
-        }
-        if (!died){
-            textManager.clear();
-            heal( waveManager.getHealAmount() );
-            saveInfo();
-            downtime = true;
-            GUI.buttonValid(downtime);
-            GUI.nextWaveText();
+        System.out.println("Process start");
+        gameThread.start();
 
-        }
     }
 
 
     /// /// /// /// INPUT
 
-    public void setGUI(GameGUIManager GUI) {
+    public void initGUI(GameGUIManager GUI) {
         this.GUI = GUI;
+        GUI.setWordText(new ArrayList<TextUnit>());
+        displayScore();
+        GUI.setCoinText(coins);
+        GUI.setWaveText(waveManager.getWave());
+        GUI.setTIME_BAR(0,0);
+        GUI.setHP_BAR(curLife, maxLife);
+        GUI.buttonValid(true);
+        GUI.nextWaveText();
+        GUI.GameOverScreen(false);
     }
     public GameGUIManager getGUI() {
         return GUI;
@@ -115,12 +148,17 @@ public class GameManager {
      * @param input
      */
     public void spellingAttempt(String input){
-        int spellingAttempt = textManager.spellingAttempt(input);
+        String corrected_input = input.toUpperCase();
+        int spellingAttempt = textManager.spellingAttempt(corrected_input);
         if (spellingAttempt == 0){
             spellingCorrect();
         }
+        else if (spellingAttempt == -1){
+            //nothing, invalid
+        }
         else{
             takeDamage(spellingAttempt);
+
         }
     }
 
@@ -130,11 +168,20 @@ public class GameManager {
      * @throws InterruptedException
      */
     public void startWave() throws InterruptedException {
+        GUI.setWaveText(waveManager.getWave());
+        GUI.clearTextField();
         waveManager.startWave();
         textManager.reset();
+
         for(int x = 0;x<5;x++) {
-            textManager.makeText("Placeholder"); //TODO change!!!
+            textManager.makeText();
+            System.out.println("Text made");
         }
+        for (int x = 0;x<5;x++) {
+            System.out.println(textManager.getTextList().get(x));
+        }
+
+        GUI.setWordText(textManager.getTextList());
         process();
     }
 
@@ -143,13 +190,16 @@ public class GameManager {
      * Increases coins by an amount.
      * @param amount
      */
-    public void gainCoins(int amount){player.addCoins(amount);}
+    public void gainCoins(int amount){
+        coins += amount;
+        GUI.setCoinText(coins);
+    }
 
     /**
      * Gets coin amount.
      * @return coins
      */
-    public int getCoins() {return player.getCoins();}
+    public int getCoins() {return coins;}
 
     /**
      * Checks if coins can be used, and uses coins if it can. Returns whether coins have been used or not
@@ -157,7 +207,13 @@ public class GameManager {
      * @return if coins used
      */
     public boolean useCoins(int amount){
-        return player.spendCoins(amount);
+        if (coins > amount){
+            coins -= amount;
+            player.setCoins(coins);
+            GUI.setCoinText(coins);
+            return true;
+        }
+        return false;
     }
     /// /// /// /// SHOP
     /**
@@ -178,6 +234,7 @@ public class GameManager {
     public void takeDamage(int amount){
         if (amount > curLife) {curLife = 0; die();}
         else{ curLife -= amount; }
+        GUI.setHP_BAR(curLife,maxLife);
     }
 
     /**
@@ -187,6 +244,7 @@ public class GameManager {
     public void heal(int amount){
         if (amount + curLife > maxLife) {curLife = maxLife;}
         else {curLife += amount; }
+        GUI.setHP_BAR(curLife,maxLife);
     }
 
     /// /// /// /// FINISH
@@ -196,6 +254,7 @@ public class GameManager {
     public void spellingCorrect(){
         //TODO other additions?
         gainCoins(defaultCoinGain);
+        GUI.setWordText(textManager.getTextList());
     }
     public boolean getDowntime(){return downtime;}
 
@@ -210,10 +269,26 @@ public class GameManager {
 
         if (damage >0){takeDamage(damage);}
 
+        GUI.setTIME_BAR(waveManager.getCurTime(),waveManager.getWaveTime());
+        GUI.setWordText(textManager.getTextList());
+        displayScore();
         return waveManager.incTime();
     }
+    public void resetTime(){
+        textManager.resetTime();
+        waveManager.resetTime();
+    }
 
-
+    /// /// /// /// DISPLAY
+    public void displayScore(){
+        int WPM = textManager.getWPM();
+        int mistakes = Math.round(textManager.calculateMistakesPercent() *100);
+        int wordsCompleted = textManager.getWordsCompleted();
+        GUI.setScoreText(WPM, mistakes,wordsCompleted,0,0 );
+    }
+    public void displayText(ArrayList<TextUnit> textList){
+        GUI.setWordText(textList);
+    }
 
 
     /// /// /// /// MODIFY INFO
@@ -222,6 +297,8 @@ public class GameManager {
      */
     private void saveInfo(){
         //TODO save information
+        //player.setCoins(coins);
+        System.out.println("saved");
     }
 
     /**
@@ -238,6 +315,7 @@ public class GameManager {
     private void die(){
         died = true;
         deleteInfo();
+        GUI.GameOverScreen(true);
         //TODO show death screen, delete current run stats
     }
 

@@ -5,8 +5,10 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Group;
 import javafx.scene.Node;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
@@ -45,6 +47,8 @@ public class GameGUIManager {
     @FXML private Button SHOP_BUTTON;
     @FXML private Button MAIN_MENU_BUTTON;
 
+    @FXML private AnchorPane GAME_OVER;
+
     private GameManager gameManager;
 
     /**
@@ -59,6 +63,7 @@ public class GameGUIManager {
      * Unclickable if currently in wave.
      */
     @FXML protected void SHOP_CLICK(){
+        /*
         if (gameManager.getDowntime()){
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("shopScreen.fxml"));
             try {
@@ -72,6 +77,7 @@ public class GameGUIManager {
                 throw new RuntimeException(e);
             }
         }
+        */
     }
 
     /**
@@ -81,11 +87,22 @@ public class GameGUIManager {
     @FXML protected void MAIN_MENU_CLICK(){
         //TODO
         if (gameManager.getDowntime()){
+            System.out.println("MAIN_MENU_CLICK");
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("mainMenu.fxml"));
+            System.out.println("ch1");
             try {
-                SHOP_BUTTON.getScene().setRoot(fxmlLoader.load());
-            }  catch (IOException e) {throw new RuntimeException(e);}
+                Scene s = MAIN_MENU_BUTTON.getScene();
+                System.out.println("ch5");
+                s.setRoot(fxmlLoader.load());
+                System.out.println("ch2");
+            }  catch (IOException e) {System.out.println("ch3");throw new RuntimeException(e);}
+            System.out.println("ch4");
         }
+    }
+
+    public void GameOverScreen(boolean display) {
+        GAME_OVER.setVisible(display);
+        GAME_OVER.setDisable(!display);
     }
 
     /**
@@ -96,9 +113,11 @@ public class GameGUIManager {
      * send spelling attempt to gameManager
      */
     @FXML protected void TEXT_INPUTTED(){
+        System.out.println("Text Inputted");
         if(gameManager.getDowntime()){
             try {
                 gameManager.startWave();
+                System.out.println("Started Wave");
             } catch (InterruptedException e) {
                 throw new RuntimeException(e);
             }
@@ -109,11 +128,27 @@ public class GameGUIManager {
         }
     }
 
+    @FXML protected void START_NEW_RUN(){
+        //TODO
+    }
+    @FXML protected void MAIN_MENU_FROM_GAME_OVER(){
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("mainMenu.fxml"));
+        try {
+            SHOP_BUTTON.getScene().setRoot(fxmlLoader.load());
+        }  catch (IOException e) {throw new RuntimeException(e);}
+    }
+    @FXML protected void EXIT_GAME(){
+        //TODO logout??
+    }
+
     /**
      * Display next wave start hint
      */
     public void nextWaveText(){
         TEXT_FIELD.setText("Press enter to continue to a new wave.");
+    }
+    public void clearTextField(){
+        TEXT_FIELD.clear();
     }
 
     /**
@@ -160,12 +195,15 @@ public class GameGUIManager {
      */
     public void setTIME_BAR(int currentTime,int maxTime) {
         //base width 200 base posx 13
-        float percentage = (float)currentTime/(float)maxTime;
+        float percentage;
+        if (maxTime==0){ percentage = 0f; }
+        else { percentage = (float) (maxTime - currentTime) / (float) maxTime; }
+
         TIME_BAR.setWidth(percentage*200);
-        TIME_BAR.setX(13 + (200-percentage*200));
+        TIME_BAR.setX((200-percentage*200));
         for (Node child : TIME_CONTAINER.getChildren()){
             if (child instanceof Text){
-                ((Text) child).setText("Time left: "+ Integer.toString(currentTime));
+                ((Text) child).setText("Time left: "+ Integer.toString(maxTime - currentTime));
             }
         }
     }
