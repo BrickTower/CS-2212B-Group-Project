@@ -181,6 +181,17 @@ public class PlayerProfile {
     }
 
     /**
+     * Sets a player's Stats. Used to save any Stats changes to the Player.
+     * @param newStats Stats object, preferably the one from the currently logged in user (currUser.getPlayerStats(), for example)
+     * @see Stats
+     * @author Ethan Gregory
+     */
+    public void setStats(Stats newStats) {
+        this.playerStats = newStats;
+        this.updateSave();
+    }
+
+    /**
      * Returns a String representation of the username
      * @return the Profile's userName, represented as a String
      * @see String
