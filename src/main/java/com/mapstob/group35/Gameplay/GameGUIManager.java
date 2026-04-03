@@ -252,7 +252,7 @@ public class GameGUIManager {
             }
             //Awful, i know
             else {
-                Group g = (Group) (((HBox) (children.get(7-i)))).getChildren().getFirst();
+                Group g = (Group) (((HBox) (children.get(7-i)))).getChildren().get(0);
                 TextUnit t = shownlist.get(i);
                 setTextUnit(g, t);
 
