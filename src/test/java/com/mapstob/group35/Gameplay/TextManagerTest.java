@@ -15,8 +15,11 @@ public class TextManagerTest {
 
     // fresh manager with default settings before each test
     @BeforeEach
-    public void setUp() {
-        textManager = new TextManager();
+
+    void setUp() {
+        // Initialize with 2 second spawn rate and 15 second word life
+        manager = new TextManager();
+
     }
 
     // brand new manager should have an empty text list

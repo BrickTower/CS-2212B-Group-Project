@@ -21,6 +21,8 @@ public class TextManager {
 
     private int wordDefaultTimeLeft;
 
+    private boolean firstTry;
+    private int firstAttemptWords;
     private int mistakes;
     private int wordsCompleted;
     private int WPM;
@@ -41,6 +43,8 @@ public class TextManager {
         wordDefaultTimeLeft = 20;
         mistakes = 0;
         wordsCompleted = 0;
+        firstAttemptWords = 0;
+        firstTry = true;
     }
 
     /**
@@ -158,6 +162,8 @@ public class TextManager {
         int mistakes = textList.get(0).checkSpellingValidity(input);
         if (mistakes == 0){
             wordsCompleted++;
+            if (firstTry){ firstAttemptWords++; }
+            firstTry = true;
 
             WPMTracker.add(curTime);
 
@@ -168,6 +174,7 @@ public class TextManager {
             return 0;
         }
         else{
+            firstTry = false;
             this.mistakes++;
             return ((int) Math.ceil(mistakes/2f));
         }
@@ -189,5 +196,8 @@ public class TextManager {
         return WPM;
     }
     public int getWordsCompleted() {return wordsCompleted;}
+    public int getMistakes() {return mistakes;}
+    public int getFirstAttemptWords() {return firstAttemptWords;}
+
     public ArrayList<TextUnit>  getTextList() {return textList;}
 }
