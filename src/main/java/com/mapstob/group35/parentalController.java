@@ -3,6 +3,7 @@ package com.mapstob.group35;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.mapstob.group35.core.ParentProfile;
 import com.mapstob.group35.core.PlayerProfile;
+import com.mapstob.group35.core.Stats;
 import com.mapstob.group35.core.loggedUser;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -47,6 +48,41 @@ public class parentalController {
         }
     }
 
+    /**
+     * Reset the {@link Stats} of specifically one player from the Parent's dropdown list.
+     * @author Ethan Gregory
+     */
+    @FXML
+    protected void resetPlayersStats() {
+        if (managedPlayers.getValue() == null) { // MAKE SURE USER IS SELECTED
+            leftError.setVisible(true);
+            leftError.setText("User not selected.");
+        } else {
+            PlayerProfile student = managedPlayers.getValue();
+            student.resetStats();
+            leftError.setVisible(true);
+            leftError.setText("Stats reset.");
+        }
+    }
+
+    /**
+     * Reset the {@link Stats} of every player that the Parent is managing.
+     * @author Ethan Gregory
+     */
+    @FXML
+    protected void resetAllPlayersStats() {
+        for (PlayerProfile player : currentUser.getPlayersManaged()) {
+            player.resetStats();
+        }
+        leftError.setVisible(true);
+        leftError.setText("All Players' stats reset.");
+    }
+
+
+    /**
+     * Resets the selected Player's password to whatever is inputted in the box. Throws a small Error Message if it can't succeed.
+     * @author Ethan Gregory
+     */
     @FXML
     protected void resetPlayersPassword() {
         String newPassword = resetField.getText();
@@ -59,6 +95,8 @@ public class parentalController {
         } else {
             PlayerProfile student = managedPlayers.getValue();
             student.setPassword(newPassword);
+            leftError.setVisible(true);
+            leftError.setText("Password changed");
         }
     }
 

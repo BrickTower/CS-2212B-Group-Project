@@ -29,16 +29,22 @@ public class Stats {
     @JsonProperty("gamesPlayed")
     private int totalGamesPlayed;
     /** The total amount of waves the Player has completed across all games */
+    @JsonProperty("totalWaves")
     private int totalWaves;
     /** The highest amount of waves the Player has reached in a single run */
+    @JsonProperty("peakWaves")
     private int peakWaves;
     /** The total amount of coins the Player has earned across all games */
+    @JsonProperty("totalCoins")
     private int totalCoins;
     /** The highest amount of coins the Player has earned in a single run */
+    @JsonProperty("peakCoins")
     private int peakCoins;
     /** The total amount of mistakes the Player has made across all games */
+    @JsonProperty("totalMistakes")
     private int totalMistakes;
     /** The lowest amount of mistakes the Player has made in a single run */
+    @JsonProperty("lowestMistakes")
     private int lowestMistakes;
 
     /**

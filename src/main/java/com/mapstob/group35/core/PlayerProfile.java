@@ -169,8 +169,9 @@ public class PlayerProfile {
      * @see Stats
      * @author Ethan Gregory
      */
-    protected void resetStats() {
+    public void resetStats() {
         this.playerStats = new Stats();
+        this.updateSave();
     }
 
     /**
