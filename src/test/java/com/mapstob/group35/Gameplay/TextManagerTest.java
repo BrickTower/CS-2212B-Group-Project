@@ -12,7 +12,7 @@ public class TextManagerTest {
     @BeforeEach
     void setUp() {
         // Initialize with 2 second spawn rate and 15 second word life
-        manager = new TextManager(2, 15);
+        manager = new TextManager();
     }
 
     @Test
