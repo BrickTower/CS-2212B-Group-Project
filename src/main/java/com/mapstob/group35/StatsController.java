@@ -11,6 +11,8 @@ import javafx.scene.control.Button;
 import javafx.stage.Stage;
 import javafx.scene.text.Text;
 
+import java.io.IOException;
+
 /**
  * Controller for the Statistics screen.
  * <p>
@@ -126,10 +128,10 @@ public class StatsController {
      */
     @FXML
     private void handleExit() throws Exception {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("mainMenu.fxml"));
-        Parent root = loader.load();
-        Stage stage = (Stage) exitButton.getScene().getWindow();
-        stage.setScene(new Scene(root));
-        stage.show();
+        try {
+            SceneManager.loadMainMenu();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 }
