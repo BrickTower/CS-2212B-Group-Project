@@ -19,6 +19,7 @@ public class mainApp extends Application{
     public void start(Stage stage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("baseMenu.fxml")); // LOAD MAIN MENU FROM FXML
         Scene scene = new Scene(fxmlLoader.load(), 600, 400); // LOAD OUR FXML AS A SCENE
+        SceneManager.BaseScene = scene; // LOAD SCENE INTO BASE SCENE
         stage.setTitle("BotSpam");
         stage.setResizable(false);
         stage.setScene(scene); // SHOW SCENE
