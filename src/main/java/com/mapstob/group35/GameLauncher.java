@@ -20,8 +20,6 @@ public class GameLauncher extends Application{
 
     public static void main(String[] args) {
         Application.launch(GameLauncher.class, args);
-
-
     }
 
     @Override // BASED ON INTELIJ JAVAFX PRESET HELLOWORLD

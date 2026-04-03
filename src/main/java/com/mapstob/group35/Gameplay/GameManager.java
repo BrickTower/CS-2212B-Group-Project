@@ -29,6 +29,8 @@ public class GameManager {
     private PlayerProfile player = account.getCurrUser();
     private GameGUIManager GUI;
 
+    private Thread gameThread;
+
     private int coins;
     private int defaultCoinGain;
     private int maxLife;
@@ -51,7 +53,7 @@ public class GameManager {
         coins = 0;
         defaultCoinGain = 10;
 
-        waveManager = new WaveManager(0,30);
+        waveManager = new WaveManager(0,10);
         textManager = new TextManager();
         died = false;
         downtime = true;
@@ -80,35 +82,6 @@ public class GameManager {
     }
     /// /// /// /// PROCESS
 
-    // taken from https://stackoverflow.com/questions/17758411/java-creating-a-new-thread
-    // new thread required so that the thread.sleep doesnt stop the entire program
-    Thread gameThread = new Thread(new Runnable() {
-        @Override
-        public void run() {
-            while(!incTime() && !died){
-                try {
-                    gameThread.sleep(1000);
-                } catch (InterruptedException e) {
-                    throw new RuntimeException(e);
-                }
-                System.out.println("Process loop");
-            }
-
-            if (!died){
-                textManager.clear();
-                resetTime();
-                heal( waveManager.getHealAmount() );
-                saveInfo();
-                downtime = true;
-                GUI.buttonValid(downtime);
-                GUI.nextWaveText();
-                GUI.setWaveText(waveManager.getWave());
-                GUI.setTIME_BAR(waveManager.getCurTime(),waveManager.getWaveTime());
-                displayText(textManager.getTextList());
-            }
-            gameThread.interrupt();
-        }
-    });
     /**
      * This function is the main function that counts time.
      * Waits 1 second, then calls the increment time function for all other managers.
@@ -120,7 +93,38 @@ public class GameManager {
         downtime = false;
         GUI.buttonValid(downtime);
         System.out.println("Process start");
+        // taken from https://stackoverflow.com/questions/17758411/java-creating-a-new-thread
+        // new thread required so that the thread.sleep doesnt stop the entire program
+        gameThread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                while(!incTime() && !died){
+                    try {
+                        gameThread.sleep(1000);
+                    } catch (InterruptedException e) {
+                        throw new RuntimeException(e);
+                    }
+                    System.out.println("Process loop");
+                }
+
+                if (!died){
+                    textManager.clear();
+                    resetTime();
+                    heal( waveManager.getHealAmount() );
+                    saveInfo();
+                    downtime = true;
+                    GUI.buttonValid(downtime);
+                    GUI.nextWaveText();
+                    GUI.setWaveText(waveManager.getWave());
+                    GUI.setTIME_BAR(waveManager.getCurTime(),waveManager.getWaveTime());
+                    displayText(textManager.getTextList());
+                }
+                gameThread.interrupt();
+            }
+        });
         gameThread.start();
+
+
 
     }
 
