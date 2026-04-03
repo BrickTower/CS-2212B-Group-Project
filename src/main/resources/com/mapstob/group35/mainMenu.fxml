@@ -60,7 +60,6 @@
                               <!-- rows will be added here dynamically -->
                            </children>
                         </VBox>
-
                      </children>
                   </AnchorPane>
               </content>

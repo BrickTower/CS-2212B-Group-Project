@@ -71,22 +71,28 @@ public class DataManager {
 
 
     /**
-     * Loads all PlayerProfile objects from the players.json file.
-     * <p>
-     * If the file cannot be found or read, this method returns an empty list
-     * instead of causing an error.
-     * </p>
-     * @author Amlan Tamaki Konan
-     * @return a List of PlayerProfile objects, or an empty list if loading fails
+     * Loads all PlayerProfile objects by reading every ParentProfile
+     * and collecting all players they manage.
+     *
+     * @return a list of all PlayerProfile objects managed by all parents
      */
     public static List<PlayerProfile> loadAllPlayerProfiles() {
-        try {
-            return loadList("players.json", new TypeReference<List<PlayerProfile>>() {});
-        } catch (IOException e) {
-            e.printStackTrace();
-            return new ArrayList<>();
+        List<PlayerProfile> allPlayers = new ArrayList<>();
+
+        // Load all parents
+        List<ParentProfile> parents = loadAllParentProfiles();
+
+        // Collect all players from each parent
+        for (ParentProfile parent : parents) {
+            List<PlayerProfile> managed = parent.getPlayersManaged();
+            if (managed != null) {
+                allPlayers.addAll(managed);
+            }
         }
+
+        return allPlayers;
     }
+
 
     /**
      * Loads all ParentProfile objects from the parents.json file.
@@ -122,14 +128,11 @@ public class DataManager {
         users.addAll(loadAllParentProfiles());
 
         users.sort((a, b) -> {
-            int waveA = (a instanceof PlayerProfile)
-                    ? ((PlayerProfile) a).getPlayerStats().getPeakWaves()
-                    : ((ParentProfile) a).getPlayerStats().getPeakWaves();
+            PlayerProfile pA = (PlayerProfile) a;
+            PlayerProfile pB = (PlayerProfile) b;
 
-            int waveB = (b instanceof PlayerProfile)
-                    ? ((PlayerProfile) b).getPlayerStats().getPeakWaves()
-                    : ((ParentProfile) b).getPlayerStats().getPeakWaves();
-
+            int waveA = pA.getPlayerStats().getPeakWaves();
+            int waveB = pB.getPlayerStats().getPeakWaves();
             return Integer.compare(waveB, waveA);
         });
 
