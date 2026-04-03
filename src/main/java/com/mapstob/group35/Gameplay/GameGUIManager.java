@@ -88,6 +88,7 @@ public class GameGUIManager {
         //TODO
         if (gameManager.getDowntime()){
             System.out.println("MAIN_MENU_CLICK");
+            // REMINDER FOR ABSOLUTE PATH FROM COPILOT: https://github.com/copilot/share/c87c0288-0900-8c25-9010-2a0ee093601e
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/mapstob/group35/mainMenu.fxml"));
             System.out.println("ch1");
             try {
