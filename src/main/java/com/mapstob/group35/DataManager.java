@@ -8,6 +8,7 @@ import com.mapstob.group35.core.PlayerProfile;
 
 import java.io.File;
 import java.io.IOException;
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
