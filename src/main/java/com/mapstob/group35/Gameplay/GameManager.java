@@ -167,12 +167,8 @@ public class GameManager {
     public void addBuff(BuffItem shopitem){
         waveManager.addBuff(shopitem);
     }
-    public void setShopManager(ShopManager shopManager) {
-        this.shopManager = shopManager;
-    }
-    public ShopManager getShopManager() {
-        return shopManager;
-    }
+    public void setShopManager(ShopManager shopManager) {this.shopManager = shopManager;}
+    public ShopManager getShopManager() {return shopManager;}
 
     /// /// /// /// HEALTH
     /**

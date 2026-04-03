@@ -44,14 +44,14 @@ public class ShopManager {
      * Creates a shop item.
      * @return Shop item
      */
-    public BuffItem createShopItem(){
+    private BuffItem createShopItem(){
         return new BuffItem();
     }
 
     /**
      * Resets all shop items and makes new ones.
      */
-    public void resetShopItems()
+    private void resetShopItems()
     {
         shopItems.clear();
         shopItems.add(createShopItem());
@@ -65,8 +65,7 @@ public class ShopManager {
      * @param shopItem
      * @return if the item is bought
      */
-    public boolean Buyable(BuffItem shopItem){
-
+    private boolean Buyable(BuffItem shopItem){
         return gameManager.useCoins(shopItem.getCost());
     }
 
@@ -75,7 +74,7 @@ public class ShopManager {
      * Does the functional part of recieving what you bought.
      * @param shopItem
      */
-    public void buyShopItem(BuffItem shopItem){
+    private void buyShopItem(BuffItem shopItem){
         DisplayCoins();
 
         switch (shopItem.getName()) {
@@ -94,7 +93,7 @@ public class ShopManager {
     /**
      * Display shop items in GUI.
      */
-    public void DisplayShopItems(){
+    private void DisplayShopItems(){
         BuffItem item = shopItems.get(0);
         NAME_1.setText(item.getName());
         COST_1.setText( "COST: " +  Integer.toString(item.getCost()) + " COINS");
@@ -114,8 +113,23 @@ public class ShopManager {
     /**
      * Displays coin amount in GUI.
      */
-    public void DisplayCoins(){
+    private void DisplayCoins(){
         COINS_TEXT.setText("COINS: "+ Integer.toString(gameManager.getCoins()));
     }
 
+    @FXML protected void CLICKED_1(){
+        if (Buyable( shopItems.get(0) )){
+            buyShopItem(shopItems.get(0));
+        }
+    }
+    @FXML protected void CLICKED_2(){
+        if (Buyable( shopItems.get(1) )){
+            buyShopItem(shopItems.get(1));
+        }
+    }
+    @FXML protected void CLICKED_3(){
+        if (Buyable( shopItems.get(2) )){
+            buyShopItem(shopItems.get(2));
+        }
+    }
 }
