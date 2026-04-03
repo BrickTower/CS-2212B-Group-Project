@@ -86,28 +86,4 @@ public class ParentProfile extends PlayerProfile { // Parents should be able to 
         return this.playersManaged;
     }
 
-    /**
-     *  Updates the JSON file (parents.json) with any major changes (when coins are added or removed, Stats are modified, etc.)
-     *  Only called within its class, and slightly modified to accomodate for different way of accessing
-     *
-     * @author Ethan Gregory
-     */
-    private void updateSave() {
-        try {
-            List<ParentProfile> parents = DataManager.loadList("parents.json", new TypeReference<List<ParentProfile>>() {
-            });
-
-            int counter = 0; // FIND INDEX IN FOR LOOP
-            for (ParentProfile parent : parents) {
-                if (parent.getUserName().equals(this.getUserName())) {
-                    parents.set(counter, (ParentProfile) (this));
-                    break;
-                }
-                counter++;
-            }
-            DataManager.saveList("parents.json", parents);
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
-    }
 }

@@ -1,6 +1,7 @@
 package com.mapstob.group35.Gameplay;
 
 import com.mapstob.group35.core.PlayerProfile;
+import com.mapstob.group35.core.Stats;
 import com.mapstob.group35.core.loggedUser;
 
 import java.util.ArrayList;
@@ -302,6 +303,10 @@ public class GameManager {
     private void saveInfo(){
         //TODO save information
         player.setCoins(coins);
+        Stats update = player.getPlayerStats();
+        update.setCurrWave(waveManager.getWave());
+        update.updateStats(textManager.getWPM(), textManager.calculateMistakesPercent(), 1, player.getCoins(), textManager.getMistakes(), 15 + waveManager.getWave());
+        player.setStats(update);
         System.out.println("saved");
     }
 

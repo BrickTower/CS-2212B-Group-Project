@@ -65,36 +65,55 @@ public class PlayerProfile {
 
     /**
      *  Updates the JSON file (parents.json) with any major changes (when coins are added or removed, Stats are modified, etc.)
-     *  Only called within its class
+     *  Only called within its class, and makes decision based on whether or not its a ParentProfile
      *
      * @author Ethan Gregory
      */
-    private void updateSave() {
-        try {
-            List<ParentProfile> parents = DataManager.loadList("parents.json", new TypeReference<List<ParentProfile>>() {
-            });
+    protected void updateSave() {
+        if (this instanceof ParentProfile){
+            try {
+                List<ParentProfile> parents = DataManager.loadList("parents.json", new TypeReference<List<ParentProfile>>() {
+                });
 
-            int counter = 0; // FIND INDEX IN FOR LOOP
-            boolean foundPlayer = false;
-            for (ParentProfile parent : parents) {
-                int counter2 = 0;
-                List<PlayerProfile> players = parent.getPlayersManaged();
-                for (PlayerProfile player : players) {
-                    if (player.getUserName().equals(this.getUserName())) {
-                        players.set(counter2, this);
-                        foundPlayer = true;
+                int counter = 0; // FIND INDEX IN FOR LOOP
+                for (ParentProfile parent : parents) {
+                    if (parent.getUserName().equals(this.getUserName())) {
+                        parents.set(counter, (ParentProfile) (this));
                         break;
                     }
-                    counter2++;
+                    counter++;
                 }
-                if (foundPlayer) { // IF PLAYER WAS FOUND, BREAK OUT OF ORIGINAL FOR LOOP
-                    break;
-                }
-                counter++;
+                DataManager.saveList("parents.json", parents);
+            } catch (Exception e) {
+                throw new RuntimeException(e);
             }
-            DataManager.saveList("parents.json", parents);
-        } catch (Exception e) {
-            throw new RuntimeException(e);
+        } else {
+            try {
+                List<ParentProfile> parents = DataManager.loadList("parents.json", new TypeReference<List<ParentProfile>>() {
+                });
+
+                int counter = 0; // FIND INDEX IN FOR LOOP
+                boolean foundPlayer = false;
+                for (ParentProfile parent : parents) {
+                    int counter2 = 0;
+                    List<PlayerProfile> players = parent.getPlayersManaged();
+                    for (PlayerProfile player : players) {
+                        if (player.getUserName().equals(this.getUserName())) {
+                            players.set(counter2, this);
+                            foundPlayer = true;
+                            break;
+                        }
+                        counter2++;
+                    }
+                    if (foundPlayer) { // IF PLAYER WAS FOUND, BREAK OUT OF ORIGINAL FOR LOOP
+                        break;
+                    }
+                    counter++;
+                }
+                DataManager.saveList("parents.json", parents);
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
         }
     }
 
