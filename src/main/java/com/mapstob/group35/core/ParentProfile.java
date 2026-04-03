@@ -4,14 +4,20 @@ package com.mapstob.group35.core;
 import java.util.LinkedList; // IMPORT ARRAYLIST FOR PLAYER LIST
 import java.util.List;
 
-// FIX FOR JSON AUTO DETECT FROM GITHUB COPILOT: https://github.com/copilot/share/401d100a-4104-8407-9903-280fe41b405e. CODE FOLLOWING THIS ANNOTATION IS HUMAN WRITTEN
+// FIX FOR JSON AUTO DETECT FROM GITHUB COPILOT: https://github.com/copilot/share/c03d4088-4924-8c05-b150-284ec451014e. CODE THAT IS NOT ANNOTATIONS IS HUMAN WRITTEN
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.mapstob.group35.DataManager;
 
-@JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY, getterVisibility = JsonAutoDetect.Visibility.NONE)
+@JsonAutoDetect(
+        fieldVisibility = JsonAutoDetect.Visibility.ANY,
+        getterVisibility = JsonAutoDetect.Visibility.NONE,
+        setterVisibility = JsonAutoDetect.Visibility.NONE // ADD THIS
+)
 public class ParentProfile extends PlayerProfile { // Parents should be able to play
     /** A list of all Players currently managed by this Parent, listed by UserName*/
+    @JsonProperty("students")
     private LinkedList<PlayerProfile> playersManaged;
 
     /** Empty version of ParentProfile Constructor. Should only be used for Jackson compatibility.

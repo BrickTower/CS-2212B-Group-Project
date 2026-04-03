@@ -1,28 +1,38 @@
 package com.mapstob.group35.core;
 
-// FIX FOR JSON AUTO DETECT FROM GITHUB COPILOT: https://github.com/copilot/share/401d100a-4104-8407-9903-280fe41b405e. CODE FOLLOWING THIS ANNOTATION IS HUMAN WRITTEN
+// FIX FOR JSON AUTO DETECT FROM GITHUB COPILOT: https://github.com/copilot/share/c03d4088-4924-8c05-b150-284ec451014e. CODE THAT IS NOT ANNOTATIONS IS HUMAN WRITTEN
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.mapstob.group35.DataManager;
 
 import java.util.List;
 
-@JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY, getterVisibility = JsonAutoDetect.Visibility.NONE)
+@JsonAutoDetect(
+        fieldVisibility = JsonAutoDetect.Visibility.ANY,
+        getterVisibility = JsonAutoDetect.Visibility.NONE,
+        setterVisibility = JsonAutoDetect.Visibility.NONE // ADD THIS
+)
 public class PlayerProfile {
     /** The player's current difficulty level.*/
+    @JsonProperty("level")
     private int level;
     /** The current amount of coins the Player has.*/
+    @JsonProperty("coins")
     private int coins;
     /** A {@link Stats} representation of the current Statistics (WPM, accuracy, etc.)*/
+    @JsonProperty("stats")
     private Stats playerStats;
     ///  Profile's username (i.e. egregor4)
+    @JsonProperty("userName")
     private String userName;
     ///  Profile's password
+    @JsonProperty("password")
     private String password;
 
     /** Empty version of PlayerProfile Constructor. Should only be used for Jackson compatibility.
      */
-    public PlayerProfile() {}
+    public PlayerProfile() {this.playerStats = new Stats();}
 
     /**
      Player constructor. Creates a new Player Profile object.
@@ -165,8 +175,9 @@ public class PlayerProfile {
      * @see Stats
      * @author Ethan Gregory
      */
-    protected void resetStats() {
+    public void resetStats() {
         this.playerStats = new Stats();
+        this.updateSave();
     }
 
     /**

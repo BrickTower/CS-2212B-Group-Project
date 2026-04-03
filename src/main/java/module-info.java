@@ -3,6 +3,7 @@ module com.mapstob.group35 {
     requires javafx.fxml;
     requires annotations;
     requires com.fasterxml.jackson.databind;
+    requires javafx.media;
 
     opens com.mapstob.group35 to javafx.fxml, com.fasterxml.jackson.databind;
     exports com.mapstob.group35;

@@ -29,6 +29,7 @@ public class WaveManager {
      * @param defaultWaveTime
      */
     public WaveManager(int wave,  int defaultWaveTime) {
+        this.buffList = new ArrayList<BuffItem>();
         this.wave = wave;
         this.waveTime = defaultWaveTime;
         this.defaultWaveTime = defaultWaveTime;

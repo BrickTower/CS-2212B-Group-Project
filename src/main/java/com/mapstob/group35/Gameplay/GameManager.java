@@ -211,7 +211,7 @@ public class GameManager {
      * @return if coins used
      */
     public boolean useCoins(int amount){
-        if (coins > amount){
+        if (coins >= amount){
             coins -= amount;
             player.setCoins(coins);
             GUI.setCoinText(coins);
