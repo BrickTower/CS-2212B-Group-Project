@@ -8,7 +8,7 @@
 <?import javafx.scene.text.*?>
 
 <AnchorPane prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #062E50;" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mapstob.group35.Gameplay.GameGUIManager">
-   <Button fx:id="SHOP_BUTTON" layoutX="11.0" layoutY="299.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="120.0" style="-fx-background-color: #7D8570;" text="Shop" textFill="WHITE">
+   <Button fx:id="SHOP_BUTTON" layoutX="11.0" layoutY="299.0" mnemonicParsing="false" onAction="#SHOP_CLICK" prefHeight="25.0" prefWidth="120.0" style="-fx-background-color: #7D8570;" text="Shop" textFill="WHITE">
       <font>
          <Font size="16.0" />
       </font>
@@ -23,11 +23,11 @@
          <Font size="18.0" />
       </font>
    </Text>
-   <Button fx:id="MAIN_MENU_BUTTON" layoutX="11.0" layoutY="344.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="120.0" style="-fx-background-color: #7D8570;" text="Main Menu" textFill="WHITE">
+   <Button fx:id="MAIN_MENU_BUTTON" layoutX="11.0" layoutY="344.0" mnemonicParsing="false" onAction="#MAIN_MENU_CLICK" prefHeight="25.0" prefWidth="120.0" style="-fx-background-color: #7D8570;" text="Main Menu" textFill="WHITE">
       <font>
          <Font size="16.0" />
       </font></Button>
-   <TextField id="TEXT_FIELD" fx:id="TEXT_FIELD" layoutX="177.0" layoutY="355.0" prefHeight="25.0" prefWidth="398.0" />
+   <TextField id="TEXT_FIELD" fx:id="TEXT_FIELD" layoutX="177.0" layoutY="355.0" onAction="#TEXT_INPUTTED" prefHeight="25.0" prefWidth="398.0" />
    <Pane layoutX="144.0" layoutY="-1.0" prefHeight="339.0" prefWidth="455.0" style="-fx-background-color: #05001A;">
       <children>
          <VBox fx:id="TEXT_LIST" alignment="BOTTOM_LEFT" layoutX="13.0" layoutY="-116.0" prefHeight="442.0" prefWidth="434.0">

@@ -1,5 +1,7 @@
 package com.mapstob.group35;
 
+import com.mapstob.group35.Gameplay.GameGUIManager;
+import com.mapstob.group35.Gameplay.GameManager;
 import com.mapstob.group35.core.ParentProfile;
 import com.mapstob.group35.core.PlayerProfile;
 import com.mapstob.group35.core.loggedUser;
@@ -22,10 +24,27 @@ public class mainController {
     @FXML
     private Button parentalButton;
 
+    public mainController() {
+        runButtonText();
+    }
+
     // THIS LINE CREATES A CONNECTION TO THE LOGGED USER CLASS
     private loggedUser account = new loggedUser();
     // THIS LINE PULLS THE CURRENTLY SAVED USER (WHICH SHOULD BE ESTABLISHED IN LOGIN) AND SAVES IT TO A VARIABLE
     private PlayerProfile currentUser = account.getCurrUser();
+
+    //temporary var
+    private boolean runExists = false;
+
+
+    private void runButtonText(){
+        if (runExists){
+            newGame.setText("Continue Run");
+        }
+        else{
+            newGame.setText("New Run");
+        }
+    }
 
     /*
         Moves
@@ -35,6 +54,29 @@ public class mainController {
         try {
             FXMLLoader load = new FXMLLoader(getClass().getResource("tutorialScreen.fxml"));
             tutorial.getScene().setRoot(load.load());
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+    @FXML
+    protected void StartGame() {
+        GameManager gm;
+        GameGUIManager GUI;
+
+        if (runExists) {
+            //TODO load information into gameManager
+            gm = new GameManager();
+        }
+        else{//if first run or if first run after a death
+            gm = new GameManager();
+        }
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("tutorialScreen.fxml"));
+            tutorial.getScene().setRoot(fxmlLoader.load());
+            GUI = fxmlLoader.getController();
+            gm.setGUI(GUI);
+            GUI.setGameManager(gm);
+
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

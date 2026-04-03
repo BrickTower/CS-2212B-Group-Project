@@ -2,6 +2,7 @@ package com.mapstob.group35.Gameplay;
 
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
@@ -12,9 +13,16 @@ import javafx.scene.layout.VBox;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Manages Game UI, and loads scenes as needed.
+ * @see GameManager
+ * @see ShopManager
+ * @author Shaun
+ */
 public class GameGUIManager {
     @FXML private Pane HP_CONTAINER;
     @FXML private Rectangle HP_BAR;
@@ -37,6 +45,102 @@ public class GameGUIManager {
     @FXML private Button SHOP_BUTTON;
     @FXML private Button MAIN_MENU_BUTTON;
 
+    private GameManager gameManager;
+
+    /**
+     * Sets gameManager.
+     * @param gameManager
+     */
+    public void setGameManager(GameManager gameManager) {this.gameManager = gameManager;}
+
+    /**
+     * Only called on shop button click.
+     * Switches scenes, and creates a shopManager.
+     * Unclickable if currently in wave.
+     */
+    @FXML protected void SHOP_CLICK(){
+        if (gameManager.getDowntime()){
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("shopScreen.fxml"));
+            try {
+
+                SHOP_BUTTON.getScene().setRoot(fxmlLoader.load());
+                ShopManager shop = fxmlLoader.getController();
+                gameManager.setShopManager(shop);
+                shop.setGameManager(gameManager);
+
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        }
+    }
+
+    /**
+     * Only called on main menu click. Opens main menu.
+     * Unclickable if currently in wave.
+     */
+    @FXML protected void MAIN_MENU_CLICK(){
+        //TODO
+        if (gameManager.getDowntime()){
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("mainMenu.fxml"));
+            try {
+                SHOP_BUTTON.getScene().setRoot(fxmlLoader.load());
+            }  catch (IOException e) {throw new RuntimeException(e);}
+        }
+    }
+
+    /**
+     * On pressing enter, will either: <br>
+     * if not in wave:
+     * start wave
+     * if in wave:
+     * send spelling attempt to gameManager
+     */
+    @FXML protected void TEXT_INPUTTED(){
+        if(gameManager.getDowntime()){
+            try {
+                gameManager.startWave();
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
+        }
+        else{
+            gameManager.spellingAttempt(TEXT_FIELD.getText());
+            TEXT_FIELD.clear();
+        }
+    }
+
+    /**
+     * Display next wave start hint
+     */
+    public void nextWaveText(){
+        TEXT_FIELD.setText("Press enter to continue to a new wave.");
+    }
+
+    /**
+     * Changes button look and behaviour depending on if valid or not
+     * @param valid
+     */
+    public void buttonValid(boolean valid){
+        if (valid){
+            SHOP_BUTTON.setStyle("-fx-background-color: #7D8570 ");
+            SHOP_BUTTON.setMouseTransparent(false);
+            MAIN_MENU_BUTTON.setStyle("-fx-background-color: #7D8570 ");
+            MAIN_MENU_BUTTON.setMouseTransparent(false);
+        }
+        else{
+            SHOP_BUTTON.setStyle("-fx-background-color: #7C7C7C ");
+            MAIN_MENU_BUTTON.setStyle("-fx-background-color: #7C7C7C ");
+            SHOP_BUTTON.setMouseTransparent(true);
+            MAIN_MENU_BUTTON.setMouseTransparent(true);
+        }
+    }
+
+    /**
+     * Sets HP bar.
+     * Called on every HP change.
+     * @param currentHP
+     * @param maxHP
+     */
     public void setHP_BAR(int currentHP,int maxHP) {
         //base width 200 base posx 13
         HP_BAR.setWidth(currentHP*2);
@@ -47,6 +151,13 @@ public class GameGUIManager {
             }
         }
     }
+
+    /**
+     * Sets time left bar.
+     * Called on every time change.
+     * @param currentTime
+     * @param maxTime
+     */
     public void setTIME_BAR(int currentTime,int maxTime) {
         //base width 200 base posx 13
         float percentage = (float)currentTime/(float)maxTime;
@@ -59,14 +170,33 @@ public class GameGUIManager {
         }
     }
 
+    /**
+     * Sets waves cleared text.
+     * Called on every wave change.
+     * @param waveNumber
+     */
     public void setWaveText(int waveNumber){
         WAVE_TEXT.setText("WAVE: "+Integer.toString(waveNumber));
     }
 
+    /**
+     * Sets coins text.
+     * Called on every coin change.
+     * @param coinNumber
+     */
     public void setCoinText(int coinNumber){
         COINS_TEXT.setText("COINS: "+Integer.toString(coinNumber));
     }
 
+    /**
+     * Sets scores text.
+     * Called on every score text.
+     * @param WPM
+     * @param mistakes_percent
+     * @param session_words
+     * @param highscoreWPM
+     * @param highscoreWaves
+     */
     public void setScoreText(int WPM, int mistakes_percent, int session_words,int highscoreWPM, int highscoreWaves){
         WPM_TEXT.setText("WPM: "+Integer.toString(WPM));
         MISTAKES_TEXT.setText("MISTAKES: "+Integer.toString(mistakes_percent) + "%");
@@ -75,7 +205,13 @@ public class GameGUIManager {
         HIGH_WAVE_TEXT.setText("HIGHEST WAVE: "+Integer.toString(highscoreWaves));
     }
 
-    //I hate this!!
+    /**
+     * Displays each individual text, as well as their progress bars.
+     * Only displays the first 7 in list, anything more would be off screen.
+     * Awful implementation, but JavaFX for some reason doesn't let things stack in reverse order. Thank you JavaFX!!! I hate you!!!
+     * But i could also just be stupid and sleep deprived. Who knows.
+     * @param textList
+     */
     public void setWordText(ArrayList<TextUnit> textList){
         int size = textList.size();
         if  (size > 7){size = 7;}

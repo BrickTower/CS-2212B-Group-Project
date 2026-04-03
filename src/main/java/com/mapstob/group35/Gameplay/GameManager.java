@@ -25,12 +25,14 @@ public class GameManager {
     private ShopManager shopManager;
     private loggedUser account = new loggedUser();
     private PlayerProfile player = account.getCurrUser();
+    private GameGUIManager GUI;
 
     private int coins;
     private int defaultCoinGain;
     private int maxLife;
     private int curLife;
     private boolean died;
+    private boolean downtime;
 
     //TODO move elsewhere
     private String[] easyDiffWords = {"cake", "cookie", "tea", "hope", "news", "chance", "luck", "known", "you", "soul"};
@@ -49,7 +51,6 @@ public class GameManager {
 
         waveManager = new WaveManager(0,30);
         textManager = new TextManager();
-        shopManager = new ShopManager(this);
         died = false;
     }
 
@@ -71,9 +72,8 @@ public class GameManager {
 
         this.waveManager = new WaveManager(wave,waveTime);
         this.textManager = new TextManager();
-        shopManager = new ShopManager(this);
-        //due to how loading this works you can savescum shop items until you get a good one but like oh well
         died = false;
+        downtime = true;
     }
     /// /// /// /// PROCESS
     /**
@@ -84,6 +84,8 @@ public class GameManager {
      * @throws InterruptedException
      */
     public void process() throws InterruptedException {
+        downtime = false;
+        GUI.buttonValid(downtime);
         while(!incTime() && !died){
             Thread.sleep(1000);
         }
@@ -91,17 +93,28 @@ public class GameManager {
             textManager.clear();
             heal( waveManager.getHealAmount() );
             saveInfo();
-        }
+            downtime = true;
+            GUI.buttonValid(downtime);
+            GUI.nextWaveText();
 
+        }
     }
 
 
     /// /// /// /// INPUT
+
+    public void setGUI(GameGUIManager GUI) {
+        this.GUI = GUI;
+    }
+    public GameGUIManager getGUI() {
+        return GUI;
+    }
+
     /**
      * Checks spelling and either rewards or punishes you accordingly.
      * @param input
      */
-    public void spellingAttempt(String input){ //TODO replace string input with actual input
+    public void spellingAttempt(String input){
         int spellingAttempt = textManager.spellingAttempt(input);
         if (spellingAttempt == 0){
             spellingCorrect();
@@ -146,13 +159,19 @@ public class GameManager {
     public boolean useCoins(int amount){
         return player.spendCoins(amount);
     }
-    /// /// /// /// SHOP UPGRADES
+    /// /// /// /// SHOP
     /**
      * Adds a buff to the WaveManager
      * @param shopitem
      */
     public void addBuff(BuffItem shopitem){
         waveManager.addBuff(shopitem);
+    }
+    public void setShopManager(ShopManager shopManager) {
+        this.shopManager = shopManager;
+    }
+    public ShopManager getShopManager() {
+        return shopManager;
     }
 
     /// /// /// /// HEALTH
@@ -182,6 +201,7 @@ public class GameManager {
         //TODO other additions?
         gainCoins(defaultCoinGain);
     }
+    public boolean getDowntime(){return downtime;}
 
     /// /// /// /// TIME
     /**

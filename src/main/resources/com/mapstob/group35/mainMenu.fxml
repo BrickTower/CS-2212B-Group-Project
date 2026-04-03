@@ -3,16 +3,8 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ScrollPane?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.Pane?>
-<?import javafx.scene.layout.VBox?>
-<?import javafx.scene.text.Font?>
-<?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #05001A;" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mapstob.group35.MainMenuApp">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #05001A;" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mapstob.group35.MainMenuApp">
 
    <children>
       <Text fill="WHITE" layoutX="30.0" layoutY="67.0" strokeType="OUTSIDE" strokeWidth="0.0" text="BOTSPAM">
@@ -22,7 +14,7 @@
       </Text>
       <VBox layoutX="24.0" layoutY="90.0" prefHeight="287.0" prefWidth="261.0">
          <children>
-            <Button fx:id="newGame" mnemonicParsing="false" prefHeight="51.0" prefWidth="292.0" style="-fx-background-color: #062E50;" text="New Run" textFill="WHITE">
+            <Button fx:id="newGame" mnemonicParsing="false" onAction="#StartGame" prefHeight="51.0" prefWidth="292.0" style="-fx-background-color: #062E50;" text="New Run" textFill="WHITE">
                <font>
                   <Font name="Consolas Bold" size="24.0" />
                </font>
