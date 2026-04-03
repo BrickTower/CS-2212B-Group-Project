@@ -10,7 +10,7 @@
    <children>
       <BorderPane prefHeight="89.0" prefWidth="600.0" style="-fx-background-color: #062E50;">
          <left>
-            <Button mnemonicParsing="false" text="BACK" fx:id="backButton" onAction="#backToMainMenu" BorderPane.alignment="CENTER">
+            <Button mnemonicParsing="false" onAction="#EXIT_BUTTON_CLICKED" style="-fx-background-color: #7d8570;" text="EXIT" textFill="WHITE" BorderPane.alignment="CENTER">
                <BorderPane.margin>
                   <Insets left="20.0" />
                </BorderPane.margin>

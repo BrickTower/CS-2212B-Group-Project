@@ -26,6 +26,8 @@ public class TextManager {
     private int WPM;
     private ArrayList<Integer> WPMTracker;
 
+
+
     /**
      * Constructor
      */
@@ -34,7 +36,7 @@ public class TextManager {
         WPMTracker = new ArrayList<Integer>();
         WPM = 0;
         curTime = 0;
-        defaultWordSpawnTime = 2;
+        defaultWordSpawnTime = 4;
         wordSpawnTime = defaultWordSpawnTime;
         wordDefaultTimeLeft = 15;
         mistakes = 0;
@@ -46,7 +48,7 @@ public class TextManager {
      * @param defaultWordSpawnTime
      * @param wordDefaultTimeLeft
      */
-    public TextManager(int defaultWordSpawnTime,int wordDefaultTimeLeft) {
+    public TextManager(int defaultWordSpawnTime,int wordDefaultTimeLeft,int mistakes,int wordsCompleted) {
         textList = new ArrayList<TextUnit>();
         WPMTracker = new ArrayList<Integer>();
         WPM = 0;
@@ -54,8 +56,8 @@ public class TextManager {
         this.defaultWordSpawnTime = defaultWordSpawnTime;
         wordSpawnTime = defaultWordSpawnTime;
         this.wordDefaultTimeLeft = wordDefaultTimeLeft;
-        mistakes = 0;
-        wordsCompleted = 0;
+        this.mistakes = mistakes;
+        this.wordsCompleted = wordsCompleted;
     }
 
     /**
@@ -85,9 +87,20 @@ public class TextManager {
                 damage_amount += textTimeout(text);
             }
         }
-        if (curTime % wordSpawnTime == 0){
-            makeText("Placeholder");
+
+        for (int index = 0; index < WPMTracker.size(); index++){
+            int wordTime = WPMTracker.get(index);
+            if (wordTime+10 == curTime){
+                WPMTracker.remove(WPMTracker.get(index)) ;
+                index--;
+            }
         }
+        WPM = calculateWPM();
+
+        if (curTime % wordSpawnTime == 0){
+            makeText();
+        }
+
 
         return damage_amount;
     }
@@ -95,10 +108,9 @@ public class TextManager {
     /// /// /// /// TEXT
     /**
      * Adds a new word to the text list.
-     * @param text
      */
-    public void makeText(String text) {
-        TextUnit newTextUnit = new TextUnit(text,wordDefaultTimeLeft);
+    public void makeText() {
+        TextUnit newTextUnit = new TextUnit("AAA",wordDefaultTimeLeft);
         textList.add(newTextUnit);
     }
     private void removeText(TextUnit text){
@@ -107,6 +119,24 @@ public class TextManager {
     private int textTimeout(TextUnit text) {
         removeText(text);
         return text.getText().length() * 2;
+    }
+
+    /**
+     *  WPMTracker keeps track of every word thats been typed in the last 10 seconds
+     *  It adds it up and then multiplies by 6 for an approximation of the current WPM
+     * @return Words Per Minute (approximation)
+     */
+    public int calculateWPM(){
+        int WordsInTheLastTenSeconds = WPMTracker.size();
+        return WordsInTheLastTenSeconds * 6; //for 60 seconds
+    }
+
+    /**
+     * Calculates the total mistake percentage of the run.
+     * @return Mistake percentage
+     */
+    public float calculateMistakesPercent(){
+        return (float)mistakes / (float)wordsCompleted;
     }
 
     /**
@@ -124,15 +154,22 @@ public class TextManager {
      * @return Damage taken
      */
     public int spellingAttempt(String input){
+        if (textList.size() <=0){return -1;}
         int mistakes = textList.getFirst().checkSpellingValidity(input);
         if (mistakes == 0){
             wordsCompleted++;
+
+            WPMTracker.add(curTime);
+
             removeText(textList.getFirst());
+            return 0;
+        }
+        else if (mistakes == -1) {//invalid
             return 0;
         }
         else{
             this.mistakes++;
-            return ((Integer) mistakes/2);
+            return ((int) Math.ceil(mistakes/2f));
         }
     }
 
@@ -147,4 +184,10 @@ public class TextManager {
      * Resets time.
      */
     public void resetTime(){curTime = 0;}
+
+    public int getWPM() {
+        return WPM;
+    }
+    public int getWordsCompleted() {return wordsCompleted;}
+    public ArrayList<TextUnit>  getTextList() {return textList;}
 }

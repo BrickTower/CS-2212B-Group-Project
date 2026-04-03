@@ -96,27 +96,24 @@ public class BuffItem {
 
 
     private void setDescription(String name){
+        description = "";
         switch (name) {
             case "Heal" ->{
-                description = "Costs " + Integer.toString(cost) + ".\nHeals" + Integer.toString(power) + "HP immediately";
+                description = "Heals " + Integer.toString(power) + " HP immediately";
             }
             case "Coin Gain Increase" -> {
-                description = "Costs " + Integer.toString(cost) + ".\n";
                 description = description + "Gain +" + Integer.toString(power) + "% more coins for ";
                 description = description + Integer.toString(length) + " waves.";
             }
             case "Wave Length Decrease" -> {
-                description = "Costs " + Integer.toString(cost) + ".\n";
                 description = description + "Lower wave length by -" + Integer.toString(power) + "% for ";
                 description = description + Integer.toString(length) + " waves.";
             }
             case "Word Time Increase" -> {
-                description = "Costs " + Integer.toString(cost) + ".\n";
                 description = description + "Increases word countdown length by +" + Integer.toString(power) + "% for ";
                 description = description + Integer.toString(length) + " waves.";
             }
             case "Regeneration" -> {
-                description = "Costs " + Integer.toString(cost) + ".\n";
                 description = description + "Regenerates " + Integer.toString(power)+ "HP after every turn for ";
                 description = description + Integer.toString(length) + " waves.";
             }

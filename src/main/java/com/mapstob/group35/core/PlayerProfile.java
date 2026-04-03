@@ -155,6 +155,12 @@ public class PlayerProfile {
     }
 
     /**
+     *
+     * @param coins
+     */
+    public void setCoins(int coins) {this.coins=coins;}
+
+    /**
      * Returns a Stats object containing the current Stats of the Player.
      * @return the Player's current statistics, represented as a Stats object
      * @see Stats

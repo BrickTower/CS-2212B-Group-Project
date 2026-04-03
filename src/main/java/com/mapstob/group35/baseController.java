@@ -34,8 +34,8 @@ public class baseController {
     */
     @FXML
     protected void goToLogin() throws IOException {
-        FXMLLoader load = new FXMLLoader(getClass().getResource("Login_Page.fxml"));
-        logIn.getScene().setRoot(load.load());
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Login_Page.fxml"));
+        logIn.getScene().setRoot(fxmlLoader.load());
     }
 
     public void initialize() {

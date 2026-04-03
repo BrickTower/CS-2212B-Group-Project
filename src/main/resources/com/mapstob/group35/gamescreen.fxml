@@ -7,32 +7,32 @@
 <?import javafx.scene.shape.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #062E50;" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mapstob.group35.GameGUIManager">
-   <Button id="SHOP_BUTTON" layoutX="11.0" layoutY="299.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="120.0" style="-fx-background-color: #7D8570;" text="Shop" textFill="WHITE">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #062E50;" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mapstob.group35.Gameplay.GameGUIManager">
+   <Button fx:id="SHOP_BUTTON" layoutX="11.0" layoutY="299.0" mnemonicParsing="false" onAction="#SHOP_CLICK" prefHeight="25.0" prefWidth="120.0" style="-fx-background-color: #7D8570;" text="Shop" textFill="WHITE">
       <font>
          <Font size="16.0" />
       </font>
    </Button>
-   <Text id="WAVE_TEXT" fx:id="WAVE_TEXT" fill="WHITE" layoutX="28.0" layoutY="40.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Wave: #">
+   <Text fx:id="WAVE_TEXT" fill="WHITE" layoutX="28.0" layoutY="40.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Wave: #">
       <font>
          <Font size="24.0" />
       </font>
    </Text>
-   <Text id="COINS_TEXT" fx:id="COINS_TEXT" fill="WHITE" layoutX="29.0" layoutY="285.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Coins: #">
+   <Text fx:id="COINS_TEXT" fill="WHITE" layoutX="21.0" layoutY="285.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Coins: #">
       <font>
-         <Font size="24.0" />
+         <Font size="18.0" />
       </font>
    </Text>
-   <Button id="MAIN_MENU_BUTTON" layoutX="11.0" layoutY="344.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="120.0" style="-fx-background-color: #7D8570;" text="Main Menu" textFill="WHITE">
+   <Button fx:id="MAIN_MENU_BUTTON" layoutX="11.0" layoutY="344.0" mnemonicParsing="false" onAction="#MAIN_MENU_CLICK" prefHeight="25.0" prefWidth="120.0" style="-fx-background-color: #7D8570;" text="Main Menu" textFill="WHITE">
       <font>
          <Font size="16.0" />
       </font></Button>
-   <TextField id="TEXT_FIELD" fx:id="TEXT_FIELD" layoutX="177.0" layoutY="355.0" prefHeight="25.0" prefWidth="398.0" />
+   <TextField id="TEXT_FIELD" fx:id="TEXT_FIELD" layoutX="177.0" layoutY="355.0" onAction="#TEXT_INPUTTED" prefHeight="25.0" prefWidth="398.0" />
    <Pane layoutX="144.0" layoutY="-1.0" prefHeight="339.0" prefWidth="455.0" style="-fx-background-color: #05001A;">
       <children>
-         <VBox id="TEXT_LIST" fx:id="TEXT_LIST" alignment="BOTTOM_LEFT" layoutX="13.0" layoutY="-116.0" prefHeight="448.0" prefWidth="434.0">
+         <VBox fx:id="TEXT_LIST" alignment="BOTTOM_LEFT" layoutX="13.0" layoutY="-116.0" prefHeight="442.0" prefWidth="434.0">
             <children>
-               <HBox layoutX="10.0" layoutY="101.0" prefHeight="43.0" prefWidth="442.0">
+               <HBox alignment="BOTTOM_LEFT" layoutX="10.0" layoutY="101.0" prefHeight="43.0" prefWidth="442.0">
                   <children>
                      <Group>
                         <children>
@@ -46,7 +46,7 @@
                      </Group>
                   </children>
                </HBox>
-               <HBox layoutX="10.0" layoutY="415.0" prefHeight="43.0" prefWidth="442.0">
+               <HBox alignment="BOTTOM_LEFT" layoutX="10.0" layoutY="415.0" prefHeight="43.0" prefWidth="442.0">
                   <children>
                      <Group>
                         <children>
@@ -60,7 +60,7 @@
                      </Group>
                   </children>
                </HBox>
-               <HBox layoutX="10.0" layoutY="372.0" prefHeight="43.0" prefWidth="442.0">
+               <HBox alignment="BOTTOM_LEFT" layoutX="10.0" layoutY="372.0" prefHeight="43.0" prefWidth="442.0">
                   <children>
                      <Group>
                         <children>
@@ -74,7 +74,7 @@
                      </Group>
                   </children>
                </HBox>
-               <HBox layoutX="10.0" layoutY="328.0" prefHeight="43.0" prefWidth="442.0">
+               <HBox alignment="BOTTOM_LEFT" layoutX="10.0" layoutY="328.0" prefHeight="43.0" prefWidth="442.0">
                   <children>
                      <Group>
                         <children>
@@ -88,7 +88,7 @@
                      </Group>
                   </children>
                </HBox>
-               <HBox layoutX="10.0" layoutY="415.0" prefHeight="43.0" prefWidth="442.0">
+               <HBox alignment="BOTTOM_LEFT" layoutX="10.0" layoutY="415.0" prefHeight="43.0" prefWidth="442.0">
                   <children>
                      <Group>
                         <children>
@@ -102,7 +102,7 @@
                      </Group>
                   </children>
                </HBox>
-               <HBox layoutX="10.0" layoutY="415.0" prefHeight="43.0" prefWidth="442.0">
+               <HBox alignment="BOTTOM_LEFT" layoutX="10.0" layoutY="415.0" prefHeight="43.0" prefWidth="442.0">
                   <children>
                      <Group>
                         <children>
@@ -116,7 +116,7 @@
                      </Group>
                   </children>
                </HBox>
-               <HBox layoutX="10.0" layoutY="415.0" prefHeight="43.0" prefWidth="442.0">
+               <HBox alignment="BOTTOM_LEFT" layoutX="10.0" layoutY="415.0" prefHeight="43.0" prefWidth="442.0">
                   <children>
                      <Group>
                         <children>
@@ -130,7 +130,7 @@
                      </Group>
                   </children>
                </HBox>
-               <HBox layoutX="10.0" layoutY="415.0" prefHeight="43.0" prefWidth="442.0">
+               <HBox alignment="BOTTOM_LEFT" layoutX="10.0" layoutY="415.0" prefHeight="43.0" prefWidth="442.0">
                   <children>
                      <Group>
                         <children>
@@ -148,7 +148,7 @@
          <Pane layoutX="229.0" layoutY="-6.0" prefHeight="62.0" prefWidth="225.0" />
          <HBox>
             <children>
-               <Pane id="HP_CONTAINER" fx:id="HP_CONTAINER" prefHeight="62.0" prefWidth="225.0">
+               <Pane fx:id="HP_CONTAINER" prefHeight="62.0" prefWidth="225.0">
                   <children>
                      <Pane layoutX="1.0" layoutY="-1.0" prefHeight="62.0" prefWidth="225.0" style="-fx-background-color: #05001A;">
                         <effect>
@@ -156,7 +156,7 @@
                         </effect>
                      </Pane>
                      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#05001a" height="37.0" layoutX="13.0" layoutY="13.0" stroke="WHITE" strokeType="INSIDE" strokeWidth="5.0" width="200.0" />
-                     <Rectangle id="HP_BAR" fx:id="HP_BAR" arcHeight="5.0" arcWidth="5.0" fill="#664143" height="37.0" layoutX="13.0" layoutY="13.0" stroke="WHITE" strokeType="INSIDE" width="200.0" />
+                     <Rectangle fx:id="HP_BAR" arcHeight="5.0" arcWidth="5.0" fill="#664143" height="37.0" layoutX="13.0" layoutY="13.0" stroke="WHITE" strokeType="INSIDE" width="200.0" />
                      <Text fill="WHITE" layoutX="74.0" layoutY="37.0" strokeType="OUTSIDE" strokeWidth="0.0" text="HP: 100/100">
                         <font>
                            <Font size="16.0" />
@@ -164,7 +164,7 @@
                      </Text>
                   </children>
                </Pane>
-               <Pane id="TIME_CONTAINER" fx:id="TIME_CONTAINER" prefHeight="62.0" prefWidth="225.0">
+               <Pane fx:id="TIME_CONTAINER" prefHeight="62.0" prefWidth="225.0">
                   <children>
                      <Pane layoutX="1.0" layoutY="-1.0" prefHeight="62.0" prefWidth="225.0" style="-fx-background-color: #05001A;">
                         <effect>
@@ -172,7 +172,7 @@
                         </effect>
                      </Pane>
                      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#05001a" height="37.0" layoutX="13.0" layoutY="13.0" stroke="WHITE" strokeType="INSIDE" strokeWidth="5.0" width="200.0" />
-                     <Rectangle id="TIME_BAR" fx:id="TIME_BAR" arcHeight="5.0" arcWidth="5.0" fill="#7d8570" height="37.0" layoutX="13.0" layoutY="13.0" stroke="WHITE" strokeType="INSIDE" width="200.0" />
+                     <Rectangle fx:id="TIME_BAR" arcHeight="5.0" arcWidth="5.0" fill="#7d8570" height="37.0" layoutX="13.0" layoutY="13.0" stroke="WHITE" strokeType="INSIDE" width="200.0" />
                      <Text fill="WHITE" layoutX="74.0" layoutY="37.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Time left: #">
                         <font>
                            <Font size="16.0" />
@@ -184,14 +184,27 @@
          </HBox>
       </children>
    </Pane>
-   <VBox id="SCORE_CONTAINER" layoutX="11.0" layoutY="46.05078125">
+   <VBox fx:id="SCORE_CONTAINER" layoutX="11.0" layoutY="46.05078125">
       <children>
-         <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="WPM: #\n64646464" wrappingWidth="120.00000000000006" />
-         <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="MISTAKES: #" wrappingWidth="120.00000000000006" />
-         <Text fill="WHITE" layoutX="10.0" layoutY="39.0" strokeType="OUTSIDE" strokeWidth="0.0" text="WORDS THIS SESSION: #" wrappingWidth="120.00000000000006" />
+         <Text fx:id="WPM_TEXT" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="WPM: #\n64646464" wrappingWidth="120.00000000000006" />
+         <Text fx:id="MISTAKES_TEXT" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="MISTAKES: #" wrappingWidth="120.00000000000006" />
+         <Text fx:id="WORDS_TEXT" fill="WHITE" layoutX="10.0" layoutY="39.0" strokeType="OUTSIDE" strokeWidth="0.0" text="WORDS THIS SESSION: #" wrappingWidth="120.00000000000006" />
          <Pane prefHeight="12.0" prefWidth="55.0" />
-         <Text fx:id="WPM_CONTAINER" fill="WHITE" layoutX="10.0" layoutY="93.0" strokeType="OUTSIDE" strokeWidth="0.0" text="HIGHEST WPM: #" wrappingWidth="120.00000000000006" />
-         <Text fill="WHITE" layoutX="10.0" layoutY="57.0" strokeType="OUTSIDE" strokeWidth="0.0" text="HIGHEST WAVE: #" wrappingWidth="120.00000000000006" />
+         <Text fx:id="HIGH_WPM_TEXT" fill="WHITE" layoutX="10.0" layoutY="93.0" strokeType="OUTSIDE" strokeWidth="0.0" text="HIGHEST WPM: #" wrappingWidth="120.00000000000006" />
+         <Text fx:id="HIGH_WAVE_TEXT" fill="WHITE" layoutX="10.0" layoutY="57.0" strokeType="OUTSIDE" strokeWidth="0.0" text="HIGHEST WAVE: #" wrappingWidth="120.00000000000006" />
       </children>
    </VBox>
+   <AnchorPane fx:id="GAME_OVER" disable="true" prefHeight="400.0" prefWidth="600.0" visible="false">
+      <children>
+         <Pane layoutY="2.0" opacity="0.8" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: black;" />
+         <Text fill="WHITE" layoutX="124.0" layoutY="146.0" strokeType="OUTSIDE" strokeWidth="0.0" text="GAME OVER!">
+            <font>
+               <Font name="Consolas Bold" size="64.0" />
+            </font>
+         </Text>
+         <Button layoutX="124.0" layoutY="183.0" mnemonicParsing="false" onAction="#START_NEW_RUN" prefHeight="26.0" prefWidth="352.0" style="-fx-background-color: #7d8570;" text="NEW RUN" textAlignment="CENTER" textFill="WHITE" />
+         <Button layoutX="124.0" layoutY="229.0" mnemonicParsing="false" onAction="#MAIN_MENU_FROM_GAME_OVER" prefHeight="26.0" prefWidth="352.0" style="-fx-background-color: #7d8570;" text="MAIN MENU" textAlignment="CENTER" textFill="WHITE" />
+         <Button layoutX="124.0" layoutY="274.0" mnemonicParsing="false" onAction="#EXIT_GAME" prefHeight="26.0" prefWidth="352.0" style="-fx-background-color: #7d8570;" text="EXIT" textAlignment="CENTER" textFill="WHITE" />
+      </children>
+   </AnchorPane>
 </AnchorPane>

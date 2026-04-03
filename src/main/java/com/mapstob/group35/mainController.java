@@ -1,5 +1,6 @@
 package com.mapstob.group35;
 
+import com.mapstob.group35.Gameplay.GameGUIManager;
 import com.mapstob.group35.Gameplay.GameManager;
 import com.mapstob.group35.core.ParentProfile;
 import com.mapstob.group35.core.PlayerProfile;
@@ -28,39 +29,55 @@ public class mainController {
     // THIS LINE PULLS THE CURRENTLY SAVED USER (WHICH SHOULD BE ESTABLISHED IN LOGIN) AND SAVES IT TO A VARIABLE
     private PlayerProfile currentUser = account.getCurrUser();
 
+    //temporary var
+    private boolean runExists = false;
+
+
+    private void runButtonText(){
+        if (runExists){
+            assert newGame != null;
+            newGame.setText("Continue Run");
+        }
+        else{
+            assert newGame != null;
+            newGame.setText("New Run");
+        }
+    }
+
     /*
         Moves
      */
     @FXML
     protected void goToTutorial() {
         try {
-            FXMLLoader load = new FXMLLoader(getClass().getResource("tutorialScreen.fxml"));
-            tutorial.getScene().setRoot(load.load());
+            SceneManager.loadTutorial();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+    @FXML
+    protected void StartGame() {
+        GameManager gm;
+
+        if (runExists) {
+            //TODO load information into gameManager
+            gm = new GameManager();
+        }
+        else{//if first run or if first run after a death
+            gm = new GameManager();
+        }
+        try {
+            SceneManager.loadGame(gm);
+
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
     }
 
-    @FXML
-    protected void startGame() {
-        try {
-            FXMLLoader load = new FXMLLoader(getClass().getResource("gamescreen.fxml"));
-            Parent root = load.load();
-            GameGUIManager gui = load.getController();
-            newGame.getScene().setRoot(root);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-    }
 
-    @FXML
-    protected void goToStats() {
-        try {
-            FXMLLoader load = new FXMLLoader(getClass().getResource("stats.fxml"));
-            Parent root = load.load();
-            statsButton.getScene().setRoot(root);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
+    public void testFunction() { // QUICK TEST FUNCTION TO MAKE SURE SAVING USER DATA WORKS
+        if (currentUser != null) {
+            currentUser.addCoins(15);
         }
     }
 
@@ -77,11 +94,7 @@ public class mainController {
             parentalButton.setText("Not a Parent!");
         } else {
             try {
-                FXMLLoader load = new FXMLLoader(getClass().getResource("parentalScreen.fxml"));
-                Parent root = load.load();
-                parentalController setup = load.getController();
-                setup.getParentsPlayers(); // POPULATE LIST WITH MAIN OPTIONS
-                parentalButton.getScene().setRoot(root);
+                SceneManager.loadParentalControls();
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }

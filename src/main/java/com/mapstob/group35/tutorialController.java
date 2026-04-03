@@ -12,7 +12,15 @@ public class tutorialController {
 
     @FXML
     protected void backToMainMenu() throws IOException {
-        FXMLLoader load = new FXMLLoader(getClass().getResource("mainMenu.fxml"));
-        backButton.getScene().setRoot(load.load());
+        SceneManager.loadMainMenu();
+    }
+
+    @FXML
+    protected void EXIT_BUTTON_CLICKED()  {
+        try {
+            SceneManager.loadMainMenu();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 }
