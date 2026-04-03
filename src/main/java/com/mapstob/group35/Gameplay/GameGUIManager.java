@@ -1,5 +1,6 @@
 package com.mapstob.group35.Gameplay;
 
+import com.mapstob.group35.SceneManager;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -63,21 +64,15 @@ public class GameGUIManager {
      * Unclickable if currently in wave.
      */
     @FXML protected void SHOP_CLICK(){
-        /*
         if (gameManager.getDowntime()){
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("shopScreen.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/mapstob/group35/shopScreen.fxml"));
             try {
-
-                SHOP_BUTTON.getScene().setRoot(fxmlLoader.load());
-                ShopManager shop = fxmlLoader.getController();
-                gameManager.setShopManager(shop);
-                shop.setGameManager(gameManager);
+                    SceneManager.loadShop(gameManager);
 
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
         }
-        */
     }
 
     /**
@@ -88,15 +83,9 @@ public class GameGUIManager {
         //TODO
         if (gameManager.getDowntime()){
             System.out.println("MAIN_MENU_CLICK");
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/mapstob/group35/mainMenu.fxml"));
-            System.out.println("ch1");
             try {
-                Scene s = MAIN_MENU_BUTTON.getScene();
-                System.out.println("ch5");
-                s.setRoot(fxmlLoader.load());
-                System.out.println("ch2");
-            }  catch (IOException e) {System.out.println("ch3");throw new RuntimeException(e);}
-            System.out.println("ch4");
+                SceneManager.loadMainMenu();
+            }  catch (IOException e) {throw new RuntimeException(e);}
         }
     }
 
@@ -132,13 +121,12 @@ public class GameGUIManager {
         //TODO
     }
     @FXML protected void MAIN_MENU_FROM_GAME_OVER(){
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("mainMenu.fxml"));
         try {
-            SHOP_BUTTON.getScene().setRoot(fxmlLoader.load());
+            SceneManager.loadMainMenu();
         }  catch (IOException e) {throw new RuntimeException(e);}
     }
     @FXML protected void EXIT_GAME(){
-        //TODO logout??
+        SceneManager.closeProgram();
     }
 
     /**

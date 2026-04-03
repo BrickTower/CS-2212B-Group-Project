@@ -1,9 +1,11 @@
 package com.mapstob.group35.Gameplay;
 
+import com.mapstob.group35.SceneManager;
 import javafx.fxml.FXML;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 /**
@@ -31,15 +33,20 @@ public class ShopManager {
     @FXML private Text COST_3;
     @FXML private Text DESC_3;
 
-    /**
-     * Constructor.
-     */
-    public ShopManager() {
+    @FXML protected void EXIT_BUTTON(){
+        try {
+            SceneManager.loadGame(gameManager);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public void setGameManager(GameManager gameManager) {this.gameManager = gameManager;}
+    public void initShop(){
         shopItems = new ArrayList<>();
         resetShopItems();
+        DisplayCoins();
     }
-    public void setGameManager(GameManager gameManager) {this.gameManager = gameManager;}
-
     /**
      * Creates a shop item.
      * @return Shop item
@@ -118,16 +125,19 @@ public class ShopManager {
     }
 
     @FXML protected void CLICKED_1(){
+        System.out.println("Attempt buy 1");
         if (Buyable( shopItems.get(0) )){
             buyShopItem(shopItems.get(0));
         }
     }
     @FXML protected void CLICKED_2(){
+        System.out.println("Attempt buy 2");
         if (Buyable( shopItems.get(1) )){
             buyShopItem(shopItems.get(1));
         }
     }
     @FXML protected void CLICKED_3(){
+        System.out.println("Attempt buy 3");
         if (Buyable( shopItems.get(2) )){
             buyShopItem(shopItems.get(2));
         }

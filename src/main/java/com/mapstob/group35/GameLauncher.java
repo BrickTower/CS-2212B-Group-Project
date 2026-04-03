@@ -26,7 +26,7 @@ public class GameLauncher extends Application{
     public void start(Stage stage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("gamescreen.fxml")); // LOAD MAIN MENU FROM FXML
         Scene scene = new Scene(fxmlLoader.load(), 600, 400); // LOAD OUR FXML AS A SCENE
-
+        SceneManager.BaseScene = scene;
         GUI = fxmlLoader.getController();
         gameManager = new GameManager();
         gameManager.initGUI(GUI);

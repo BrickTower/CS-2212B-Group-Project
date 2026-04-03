@@ -40,8 +40,7 @@ public class parentalController {
     @FXML
     protected void returnToMainMenu() {
         try {
-            FXMLLoader load = new FXMLLoader(getClass().getResource("mainMenu.fxml"));
-            backButton.getScene().setRoot(load.load());
+            SceneManager.loadMainMenu();
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
