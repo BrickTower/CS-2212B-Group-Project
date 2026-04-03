@@ -88,12 +88,12 @@ public class GameGUIManager {
         //TODO
         if (gameManager.getDowntime()){
             System.out.println("MAIN_MENU_CLICK");
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("mainMenu.fxml"));
+            FXMLLoader load = new FXMLLoader(getClass().getResource("/com/mapstob/group35/mainMenu.fxml"));
             System.out.println("ch1");
             try {
                 Scene s = MAIN_MENU_BUTTON.getScene();
                 System.out.println("ch5");
-                s.setRoot(fxmlLoader.load());
+                s.setRoot(load.load());
                 System.out.println("ch2");
             }  catch (IOException e) {System.out.println("ch3");throw new RuntimeException(e);}
             System.out.println("ch4");
