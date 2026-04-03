@@ -3,6 +3,8 @@ package com.mapstob.group35;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
+import com.mapstob.group35.core.ParentProfile;
+import com.mapstob.group35.core.PlayerProfile;
 
 import java.io.File;
 import java.io.IOException;
@@ -17,6 +19,7 @@ import java.util.List;
  * methods for saving and loading lists of objects.
  * </p>
  *
+ * @author Eric Chen
  */
 public class DataManager {
 
@@ -64,4 +67,72 @@ public class DataManager {
         if (!file.exists()) return new ArrayList<>();
         return mapper.readValue(file, typeReference);
     }
+
+
+    /**
+     * Loads all PlayerProfile objects from the players.json file.
+     * <p>
+     * If the file cannot be found or read, this method returns an empty list
+     * instead of causing an error.
+     * </p>
+     * @author Amlan Tamaki Konan
+     * @return a List of PlayerProfile objects, or an empty list if loading fails
+     */
+    public static List<PlayerProfile> loadAllPlayerProfiles() {
+        try {
+            return loadList("players.json", new TypeReference<List<PlayerProfile>>() {});
+        } catch (IOException e) {
+            e.printStackTrace();
+            return new ArrayList<>();
+        }
+    }
+
+    /**
+     * Loads all ParentProfile objects from the parents.json file.
+     * <p>
+     * If the file cannot be found or read, this method returns an empty list
+     * to keep the program running safely.
+     * </p>
+     *
+     * @return a list of ParentProfile objects, or an empty list if loading fails
+     */
+    public static List<ParentProfile> loadAllParentProfiles() {
+        try {
+            return loadList("parents.json", new TypeReference<List<ParentProfile>>() {});
+        } catch (IOException e) {
+            e.printStackTrace();
+            return new ArrayList<>();
+        }
+    }
+
+    /**
+     * Combines all PlayerProfile and ParentProfile users and sorts them
+     * by their highest wave count (peak waves), from highest to lowest.
+     * <p>
+     * This method is used to build the leaderboard on the main menu.
+     * </p>
+     *
+     * @return a sorted list of all users, with the highest wave players first
+     */
+    public static List<Object> getAllUsersSortedByWaves() {
+        List<Object> users = new ArrayList<>();
+
+        users.addAll(loadAllPlayerProfiles());
+        users.addAll(loadAllParentProfiles());
+
+        users.sort((a, b) -> {
+            int waveA = (a instanceof PlayerProfile)
+                    ? ((PlayerProfile) a).getPlayerStats().getPeakWaves()
+                    : ((ParentProfile) a).getPlayerStats().getPeakWaves();
+
+            int waveB = (b instanceof PlayerProfile)
+                    ? ((PlayerProfile) b).getPlayerStats().getPeakWaves()
+                    : ((ParentProfile) b).getPlayerStats().getPeakWaves();
+
+            return Integer.compare(waveB, waveA);
+        });
+
+        return users;
+    }
+
 }
