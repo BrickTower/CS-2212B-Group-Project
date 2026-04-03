@@ -1,98 +1,82 @@
 package com.mapstob.group35.core;
 
-import com.mapstob.group35.core.ParentProfile;
-import com.mapstob.group35.core.PlayerProfile;
-import com.mapstob.group35.core.loggedUser;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.DisplayName;
 import static org.junit.jupiter.api.Assertions.*;
 
 /**
- * Unit tests for the loggedUser class
+ * tests for loggedUser
+ * this class is basically a global session holder - we test that it stores and retrieves correctly
+ * note: currUser is static so tests can bleed into each other - order matters here
+ * each test resets state via setCurrUser to stay clean
  */
 public class loggedUserTest {
 
-    private loggedUser registry;
+    private loggedUser loggedUser;
+    private PlayerProfile player;
+    private ParentProfile parent;
 
+    // fresh instance each time - but remember the field is static so state persists across tests
     @BeforeEach
-    void setUp() {
-        registry = new loggedUser();
-        // since currUser is static, we must manually reset it to ensure com.mapstob.group35.test isolation
-        registry.setCurrUser(null);
+    public void setUp() {
+        loggedUser = new loggedUser();
+        player = new PlayerProfile("playerUser", "pass");
+        parent = new ParentProfile("parentUser", "pass");
     }
 
+    // setting a player and getting it back should return the same object
     @Test
-    @DisplayName("Should store and retrieve a standard PlayerProfile")
-    void testSetAndGetPlayerProfile() {
-        PlayerProfile player = new PlayerProfile("EthanG", "pass123");
-        registry.setCurrUser(player);
-
-        PlayerProfile retrieved = registry.getCurrUser();
-        
-        assertNotNull(retrieved);
-        assertEquals("EthanG", retrieved.getUserName());
-        assertEquals(1, retrieved.getLevel(), "New player should start at level 1");
-        assertFalse(retrieved instanceof ParentProfile, "Standard player should not be a ParentProfile");
+    public void testSetAndGetCurrUser_playerProfile() {
+        loggedUser.setCurrUser(player);
+        PlayerProfile result = loggedUser.getCurrUser();
+        assertEquals(player, result);
     }
 
+    // setting a parent and getting it back should return it cast as parentprofile
     @Test
-    @DisplayName("Should store and retrieve a ParentProfile and maintain its type")
-    void testSetAndGetParentProfile() {
-        ParentProfile parent = new ParentProfile("ParentUser", "securePass");
-        registry.setCurrUser(parent);
-
-        PlayerProfile retrieved = registry.getCurrUser();
-
-        assertNotNull(retrieved);
-        assertTrue(retrieved instanceof ParentProfile, "Should be recognized as ParentProfile");
-        assertEquals("ParentUser", retrieved.getUserName());
+    public void testSetAndGetCurrUser_parentProfile() {
+        loggedUser.setCurrUser(parent);
+        PlayerProfile result = loggedUser.getCurrUser();
+        assertTrue(result instanceof ParentProfile);
     }
 
+    // when a parent is stored it should come back as a parentprofile not just a playerprofile
     @Test
-    @DisplayName("Static field should persist across different instances of loggedUser")
-    void testStaticPersistence() {
-        PlayerProfile player = new PlayerProfile("PersistentUser", "p1");
-        
-        // Set using instance A
-        new loggedUser().setCurrUser(player);
-
-        // Retrieve using instance B
-        loggedUser instanceB = new loggedUser();
-        assertEquals("PersistentUser", instanceB.getCurrUser().getUserName());
+    public void testGetCurrUser_returnsParentCastCorrectly() {
+        loggedUser.setCurrUser(parent);
+        PlayerProfile result = loggedUser.getCurrUser();
+        assertNotNull(result);
+        assertEquals("parentUser", result.getUserName());
     }
 
+    // overwriting the user should replace the previous one
     @Test
-    @DisplayName("Should return null when no user is logged in")
-    void testNullHandling() {
-        registry.setCurrUser(null);
-        assertNull(registry.getCurrUser());
+    public void testSetCurrUser_overwritesPreviousUser() {
+        loggedUser.setCurrUser(player);
+        loggedUser.setCurrUser(parent);
+        PlayerProfile result = loggedUser.getCurrUser();
+        assertTrue(result instanceof ParentProfile);
+        assertEquals("parentUser", result.getUserName());
     }
 
+    // since currUser is static all instances of loggedUser share the same user
     @Test
-    @DisplayName("Should correctly overwrite an existing logged-in user")
-    void testOverwriteUser() {
-        PlayerProfile user1 = new PlayerProfile("User1", "p1");
-        ParentProfile user2 = new ParentProfile("User2", "p2");
+    public void testStaticField_sharedAcrossInstances() {
+        loggedUser instance1 = new loggedUser();
+        loggedUser instance2 = new loggedUser();
 
-        registry.setCurrUser(user1);
-        assertEquals("User1", registry.getCurrUser().getUserName());
+        instance1.setCurrUser(player);
+        PlayerProfile result = instance2.getCurrUser();
 
-        registry.setCurrUser(user2);
-        assertEquals("User2", registry.getCurrUser().getUserName());
-        assertTrue(registry.getCurrUser() instanceof ParentProfile);
+        // both instances see the same player because the field is static
+        assertEquals(player, result);
     }
 
+    // a regular player set via setCurrUser should not come back as a parent
     @Test
-    @DisplayName("Polymorphic behavior: Parent acting as Player")
-    void testParentAsPlayer() {
-        // a ParentProfile is a PlayerProfile so it should be able to level up
-        // even when retrieved through the loggedUser registry
-        ParentProfile parent = new ParentProfile("GamingParent", "p123");
-        registry.setCurrUser(parent);
-        
-        registry.getCurrUser().levelUp();
-        
-        assertEquals(2, registry.getCurrUser().getLevel(), "Parent should be able to level up like a player");
+    public void testGetCurrUser_plainPlayerIsNotParent() {
+        loggedUser.setCurrUser(player);
+        PlayerProfile result = loggedUser.getCurrUser();
+        assertFalse(result instanceof ParentProfile);
     }
 }

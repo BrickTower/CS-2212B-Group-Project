@@ -159,7 +159,7 @@ public class TextManager {
      */
     public int spellingAttempt(String input){
         if (textList.size() <=0){return -1;}
-        int mistakes = textList.getFirst().checkSpellingValidity(input);
+        int mistakes = textList.get(0).checkSpellingValidity(input);
         if (mistakes == 0){
             wordsCompleted++;
             if (firstTry){ firstAttemptWords++; }
@@ -167,7 +167,7 @@ public class TextManager {
 
             WPMTracker.add(curTime);
 
-            removeText(textList.getFirst());
+            removeText(textList.get(0));
             return 0;
         }
         else if (mistakes == -1) {//invalid

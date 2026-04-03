@@ -155,7 +155,7 @@ public class PlayerProfile {
     }
 
     /**
-     *
+     * Sets the amount of coins present
      * @param coins
      */
     public void setCoins(int coins) {this.coins=coins;}
@@ -177,6 +177,17 @@ public class PlayerProfile {
      */
     public void resetStats() {
         this.playerStats = new Stats();
+        this.updateSave();
+    }
+
+    /**
+     * Sets a player's Stats. Used to save any Stats changes to the Player.
+     * @param newStats Stats object, preferably the one from the currently logged in user (currUser.getPlayerStats(), for example)
+     * @see Stats
+     * @author Ethan Gregory
+     */
+    public void setStats(Stats newStats) {
+        this.playerStats = newStats;
         this.updateSave();
     }
 

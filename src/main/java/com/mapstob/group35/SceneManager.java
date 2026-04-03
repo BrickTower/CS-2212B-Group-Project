@@ -12,6 +12,15 @@ import javafx.scene.Scene;
 import java.io.IOException;
 import java.util.Objects;
 
+/**
+ * Utility class used to easily handle switching scenes, calling specific necessary tricks for setting up the corresponding scene.
+ * <p></p>
+ * The original Scene of the application must be set to BaseScene before any work is done, as it is key to changing the scenes around.
+ *
+ * @version 1
+ * @author Shaun Zhang
+ * @author Tamaki Konan
+ */
 public class SceneManager {
     static Scene BaseScene;
 
@@ -43,7 +52,13 @@ public class SceneManager {
 
     //TODO Below!!!
     static public void loadStats() throws IOException{
-
+        try {
+            FXMLLoader load = new FXMLLoader(SceneManager.class.getResource("/com/mapstob/group35/stats.fxml"));
+            Parent root = load.load();
+            BaseScene.setRoot(root);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
     static public tutorialController loadTutorial() throws IOException{
         FXMLLoader fxmlLoader = new FXMLLoader(SceneManager.class.getResource("/com/mapstob/group35/tutorialScreen.fxml"));

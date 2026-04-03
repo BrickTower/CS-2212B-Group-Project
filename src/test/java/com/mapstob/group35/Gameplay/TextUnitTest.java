@@ -2,91 +2,143 @@ package com.mapstob.group35.Gameplay;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.DisplayName;
 import static org.junit.jupiter.api.Assertions.*;
 
+/**
+ * tests for TextUnit
+ * covers time tracking, spelling validity checks, and percent calculations
+ */
 public class TextUnitTest {
 
-    private TextUnit unit;
+    private TextUnit textUnit;
 
+    // create a fresh text unit before each test - "HELLO" with 10 second limit
     @BeforeEach
-    void setUp() {
-        unit = new TextUnit("Apple", 10);
+    public void setUp() {
+        textUnit = new TextUnit("HELLO", 10);
     }
 
+    // getter should return what was passed in the constructor
     @Test
-    @DisplayName("Should initialize with correct text and time values")
-    void testInitialization() {
-        assertEquals("Apple", unit.getText());
-        // Use (double) to match the return type of the method
-        double limit = unit.getTimeLimit();
-        assertEquals(10.0, limit);
+    public void testGetText_returnsCorrectText() {
+        assertEquals("HELLO", textUnit.getText());
     }
 
+    // time limit should match what we passed in
     @Test
-    @DisplayName("incTime should increment current time")
-    void testIncrementTime() {
-        unit.incTime();
-        assertEquals(1, unit.getCurTime());
-        unit.incTime();
-        assertEquals(2, unit.getCurTime());
+    public void testGetTimeLimit_returnsCorrectLimit() {
+        assertEquals(10.0, textUnit.getTimeLimit(), 0.001);
     }
 
+    // brand new unit should have zero time elapsed
     @Test
-    @DisplayName("checkTime should return true only when limit is reached or exceeded")
-    void testCheckTime() {
-        // At start (0/10)
-        assertFalse(unit.checkTime());
-
-        // Increment to 9/10
-        for(int i = 0; i < 9; i++) unit.incTime();
-        assertFalse(unit.checkTime());
-
-        // Increment to 10/10
-        unit.incTime();
-        assertTrue(unit.checkTime(), "Should be true when curTime == timeLimit");
-
-        // Increment to 11/10
-        unit.incTime();
-        assertTrue(unit.checkTime(), "Should be true when curTime > timeLimit");
+    public void testGetCurTime_startsAtZero() {
+        assertEquals(0.0, textUnit.getCurTime(), 0.001);
     }
 
+    // percent time should be 0 when no time has passed
     @Test
-    @DisplayName("getPercentTime should return correct float ratio")
-    void testPercentTime() {
-        unit.incTime(); // 1 / 10
-        assertEquals(0.1f, unit.getPercentTime(), 0.001f);
-        
-        for(int i = 0; i < 4; i++) unit.incTime(); // 5 / 10
-        assertEquals(0.5f, unit.getPercentTime(), 0.001f);
+    public void testGetPercentTime_startsAtZero() {
+        assertEquals(0.0f, textUnit.getPercentTime(), 0.001f);
     }
 
+    // incrementing time once should move us to 1
     @Test
-    @DisplayName("checkSpellingValidity should return 0 for perfect match")
-    void testSpellingPerfectMatch() {
-        assertEquals(0, unit.checkSpellingValidity("Apple"));
+    public void testIncTime_incrementsByOne() {
+        textUnit.incTime();
+        assertEquals(1.0, textUnit.getCurTime(), 0.001);
     }
 
+    // incTime should return false while we havent hit the limit yet
     @Test
-    @DisplayName("checkSpellingValidity should count mismatches correctly")
-    void testSpellingMismatches() {
-        // "Apply" vs "Apple" -> 1 mistake ('y' vs 'e')
-        assertEquals(1, unit.checkSpellingValidity("Apply"));
-        
-        // "Axxle" vs "Apple" -> 2 mistakes
-        assertEquals(2, unit.checkSpellingValidity("Axxle"));
-        
-        // "xxxxx" vs "Apple" -> 5 mistakes
-        assertEquals(5, unit.checkSpellingValidity("xxxxx"));
+    public void testIncTime_returnsFalseBeforeLimit() {
+        boolean result = textUnit.incTime(); // now at 1, limit is 10
+        assertFalse(result);
     }
 
+    // incTime should return true exactly when we hit the time limit
     @Test
-    @DisplayName("CRASH TEST: Short input should not crash the game")
-    void testShortInputHandling() {
-        // Target is "Apple" (5 chars). Input is "App" (3 chars).
-        // WARNING: Your current code WILL fail this test and throw an Exception.
-        assertDoesNotThrow(() -> {
-            unit.checkSpellingValidity("App");
-        }, "The code should handle inputs shorter than the target text without crashing.");
+    public void testIncTime_returnsTrueAtLimit() {
+        boolean result = false;
+        for (int i = 0; i < 10; i++) {
+            result = textUnit.incTime();
+        }
+        assertTrue(result);
+    }
+
+    // percent time after halfway should be 0.5
+    @Test
+    public void testGetPercentTime_halfwayThrough() {
+        for (int i = 0; i < 5; i++) {
+            textUnit.incTime();
+        }
+        assertEquals(0.5f, textUnit.getPercentTime(), 0.001f);
+    }
+
+    // perfect spelling match should return 0 mistakes
+    @Test
+    public void testCheckSpellingValidity_perfectMatch() {
+        int result = textUnit.checkSpellingValidity("HELLO");
+        assertEquals(0, result);
+    }
+
+    // wrong spelling with same length should count character differences
+    @Test
+    public void testCheckSpellingValidity_wrongLetters() {
+        // HELLO vs HXLLX - two characters are different
+        int result = textUnit.checkSpellingValidity("HXLLX");
+        assertEquals(2, result);
+    }
+
+    // completely wrong word with same length should count all differences
+    @Test
+    public void testCheckSpellingValidity_allWrong() {
+        int result = textUnit.checkSpellingValidity("ZZZZZ");
+        assertEquals(5, result);
+    }
+
+    // shorter input should count length difference plus mismatched chars
+    @Test
+    public void testCheckSpellingValidity_inputTooShort() {
+        // HELL vs HELLO - 1 length difference + comparing HELl vs HELL (no char errors)
+        int result = textUnit.checkSpellingValidity("HELL");
+        assertEquals(1, result); // just the missing character
+    }
+
+    // longer input counts the extra length too
+    @Test
+    public void testCheckSpellingValidity_inputTooLong() {
+        // HELLOO vs HELLO - 1 extra char
+        int result = textUnit.checkSpellingValidity("HELLOO");
+        assertEquals(1, result);
+    }
+
+    // empty input vs a 5 letter word should give 5 mistakes (all from length diff)
+    @Test
+    public void testCheckSpellingValidity_emptyInput() {
+        int result = textUnit.checkSpellingValidity("");
+        assertEquals(5, result);
+    }
+
+    // if the attempt exactly equals the text length but everything is wrong thats max mistakes
+    @Test
+    public void testCheckSpellingValidity_sameLengthAllWrong() {
+        TextUnit unit = new TextUnit("AAA", 5);
+        int result = unit.checkSpellingValidity("ZZZ");
+        assertEquals(3, result);
+    }
+
+    // a single character unit should work fine
+    @Test
+    public void testSingleCharacter_correctSpelling() {
+        TextUnit unit = new TextUnit("A", 5);
+        assertEquals(0, unit.checkSpellingValidity("A"));
+    }
+
+    // a single character unit wrong answer should give 1 mistake
+    @Test
+    public void testSingleCharacter_wrongSpelling() {
+        TextUnit unit = new TextUnit("A", 5);
+        assertEquals(1, unit.checkSpellingValidity("Z"));
     }
 }

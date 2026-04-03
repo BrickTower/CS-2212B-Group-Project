@@ -30,8 +30,12 @@ public class mainController {
     private PlayerProfile currentUser = account.getCurrUser();
 
     //temporary var
-    private boolean runExists = false;
+    private boolean runExists = (currentUser.getPlayerStats().getCurrentWave() > 0);
 
+    @FXML
+    private void initialize() {
+        runButtonText();
+    }
 
     private void runButtonText(){
         if (runExists){
@@ -74,10 +78,12 @@ public class mainController {
         }
     }
 
-
-    public void testFunction() { // QUICK TEST FUNCTION TO MAKE SURE SAVING USER DATA WORKS
-        if (currentUser != null) {
-            currentUser.addCoins(15);
+    @FXML
+    protected void goToStats() {
+        try {
+            SceneManager.loadStats();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
         }
     }
 
