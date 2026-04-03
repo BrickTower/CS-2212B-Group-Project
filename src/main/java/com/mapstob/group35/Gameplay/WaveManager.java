@@ -90,7 +90,7 @@ public class WaveManager {
      */
     public void startWave(){
         curTime = 0;
-        setWaveTime((int) (defaultWaveTime * getWaveTimeModifier()));
+        setWaveTime((int) ((defaultWaveTime + wave) * getWaveTimeModifier()) );
     }
 
     /**
