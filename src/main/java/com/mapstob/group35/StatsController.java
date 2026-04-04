@@ -48,10 +48,6 @@ public class StatsController {
     @FXML
     private Text totalMistakes;
 
-    ///  The total amount of playtime the Player has played for
-    @FXML
-    private Text totalPlaytime;
-
     // ALL TIME HIGHSCORES
     /** Displays the highest WPM ever achieved in a single run. */
     @FXML
@@ -70,10 +66,21 @@ public class StatsController {
     private Text altMistakes;
 
     // CURRENT RUN SCORES
+    /** Displays the WPM achieved in the current run. */
+    @FXML
+    private Text currWPM;
+
+    /** Displays the number of waves reached in the current run. */
+    @FXML
+    private Text currWaves;
 
     /** Displays the number of coins earned in the current run. */
     @FXML
     private Text currCoinsCollected;
+
+    /** Displays the number of mistakes made in the current run. */
+    @FXML
+    private Text currMistakes;
 
     /**
      * Initializes the Stats screen by loading the current player's data
@@ -85,26 +92,37 @@ public class StatsController {
      */
     @FXML
     public void initialize() {
+        // DEFAULT: Load the currently logged-in user
         loggedUser session = new loggedUser();
-        PlayerProfile player = session.getCurrUser();
-        Stats stats = player.getPlayerStats();
+        loadPlayerData(session.getCurrUser());
+    }
 
-        // Set player name
+    /**
+     * This method can be called from parentalController to change
+     * the displayed stats to a specific student.
+     */
+    public void setPlayer(PlayerProfile player) {
+        loadPlayerData(player);
+    }
+
+    private void loadPlayerData(PlayerProfile player) {
+        if (player == null) return;
+
+        Stats stats = player.getPlayerStats();
         playerName.setText(player.getUserName());
 
         // STATISTICS (totals)
         totalWaves.setText(String.valueOf(stats.getTotalWaves()));
         totalWPM.setText(String.format("%.1f", stats.getAverageWPM()));
         totalMistakes.setText(String.valueOf(stats.getTotalMistakes()));
-        totalPlaytime.setText(String.format("%.1f", (float)(stats.getTotalPlaytime() / 60.0))); // Represent Playtime in Minutes (Ethan)
 
-        // ALL TIME HIGHSCORES
+        // HIGHSCORES
         altWPM.setText(String.format("%.1f", stats.getPeakWPM()));
         altWaves.setText(String.valueOf(stats.getPeakWaves()));
         altCoinsCollected.setText(String.valueOf(stats.getPeakCoins()));
         altMistakes.setText(String.valueOf(stats.getLowestMistakes()));
 
-        // CURRENT RUN — pulled from PlayerProfile directly
+        // CURRENT RUN
         currCoinsCollected.setText(String.valueOf(player.getCoins()));
     }
 

@@ -1,11 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #05001A;" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mapstob.group35.parentalController">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #05001A;" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mapstob.group35.parentalController">
    <children>
       <BorderPane prefHeight="89.0" prefWidth="600.0" style="-fx-background-color: #062E50;">
          <left>
@@ -36,6 +43,7 @@
                   <PasswordField fx:id="resetField" layoutX="28.0" layoutY="141.0" prefHeight="25.0" prefWidth="192.0" promptText="New Password..." style="-fx-background-color: #FBFAF3; -fx-background-radius: 10;" />
                   <Button layoutX="58.0" layoutY="178.0" mnemonicParsing="false" onAction="#resetPlayersPassword" style="-fx-background-color: #7D8570; -fx-text-fill: #FBFAF3;" text="Reset User's Password" />
                   <Label fx:id="leftError" alignment="CENTER" layoutX="21.0" layoutY="216.0" prefHeight="17.0" prefWidth="211.0" style="-fx-text-fill: #7D8570; -fx-font-weight: bold;" text="Label" textAlignment="CENTER" visible="false" wrapText="true" />
+                  <Button layoutX="74.0" layoutY="210.0" mnemonicParsing="false" onAction="#viewPlayerStats" style="-fx-background-color: #7D8570; -fx-text-fill: #FBFAF3;" text="View User's Stats" />
                </children></Pane>
             <Pane prefHeight="298.0" prefWidth="259.0" style="-fx-background-color: #062E50;">
                <children>
