@@ -82,6 +82,9 @@ public class StatsController {
     @FXML
     private Text currMistakes;
 
+    ///  THE USER WE ARE CHECKING THE STATS OF
+    private PlayerProfile playerInStats;
+
     /**
      * Initializes the Stats screen by loading the current player's data
      * and populating all stat fields.
@@ -107,6 +110,7 @@ public class StatsController {
 
     private void loadPlayerData(PlayerProfile player) {
         if (player == null) return;
+        playerInStats = player;
 
         Stats stats = player.getPlayerStats();
         playerName.setText(player.getUserName());
@@ -138,7 +142,12 @@ public class StatsController {
     @FXML
     private void handleExit() throws Exception {
         try {
-            SceneManager.loadMainMenu();
+            loggedUser session = new loggedUser();
+            if (!playerInStats.getUserName().equals(session.getCurrUser().getUserName())) {
+                SceneManager.loadParentalControls();
+            } else {
+                SceneManager.loadMainMenu();
+            }
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
