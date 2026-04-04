@@ -8,6 +8,12 @@ import com.mapstob.group35.DataManager;
 
 import java.util.List;
 
+/**
+ * Represents a Player, who can log into BotSpam, and have Stats saved over the course of the game. These Players, unless they belong to {@link ParentProfile}, cannot access Parental Controls and whatever naturally lies there.
+ *
+ * @version 1
+ * @author Ethan Gregory
+ */
 @JsonAutoDetect(
         fieldVisibility = JsonAutoDetect.Visibility.ANY,
         getterVisibility = JsonAutoDetect.Visibility.NONE,

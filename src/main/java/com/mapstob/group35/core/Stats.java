@@ -1,6 +1,6 @@
 package com.mapstob.group35.core;
 
-// FIX FOR JSON AUTO DETECT FROM GITHUB COPILOT: https://github.com/copilot/share/c03d4088-4924-8c05-b150-284ec451014e. CODE THAT IS NOT ANNOTATIONS IS HUMAN WRITTEN
+// FIX FOR JSON AUTO DETECT FROM GITHUB COPILOT: https://github.com/copilot/share/c03d4088-4924-8c05-b150-284ec451014e. CODE THAT IS NOT IN ANNOTATIONS BELOW IS HUMAN WRITTEN
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -9,6 +9,13 @@ import com.fasterxml.jackson.annotation.JsonProperty;
         getterVisibility = JsonAutoDetect.Visibility.NONE,
         setterVisibility = JsonAutoDetect.Visibility.NONE // ADD THIS
 )
+/**
+ * An object storing a variety of variables like WPM, Accuracy, and total mistakes obtained throughout games made by a {@link PlayerProfile}.
+ * These are naturally associated with them, with a blank version of Stats associated with all Players in their constructor.
+ *
+ * @version 1
+ * @author Ethan Gregory
+ */
 public class Stats {
     /** A sum of all WPM entered by the Player during games*/
     @JsonProperty("totalWPM")

@@ -13,6 +13,9 @@ import javafx.scene.control.*;
 import java.io.IOException;
 import java.util.List;
 
+/**
+ * Controller for the Login Page, handling verifying any log in attempts, alongside creation of any new Parent accounts
+ */
 public class LoginController {
 
     /// Field to enter account username

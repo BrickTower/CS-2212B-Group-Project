@@ -19,6 +19,10 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 
+/**
+ * Controller for Parental Controls, handling all UI interactions, including resetting Passwords amd resetting Scoreboards.
+ * @version 1
+ */
 public class parentalController {
     private loggedUser account = new loggedUser();
     private ParentProfile currentUser = (ParentProfile) (account.getCurrUser());

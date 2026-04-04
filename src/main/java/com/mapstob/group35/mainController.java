@@ -43,6 +43,10 @@ public class mainController {
         updateLeaderboard();
     }
 
+    /**
+     * Checks if a Run is currently occuring, and adjusts text accordingly.
+     * @author Shaun Zhang
+     */
     private void runButtonText(){
         if (runExists){
             assert newGame != null;
@@ -54,6 +58,10 @@ public class mainController {
         }
     }
 
+    /**
+     * Updates the leaderboard on right-hand side of Main Menu
+     * @author Tamaki Konan
+     */
     private void updateLeaderboard() {
         List<Object> users = DataManager.getAllUsersSortedByWaves();
 
@@ -94,7 +102,7 @@ public class mainController {
     }
 
     /**
-        Moves to tutorial screen
+        Moves to the tutorial screen
         @author Ethan Gregory
      */
     @FXML
@@ -105,6 +113,11 @@ public class mainController {
             throw new RuntimeException(e);
         }
     }
+
+    /**
+     * Moves to the Game Screen. If the Current User happens to have Stats of a previous game, resume their progress.
+     * @author Shaun Zhang
+     */
     @FXML
     protected void StartGame() {
         GameManager gm;
@@ -135,7 +148,7 @@ public class mainController {
 
     /**
      * GUI Transition to Parental Controls screen. This function will only work if the currentUser is a {@link ParentProfile}.
-     * Otherwise, throw a unique error message over text for a couple seconds.
+     * Otherwise, throw a unique error message over text.
      *
      * @author Ethan Gregory
      */
@@ -154,6 +167,10 @@ public class mainController {
 
     }
 
+    /**
+     * Goes back to Base Menu, to allow for quitting / new user login
+     * @author Ethan Gregory
+     */
     @FXML
     protected void backToMainMenu() {
         try {
