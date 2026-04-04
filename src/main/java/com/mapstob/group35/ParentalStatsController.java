@@ -10,13 +10,14 @@ import javafx.scene.text.Text;
 import java.io.IOException;
 
 /**
- * Controller for the Statistics screen.
+ * Alternate Controller for the Statistics screen, specifically for Parental Controls
  * <p>
  * Handles all UI interactions on the Stats screen, including
- * navigating back to the Main Menu.
+ * navigating back to the Main Menu, and the ability to change profile to show any other {@link PlayerProfile}.
  * </p>
  *
  * @author Amlan Tamaki Konan
+ * @author Eric Chen
  */
 
 public class ParentalStatsController {

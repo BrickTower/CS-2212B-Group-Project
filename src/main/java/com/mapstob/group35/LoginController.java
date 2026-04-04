@@ -39,7 +39,7 @@ public class LoginController {
     private Label errorMessage;
 
     /**
-     * Handles a login attempt, looking through the JSON file for any signs of correct account, and if so, pass into the Main
+     * Handles a login attempt, looking through the JSON file for any signs of correct account, and if so, move into the Main Menu
      * @author Ethan Gregory
      */
     @FXML
@@ -165,8 +165,13 @@ public class LoginController {
 
     }
 
+    /**
+     * GUI Transition to Base Menu
+     * @throws IOException - If for some reason we can't (say button to head back is null) then throw Error
+     * @author Ethan Gregory
+     */
     @FXML
-    private void handleExit(ActionEvent event) throws IOException {
+    private void handleExit() throws IOException {
         FXMLLoader load = new FXMLLoader(getClass().getResource("baseMenu.fxml"));
         backButton.getScene().setRoot(load.load());
     }
