@@ -124,7 +124,7 @@ public class mainController {
 
         if (runExists) {
             Stats userStats = currentUser.getPlayerStats();
-            gm = new GameManager(100, 100, userStats.getCurrentWave(), 10 + userStats.getCurrentWave(), userStats.getTotalCoins(), 10);
+            gm = new GameManager(100, 100, userStats.getCurrentWave(), 10 + userStats.getCurrentWave(), currentUser.getCoins(), 10);
         }
         else{//if first run or if first run after a death
             gm = new GameManager();
