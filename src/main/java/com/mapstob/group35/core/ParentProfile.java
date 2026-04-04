@@ -14,6 +14,7 @@ import com.mapstob.group35.DataManager;
  * Represents a Parent, a extension of a {@link PlayerProfile} that has access to Parental Controls, allowing them to add new accounts, view their Players' stats, and reset their Player's presence on the High Score table / Stats.
  * <br><br>
  * Otherwise, they may play the game and score on the leaderboard, just like any other Player.
+ * @see PlayerProfile
  * @version 1
  */
 @JsonAutoDetect(

@@ -4,18 +4,19 @@ package com.mapstob.group35.core;
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-@JsonAutoDetect(
-        fieldVisibility = JsonAutoDetect.Visibility.ANY,
-        getterVisibility = JsonAutoDetect.Visibility.NONE,
-        setterVisibility = JsonAutoDetect.Visibility.NONE // ADD THIS
-)
 /**
  * An object storing a variety of variables like WPM, Accuracy, and total mistakes obtained throughout games made by a {@link PlayerProfile}.
  * These are naturally associated with them, with a blank version of Stats associated with all Players in their constructor.
  *
  * @version 1
+ * @see PlayerProfile
  * @author Ethan Gregory
  */
+@JsonAutoDetect(
+        fieldVisibility = JsonAutoDetect.Visibility.ANY,
+        getterVisibility = JsonAutoDetect.Visibility.NONE,
+        setterVisibility = JsonAutoDetect.Visibility.NONE // ADD THIS
+)
 public class Stats {
     /** A sum of all WPM entered by the Player during games*/
     @JsonProperty("totalWPM")
