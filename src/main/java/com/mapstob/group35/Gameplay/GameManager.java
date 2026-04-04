@@ -314,7 +314,8 @@ public class GameManager {
      * Resets all <strong>current</strong> run data, then saves.
      */
     private void deleteInfo(){
-        //TODO
+        player.setCoins(0);
+        player.resetStats();
         saveInfo();
     }
 

@@ -160,7 +160,7 @@ public class PlayerProfile {
      * @author Ethan Gregory
      */
     public void resetStats() {
-        this.playerStats = new Stats();
+        this.playerStats.death();
         this.updateSave();
     }
 

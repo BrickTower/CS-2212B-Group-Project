@@ -119,6 +119,14 @@ public class Stats {
     }
 
     /**
+     * Resets relevant Stats to 0 when Player dies
+     * @author Ethan Gregory
+     */
+    public void death() {
+        this.currentWave = 0;
+        this.totalCoins = 0;
+    }
+    /**
      * Sets the Player's current wave in the game. Should be used for saving, and when the player dies, it should be set back to 0.
      * @param newWave Integer value showing the current wave that the Player is on.
      * @author Ethan Gregory
