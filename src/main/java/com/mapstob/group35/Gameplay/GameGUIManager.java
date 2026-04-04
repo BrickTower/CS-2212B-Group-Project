@@ -1,6 +1,8 @@
 package com.mapstob.group35.Gameplay;
 
 import com.mapstob.group35.SceneManager;
+import com.mapstob.group35.core.PlayerProfile;
+import com.mapstob.group35.core.loggedUser;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -24,7 +26,7 @@ import java.util.List;
  * Manages Game UI, and loads scenes as needed.
  * @see GameManager
  * @see ShopManager
- * @author Shaun
+ * @author Shaun Zhang
  */
 public class GameGUIManager {
     @FXML private Pane HP_CONTAINER;
