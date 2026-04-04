@@ -108,10 +108,7 @@ public class ParentalStatsController {
         altMistakes.setText(String.valueOf(stats.getLowestMistakes()));
 
         // CURRENT RUN — pulled from PlayerProfile directly
-        currWPM.setText("N/A");      // placeholder until GameManager passes run data
-        currWaves.setText("N/A");
         currCoinsCollected.setText(String.valueOf(player.getCoins()));
-        currMistakes.setText("N/A");
     }
 
     public void setPlayer(PlayerProfile player){
