@@ -6,6 +6,10 @@ import javafx.scene.control.Button;
 
 import java.io.IOException;
 
+/**
+ * Controller for Tutorial Scene, handling the one UI interaction on this menu
+ * @version 1
+ */
 public class tutorialController {
     @FXML
     private Button backButton;

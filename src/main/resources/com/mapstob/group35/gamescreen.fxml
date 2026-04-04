@@ -188,7 +188,7 @@
       <children>
          <Text fx:id="WPM_TEXT" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="WPM: #\n64646464" wrappingWidth="120.00000000000006" />
          <Text fx:id="MISTAKES_TEXT" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="MISTAKES: #" wrappingWidth="120.00000000000006" />
-         <Text fx:id="WORDS_TEXT" fill="WHITE" layoutX="10.0" layoutY="39.0" strokeType="OUTSIDE" strokeWidth="0.0" text="WORDS THIS SESSION: #" wrappingWidth="120.00000000000006" />
+         <Text fx:id="WORDS_TEXT" fill="WHITE" layoutX="10.0" layoutY="39.0" strokeType="OUTSIDE" strokeWidth="0.0" text="WORDS THIS ROUND: #" wrappingWidth="120.00000000000006" />
          <Pane prefHeight="12.0" prefWidth="55.0" />
          <Text fx:id="HIGH_WPM_TEXT" fill="WHITE" layoutX="10.0" layoutY="93.0" strokeType="OUTSIDE" strokeWidth="0.0" text="HIGHEST WPM: #" wrappingWidth="120.00000000000006" />
          <Text fx:id="HIGH_WAVE_TEXT" fill="WHITE" layoutX="10.0" layoutY="57.0" strokeType="OUTSIDE" strokeWidth="0.0" text="HIGHEST WAVE: #" wrappingWidth="120.00000000000006" />

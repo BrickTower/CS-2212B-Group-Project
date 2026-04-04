@@ -39,17 +39,11 @@ public class GameManager {
     private boolean died;
     private boolean downtime;
 
-    //TODO move elsewhere
-    private String[] easyDiffWords = {"cake", "cookie", "tea", "hope", "news", "chance", "luck", "known", "you", "soul"};
-    private String[] mediumDiffWords = {"poland", "canada", "reimu", "marisa", "important", "zoot", "dryad", "nomad", "heaven", "honeybee", "sandpaper"};
-    private String[] hardDiffWords = {"artificial", "manipulation", "despised", "topological", "prerequisite", "difficulty", "completion", "andesite", "granite", "drizzled"};
-
-
     /**
      * Constructor.
      */
     public GameManager() {
-        maxLife = 100; //todo change
+        maxLife = 100;
         curLife = maxLife;
         coins = 0;
         defaultCoinGain = 10;
@@ -63,12 +57,13 @@ public class GameManager {
     /**
      * Constructor for loading already existing data.
      *
-     * @param maxLife
-     * @param curLife
-     * @param wave
-     * @param waveTime
-     * @param coins
-     * @param defaultCoinGain
+     * @param maxLife Maximum Life (by default, assume 100)
+     * @param curLife How much health the player should start with
+     * @param wave What wave the Player is currently on
+     * @param waveTime How long the current wave lasts
+     * @param coins How many coins the Player has
+     * @param defaultCoinGain How many coins the Player should get for a successful comment
+     * @author Shaun Zhang
      */
     public GameManager(int maxLife, int curLife, int wave, int waveTime, int coins, int defaultCoinGain) {
         this.maxLife = maxLife;
@@ -314,7 +309,8 @@ public class GameManager {
      * Resets all <strong>current</strong> run data, then saves.
      */
     private void deleteInfo(){
-        //TODO
+        player.setCoins(0);
+        player.resetStats();
         saveInfo();
     }
 

@@ -1,9 +1,17 @@
 package com.mapstob.group35.core;
 
-// FIX FOR JSON AUTO DETECT FROM GITHUB COPILOT: https://github.com/copilot/share/c03d4088-4924-8c05-b150-284ec451014e. CODE THAT IS NOT ANNOTATIONS IS HUMAN WRITTEN
+// FIX FOR JSON AUTO DETECT FROM GITHUB COPILOT: https://github.com/copilot/share/c03d4088-4924-8c05-b150-284ec451014e. CODE THAT IS NOT IN ANNOTATIONS BELOW IS HUMAN WRITTEN
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+/**
+ * An object storing a variety of variables like WPM, Accuracy, and total mistakes obtained throughout games made by a {@link PlayerProfile}.
+ * These are naturally associated with them, with a blank version of Stats associated with all Players in their constructor.
+ *
+ * @version 1
+ * @see PlayerProfile
+ * @author Ethan Gregory
+ */
 @JsonAutoDetect(
         fieldVisibility = JsonAutoDetect.Visibility.ANY,
         getterVisibility = JsonAutoDetect.Visibility.NONE,
@@ -119,6 +127,14 @@ public class Stats {
     }
 
     /**
+     * Resets relevant Stats to 0 when Player dies
+     * @author Ethan Gregory
+     */
+    public void death() {
+        this.currentWave = 0;
+        this.totalCoins = 0;
+    }
+    /**
      * Sets the Player's current wave in the game. Should be used for saving, and when the player dies, it should be set back to 0.
      * @param newWave Integer value showing the current wave that the Player is on.
      * @author Ethan Gregory
@@ -184,6 +200,14 @@ public class Stats {
      * @return An Integer representation of the lowest mistakes made in a single run
      */
     public int getLowestMistakes() { return this.lowestMistakes; }
+
+    /**
+     * Returns the total playtime Player has experienced over waves
+     * @return An Integer representation of the total playtime
+     */
+    public int getTotalPlaytime() {
+        return this.totalPlaytime;
+    }
 }
 
 

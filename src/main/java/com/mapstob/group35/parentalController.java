@@ -19,6 +19,10 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 
+/**
+ * Controller for Parental Controls, handling all UI interactions, including resetting Passwords amd resetting Scoreboards.
+ * @version 1
+ */
 public class parentalController {
     private loggedUser account = new loggedUser();
     private ParentProfile currentUser = (ParentProfile) (account.getCurrUser());
@@ -58,7 +62,7 @@ public class parentalController {
             leftError.setText("User not selected.");
         } else {
             PlayerProfile student = managedPlayers.getValue();
-            student.resetStats();
+            student.parentReset();
             leftError.setVisible(true);
             leftError.setText("Stats reset.");
         }
@@ -71,7 +75,7 @@ public class parentalController {
     @FXML
     protected void resetAllPlayersStats() {
         for (PlayerProfile player : currentUser.getPlayersManaged()) {
-            player.resetStats();
+            player.parentReset();
         }
         leftError.setVisible(true);
         leftError.setText("All Players' stats reset.");
@@ -119,7 +123,7 @@ public class parentalController {
     private void addPlayer() {
         try {
 
-            String userName = newPlayerName.getText();
+            String userName = newPlayerName.getText(); // GET TEXT
             String passWord = newPlayerPass.getText();
 
             if (userName.isBlank() || passWord.isBlank()) { // GUARD
@@ -128,14 +132,14 @@ public class parentalController {
 
             // ANOTHER GUARD
             List<ParentProfile> parents = DataManager.loadList("parents.json", new TypeReference<List<ParentProfile>>() {
-            });
+            }); // GET JSON
 
             int counter = 0; // FIND INDEX IN FOR LOOP
             for (ParentProfile parent : parents) {
                 int counter2 = 0;
                 List<PlayerProfile> players = parent.getPlayersManaged();
                 for (PlayerProfile player : players) {
-                    if (player.getUserName().equals(userName)) {
+                    if (player.getUserName().equals(userName)) { // USERNAME CHECK
                         throw new IllegalArgumentException("User already exists.");
                     }
                     counter2++;

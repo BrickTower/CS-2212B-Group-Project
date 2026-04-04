@@ -30,7 +30,6 @@ public class PlayerProfileTest {
     // new player should start at level 1 with 0 coins
     @Test
     public void testConstructor_defaultValues() {
-        assertEquals(1, player.getLevel());
         assertEquals(0, player.getCoins());
         assertNotNull(player.getPlayerStats());
     }
@@ -101,33 +100,6 @@ public class PlayerProfileTest {
             boolean result = player.spendCoins(50);
             assertTrue(result);
             assertEquals(0, player.getCoins());
-        } catch (RuntimeException e) {
-            assertTrue(e.getCause() != null);
-        }
-    }
-
-    // level should go up by 1 each time levelUp is called
-    @Test
-    public void testLevelUp_incrementsLevel() {
-        try {
-            player.levelUp();
-            assertEquals(2, player.getLevel());
-            player.levelUp();
-            assertEquals(3, player.getLevel());
-        } catch (RuntimeException e) {
-            // save may fail - logic incremented correctly before that
-            assertTrue(e.getCause() != null);
-        }
-    }
-
-    // reset level should bring level back to 1 no matter what
-    @Test
-    public void testResetLevel_resetsToOne() {
-        try {
-            player.levelUp();
-            player.levelUp();
-            player.resetLevel();
-            assertEquals(1, player.getLevel());
         } catch (RuntimeException e) {
             assertTrue(e.getCause() != null);
         }

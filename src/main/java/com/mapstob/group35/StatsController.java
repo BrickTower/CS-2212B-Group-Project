@@ -48,6 +48,10 @@ public class StatsController {
     @FXML
     private Text totalMistakes;
 
+    ///  The total amount of playtime the Player has played for
+    @FXML
+    private Text totalPlaytime;
+
     // ALL TIME HIGHSCORES
     /** Displays the highest WPM ever achieved in a single run. */
     @FXML
@@ -66,21 +70,10 @@ public class StatsController {
     private Text altMistakes;
 
     // CURRENT RUN SCORES
-    /** Displays the WPM achieved in the current run. */
-    @FXML
-    private Text currWPM;
-
-    /** Displays the number of waves reached in the current run. */
-    @FXML
-    private Text currWaves;
 
     /** Displays the number of coins earned in the current run. */
     @FXML
     private Text currCoinsCollected;
-
-    /** Displays the number of mistakes made in the current run. */
-    @FXML
-    private Text currMistakes;
 
     /**
      * Initializes the Stats screen by loading the current player's data
@@ -103,6 +96,7 @@ public class StatsController {
         totalWaves.setText(String.valueOf(stats.getTotalWaves()));
         totalWPM.setText(String.format("%.1f", stats.getAverageWPM()));
         totalMistakes.setText(String.valueOf(stats.getTotalMistakes()));
+        totalPlaytime.setText(String.format("%.1f", (float)(stats.getTotalPlaytime() / 60.0))); // Represent Playtime in Minutes (Ethan)
 
         // ALL TIME HIGHSCORES
         altWPM.setText(String.format("%.1f", stats.getPeakWPM()));
@@ -111,10 +105,7 @@ public class StatsController {
         altMistakes.setText(String.valueOf(stats.getLowestMistakes()));
 
         // CURRENT RUN — pulled from PlayerProfile directly
-        currWPM.setText("N/A");      // placeholder until GameManager passes run data
-        currWaves.setText("N/A");
         currCoinsCollected.setText(String.valueOf(player.getCoins()));
-        currMistakes.setText("N/A");
     }
 
 

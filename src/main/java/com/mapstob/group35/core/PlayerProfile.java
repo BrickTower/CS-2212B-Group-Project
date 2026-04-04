@@ -8,6 +8,12 @@ import com.mapstob.group35.DataManager;
 
 import java.util.List;
 
+/**
+ * Represents a Player, who can log into BotSpam, and have Stats saved over the course of the game. These Players, unless they belong to {@link ParentProfile}, cannot access Parental Controls and whatever naturally lies there.
+ *
+ * @version 1
+ * @author Ethan Gregory
+ */
 @JsonAutoDetect(
         fieldVisibility = JsonAutoDetect.Visibility.ANY,
         getterVisibility = JsonAutoDetect.Visibility.NONE,
@@ -155,11 +161,21 @@ public class PlayerProfile {
     }
 
     /**
-     * Resets a player's Stats to the basic use case. Should only be used when a Parent is resetting Player stats.
+     * Resets a player's Stats to a post-death state, where they lose their coins and current run. Should only be called when the Player is dead from running out of HP.
      * @see Stats
      * @author Ethan Gregory
      */
     public void resetStats() {
+        this.playerStats.death();
+        this.updateSave();
+    }
+
+    /**
+     * Resets a player's Stats to the basic use case. Should only be used when a Parent is resetting Player stats.
+     * @see Stats
+     * @author Ethan Gregory
+     */
+    public void parentReset() {
         this.playerStats = new Stats();
         this.updateSave();
     }

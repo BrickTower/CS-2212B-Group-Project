@@ -4,6 +4,7 @@ import com.mapstob.group35.Gameplay.GameGUIManager;
 import com.mapstob.group35.Gameplay.GameManager;
 import com.mapstob.group35.core.ParentProfile;
 import com.mapstob.group35.core.PlayerProfile;
+import com.mapstob.group35.core.Stats;
 import com.mapstob.group35.core.loggedUser;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -42,6 +43,10 @@ public class mainController {
         updateLeaderboard();
     }
 
+    /**
+     * Checks if a Run is currently occuring, and adjusts text accordingly.
+     * @author Shaun Zhang
+     */
     private void runButtonText(){
         if (runExists){
             assert newGame != null;
@@ -53,6 +58,10 @@ public class mainController {
         }
     }
 
+    /**
+     * Updates the leaderboard on right-hand side of Main Menu
+     * @author Tamaki Konan
+     */
     private void updateLeaderboard() {
         List<Object> users = DataManager.getAllUsersSortedByWaves();
 
@@ -92,8 +101,9 @@ public class mainController {
         }
     }
 
-    /*
-        Moves
+    /**
+        Moves to the tutorial screen
+        @author Ethan Gregory
      */
     @FXML
     protected void goToTutorial() {
@@ -103,13 +113,18 @@ public class mainController {
             throw new RuntimeException(e);
         }
     }
+
+    /**
+     * Moves to the Game Screen. If the Current User happens to have Stats of a previous game, resume their progress.
+     * @author Shaun Zhang
+     */
     @FXML
     protected void StartGame() {
         GameManager gm;
 
         if (runExists) {
-            //TODO load information into gameManager
-            gm = new GameManager();
+            Stats userStats = currentUser.getPlayerStats();
+            gm = new GameManager(100, 100, userStats.getCurrentWave(), 10 + userStats.getCurrentWave(), userStats.getTotalCoins(), 10);
         }
         else{//if first run or if first run after a death
             gm = new GameManager();
@@ -133,7 +148,7 @@ public class mainController {
 
     /**
      * GUI Transition to Parental Controls screen. This function will only work if the currentUser is a {@link ParentProfile}.
-     * Otherwise, throw a unique error message over text for a couple seconds.
+     * Otherwise, throw a unique error message over text.
      *
      * @author Ethan Gregory
      */
@@ -152,6 +167,10 @@ public class mainController {
 
     }
 
+    /**
+     * Goes back to Base Menu, to allow for quitting / new user login
+     * @author Ethan Gregory
+     */
     @FXML
     protected void backToMainMenu() {
         try {
