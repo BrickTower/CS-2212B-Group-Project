@@ -43,7 +43,7 @@ public class GameManager {
      * Constructor.
      */
     public GameManager() {
-        maxLife = 100; //todo change
+        maxLife = 100;
         curLife = maxLife;
         coins = 0;
         defaultCoinGain = 10;
