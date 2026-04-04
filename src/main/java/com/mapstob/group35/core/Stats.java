@@ -192,6 +192,14 @@ public class Stats {
      * @return An Integer representation of the lowest mistakes made in a single run
      */
     public int getLowestMistakes() { return this.lowestMistakes; }
+
+    /**
+     * Returns the total playtime Player has experienced over waves
+     * @return An Integer representation of the total playtime
+     */
+    public int getTotalPlaytime() {
+        return this.totalPlaytime;
+    }
 }
 
 
