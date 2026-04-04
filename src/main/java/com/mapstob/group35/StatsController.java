@@ -48,6 +48,10 @@ public class StatsController {
     @FXML
     private Text totalMistakes;
 
+    ///  The total amount of playtime the Player has played for
+    @FXML
+    private Text totalPlaytime;
+
     // ALL TIME HIGHSCORES
     /** Displays the highest WPM ever achieved in a single run. */
     @FXML
@@ -92,6 +96,7 @@ public class StatsController {
         totalWaves.setText(String.valueOf(stats.getTotalWaves()));
         totalWPM.setText(String.format("%.1f", stats.getAverageWPM()));
         totalMistakes.setText(String.valueOf(stats.getTotalMistakes()));
+        totalPlaytime.setText(String.format("%.1f", (float)(stats.getTotalPlaytime() / 60.0))); // Represent Playtime in Minutes (Ethan)
 
         // ALL TIME HIGHSCORES
         altWPM.setText(String.format("%.1f", stats.getPeakWPM()));
