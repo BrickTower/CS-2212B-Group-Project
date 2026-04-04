@@ -305,7 +305,7 @@ public class GameManager {
         player.setCoins(coins);
         Stats update = player.getPlayerStats();
         update.setCurrWave(waveManager.getWave());
-        update.updateStats(textManager.getWPM(), textManager.calculateMistakesPercent(), 1, player.getCoins(), textManager.getMistakes(), 15 + waveManager.getWave());
+        update.updateStats(textManager.getWPM(), textManager.calculateMistakesPercent(), 1, player.getCoins(), textManager.getMistakes(), waveManager.getWaveTime());
         player.setStats(update);
         System.out.println("saved");
     }

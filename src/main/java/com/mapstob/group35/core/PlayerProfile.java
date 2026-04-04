@@ -14,9 +14,6 @@ import java.util.List;
         setterVisibility = JsonAutoDetect.Visibility.NONE // ADD THIS
 )
 public class PlayerProfile {
-    /** The player's current difficulty level.*/
-    @JsonProperty("level")
-    private int level;
     /** The current amount of coins the Player has.*/
     @JsonProperty("coins")
     private int coins;
@@ -45,7 +42,6 @@ public class PlayerProfile {
     public PlayerProfile(String userName, String password) {
         this.userName = userName; // INIT. CLASS-SPECIFIC VARIABLES
         this.password = password;
-        this.level = 1;
         this.coins = 0;
         this.playerStats = new Stats();
     }
@@ -131,37 +127,6 @@ public class PlayerProfile {
             return true;
         } // END OF IF/ELSE
     }
-
-    /**
-     * Increases the Player's current difficulty level by 1. Used when they successfully complete a wave.
-     * <br>
-     * @author Ethan Gregory
-     */
-    public void levelUp() {
-        this.level++; // INCREASE LEVEL
-        this.updateSave();
-    }
-
-    /**
-     * Resets Player's difficulty level back to 1. Used when a run ends to reset back to normal
-     * <br>
-     * @author Ethan Gregory
-     */
-    public void resetLevel() {
-        this.level = 1;
-        this.updateSave();
-    }
-
-    /**
-     * Returns an Integer representation of the Player's current difficulty level
-     * @return the Player's current difficulty level, represented as a Integer
-     * @see Integer
-     * @author Ethan Gregory
-     */
-    public int getLevel() {
-        return this.level;
-    }
-
 
     /**
      * Returns an Integer representation of the amount of coins the Player currently has.

@@ -102,7 +102,7 @@ public class Stats {
         this.totalWaves += waves;
         if (waves > this.peakWaves) this.peakWaves = waves;
 
-        this.totalCoins += coins;
+        this.totalCoins = coins;
         if (coins > this.peakCoins) this.peakCoins = coins;
 
         this.totalMistakes += mistakes;
