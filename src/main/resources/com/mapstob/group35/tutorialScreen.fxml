@@ -24,7 +24,7 @@
             </Text>
          </center></BorderPane>
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#062E50" height="269.0" layoutX="61.0" layoutY="110.0" stroke="BLACK" strokeType="INSIDE" width="479.0" />
-      <Text fill="WHITE" layoutX="80.0" layoutY="155.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Comments will appear from the top of the screen. You must type in the text bar at the bottom exactly what they say. If you do so correctly, you will earn coins. You will take damage if either a comment reaches just above your bar, or upon failing to spell correctly. After a wave ends, you can use your coins in the Shop to buy Buffs for yourself, like more health, more coins per successful spell, or decreasing the next Wave's difficulty. However, prices do increase after you buy them, and the rounds naturally get more and more challenging. Good luck!" wrappingWidth="441.1366882324219">
+      <Text fill="WHITE" layoutX="80.0" layoutY="155.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Comments will appear from the top of the screen. You must type the comment at the bottom as it appears. If you do so correctly, you will earn coins. You will take damage if either a comment reaches just above your bar, or upon failing to spell correctly. After a wave ends, you can use your coins in the Shop to buy Buffs for yourself, like more health, more coins per successful spell, or decreasing the next Wave's difficulty. However, prices do increase after you buy them, and the rounds naturally get more and more challenging. Good luck!" wrappingWidth="441.1366882324219">
          <font>
             <Font size="16.0" />
          </font>
