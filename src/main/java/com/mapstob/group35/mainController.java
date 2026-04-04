@@ -4,6 +4,7 @@ import com.mapstob.group35.Gameplay.GameGUIManager;
 import com.mapstob.group35.Gameplay.GameManager;
 import com.mapstob.group35.core.ParentProfile;
 import com.mapstob.group35.core.PlayerProfile;
+import com.mapstob.group35.core.Stats;
 import com.mapstob.group35.core.loggedUser;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -92,8 +93,9 @@ public class mainController {
         }
     }
 
-    /*
-        Moves
+    /**
+        Moves to tutorial screen
+        @author Ethan Gregory
      */
     @FXML
     protected void goToTutorial() {
@@ -108,8 +110,8 @@ public class mainController {
         GameManager gm;
 
         if (runExists) {
-            //TODO load information into gameManager
-            gm = new GameManager();
+            Stats userStats = currentUser.getPlayerStats();
+            gm = new GameManager(100, 100, userStats.getCurrentWave(), 10 + userStats.getCurrentWave(), userStats.getTotalCoins(), 10);
         }
         else{//if first run or if first run after a death
             gm = new GameManager();
