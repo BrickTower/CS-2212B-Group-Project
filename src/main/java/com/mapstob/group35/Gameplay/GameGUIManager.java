@@ -228,7 +228,7 @@ public class GameGUIManager {
     public void setScoreText(int WPM, int mistakes_percent, int session_words,int highscoreWPM, int highscoreWaves){
         WPM_TEXT.setText("WPM: "+Integer.toString(WPM));
         MISTAKES_TEXT.setText("MISTAKES: "+Integer.toString(mistakes_percent) + "%");
-        WORDS_TEXT.setText("WORDS THIS SESSION: "+Integer.toString(session_words));
+        WORDS_TEXT.setText("WORDS THIS ROUND: "+Integer.toString(session_words));
         HIGH_WPM_TEXT.setText("HIGHEST WPM: "+Integer.toString(highscoreWPM));
         HIGH_WAVE_TEXT.setText("HIGHEST WAVE: "+Integer.toString(highscoreWaves));
     }
