@@ -96,6 +96,7 @@ public class parentalController {
             student.setPassword(newPassword);
             leftError.setVisible(true);
             leftError.setText("Password changed");
+            resetField.clear();
         }
     }
 
