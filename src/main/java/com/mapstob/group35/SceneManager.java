@@ -79,4 +79,9 @@ public class SceneManager {
         Platform.exit(); // CLOSE GAME
     }
 
+    static public void loadBaseMenu() throws IOException {
+        FXMLLoader load = new FXMLLoader(SceneManager.class.getResource("baseMenu.fxml"));
+        BaseScene.setRoot(load.load());
+    }
+
 }

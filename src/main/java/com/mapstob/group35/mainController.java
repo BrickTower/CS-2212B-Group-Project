@@ -174,8 +174,7 @@ public class mainController {
     @FXML
     protected void backToMainMenu() {
         try {
-            FXMLLoader load = new FXMLLoader(getClass().getResource("baseMenu.fxml"));
-            backButton.getScene().setRoot(load.load());
+            SceneManager.loadBaseMenu();
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
