@@ -49,6 +49,9 @@ public class Stats {
     /** The lowest amount of mistakes the Player has made in a single run */
     @JsonProperty("lowestMistakes")
     private int lowestMistakes;
+    /** The lowest amount of mistakes the Player has made in a single run */
+    @JsonProperty("playtime")
+    private int totalPlaytime;
 
     /**
      Stats constructor. Initializes a new Stats object.
@@ -69,6 +72,7 @@ public class Stats {
         this.peakCoins = 0;
         this.totalMistakes = 0;
         this.lowestMistakes = 0;
+        this.totalPlaytime = 0;
     }
 
     /**
@@ -81,7 +85,7 @@ public class Stats {
      * @param accuracy A percentage amount of words typed correctly over the course of the round (3 out of 4 typed correctly = 75.0)
      * @author Ethan Gregory
      */
-    public void updateStats(double wpm, double accuracy, int waves, int coins, int mistakes) {
+    public void updateStats(double wpm, double accuracy, int waves, int coins, int mistakes, int playtime) {
         // INCREASE GAMES PLAYED
         if (wpm > this.peakWPM) {
             this.peakWPM = (float) wpm;
@@ -90,15 +94,15 @@ public class Stats {
         // UPDATE AVERAGES
         this.totalWPM += wpm;
         this.totalGamesPlayed++;
-        this.totalAccuSum += accuracy; // ADD ACCURACY SCORE TO TOTAL SUM
-        this.averageAccuracy = (this.totalAccuSum / this.totalGamesPlayed) * 100; // DIVIDE BY GAMES PLAYED AND MULTIPLIED BY 100 TO GET ACCURACY
+        this.averageAccuracy = accuracy;
         this.averageWPM = (wpm / 60);
+        this.totalPlaytime += playtime;
 
         //
         this.totalWaves += waves;
         if (waves > this.peakWaves) this.peakWaves = waves;
 
-        this.totalCoins += coins;
+        this.totalCoins = coins;
         if (coins > this.peakCoins) this.peakCoins = coins;
 
         this.totalMistakes += mistakes;

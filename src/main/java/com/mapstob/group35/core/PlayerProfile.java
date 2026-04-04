@@ -14,9 +14,6 @@ import java.util.List;
         setterVisibility = JsonAutoDetect.Visibility.NONE // ADD THIS
 )
 public class PlayerProfile {
-    /** The player's current difficulty level.*/
-    @JsonProperty("level")
-    private int level;
     /** The current amount of coins the Player has.*/
     @JsonProperty("coins")
     private int coins;
@@ -45,7 +42,6 @@ public class PlayerProfile {
     public PlayerProfile(String userName, String password) {
         this.userName = userName; // INIT. CLASS-SPECIFIC VARIABLES
         this.password = password;
-        this.level = 1;
         this.coins = 0;
         this.playerStats = new Stats();
     }
@@ -65,36 +61,55 @@ public class PlayerProfile {
 
     /**
      *  Updates the JSON file (parents.json) with any major changes (when coins are added or removed, Stats are modified, etc.)
-     *  Only called within its class
+     *  Only called within its class, and makes decision based on whether or not its a ParentProfile
      *
      * @author Ethan Gregory
      */
-    private void updateSave() {
-        try {
-            List<ParentProfile> parents = DataManager.loadList("parents.json", new TypeReference<List<ParentProfile>>() {
-            });
+    protected void updateSave() {
+        if (this instanceof ParentProfile){
+            try {
+                List<ParentProfile> parents = DataManager.loadList("parents.json", new TypeReference<List<ParentProfile>>() {
+                });
 
-            int counter = 0; // FIND INDEX IN FOR LOOP
-            boolean foundPlayer = false;
-            for (ParentProfile parent : parents) {
-                int counter2 = 0;
-                List<PlayerProfile> players = parent.getPlayersManaged();
-                for (PlayerProfile player : players) {
-                    if (player.getUserName().equals(this.getUserName())) {
-                        players.set(counter2, this);
-                        foundPlayer = true;
+                int counter = 0; // FIND INDEX IN FOR LOOP
+                for (ParentProfile parent : parents) {
+                    if (parent.getUserName().equals(this.getUserName())) {
+                        parents.set(counter, (ParentProfile) (this));
                         break;
                     }
-                    counter2++;
+                    counter++;
                 }
-                if (foundPlayer) { // IF PLAYER WAS FOUND, BREAK OUT OF ORIGINAL FOR LOOP
-                    break;
-                }
-                counter++;
+                DataManager.saveList("parents.json", parents);
+            } catch (Exception e) {
+                throw new RuntimeException(e);
             }
-            DataManager.saveList("parents.json", parents);
-        } catch (Exception e) {
-            throw new RuntimeException(e);
+        } else {
+            try {
+                List<ParentProfile> parents = DataManager.loadList("parents.json", new TypeReference<List<ParentProfile>>() {
+                });
+
+                int counter = 0; // FIND INDEX IN FOR LOOP
+                boolean foundPlayer = false;
+                for (ParentProfile parent : parents) {
+                    int counter2 = 0;
+                    List<PlayerProfile> players = parent.getPlayersManaged();
+                    for (PlayerProfile player : players) {
+                        if (player.getUserName().equals(this.getUserName())) {
+                            players.set(counter2, this);
+                            foundPlayer = true;
+                            break;
+                        }
+                        counter2++;
+                    }
+                    if (foundPlayer) { // IF PLAYER WAS FOUND, BREAK OUT OF ORIGINAL FOR LOOP
+                        break;
+                    }
+                    counter++;
+                }
+                DataManager.saveList("parents.json", parents);
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
         }
     }
 
@@ -112,37 +127,6 @@ public class PlayerProfile {
             return true;
         } // END OF IF/ELSE
     }
-
-    /**
-     * Increases the Player's current difficulty level by 1. Used when they successfully complete a wave.
-     * <br>
-     * @author Ethan Gregory
-     */
-    public void levelUp() {
-        this.level++; // INCREASE LEVEL
-        this.updateSave();
-    }
-
-    /**
-     * Resets Player's difficulty level back to 1. Used when a run ends to reset back to normal
-     * <br>
-     * @author Ethan Gregory
-     */
-    public void resetLevel() {
-        this.level = 1;
-        this.updateSave();
-    }
-
-    /**
-     * Returns an Integer representation of the Player's current difficulty level
-     * @return the Player's current difficulty level, represented as a Integer
-     * @see Integer
-     * @author Ethan Gregory
-     */
-    public int getLevel() {
-        return this.level;
-    }
-
 
     /**
      * Returns an Integer representation of the amount of coins the Player currently has.

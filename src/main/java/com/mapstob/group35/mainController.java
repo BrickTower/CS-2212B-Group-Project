@@ -9,18 +9,22 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
+import javafx.scene.text.Text;
 
 import java.io.IOException;
+import java.util.List;
 
 public class mainController {
     @FXML
     private Button newGame;
     @FXML
-    private Button tutorial;
-    @FXML
     private Button backButton;
     @FXML
-    private Button statsButton;
+    private VBox leaderboardBox;
     @FXML
     private Button parentalButton;
 
@@ -35,6 +39,7 @@ public class mainController {
     @FXML
     private void initialize() {
         runButtonText();
+        updateLeaderboard();
     }
 
     private void runButtonText(){
@@ -45,6 +50,45 @@ public class mainController {
         else{
             assert newGame != null;
             newGame.setText("New Run");
+        }
+    }
+
+    private void updateLeaderboard() {
+        List<Object> users = DataManager.getAllUsersSortedByWaves();
+
+        leaderboardBox.getChildren().remove(2, leaderboardBox.getChildren().size());
+
+        int rank = 1;
+
+        for (Object u : users) {
+            String name;
+            int wave;
+
+            if (u instanceof PlayerProfile p) {
+                name = p.getUserName();
+                wave = p.getPlayerStats().getPeakWaves();
+            } else {
+                ParentProfile p = (ParentProfile) u;
+                name = p.getUserName();
+                wave = p.getPlayerStats().getPeakWaves();
+            }
+
+            HBox row = new HBox();
+            row.setSpacing(10);
+
+            Text nameText = new Text(rank + ". " + name);
+            nameText.setFill(Color.WHITE);
+            nameText.setFont(Font.font("Consolas", 12));
+
+            Text waveText = new Text(String.valueOf(wave));
+            waveText.setFill(Color.WHITE);
+            waveText.setFont(Font.font("Consolas", 12));
+
+            row.getChildren().addAll(nameText, waveText);
+            leaderboardBox.getChildren().add(row);
+
+            rank++;
+            if (rank > 10) break;
         }
     }
 
