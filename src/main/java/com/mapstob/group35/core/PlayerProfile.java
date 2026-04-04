@@ -181,6 +181,16 @@ public class PlayerProfile {
     }
 
     /**
+     * Resets a player's peakWaves stat to 0. Should only be used when updating leaderboards.
+     * @see Stats
+     * @author Ethan Gregory
+     */
+    public void leaderboardReset() {
+        this.playerStats.resetPeakWaves();
+        this.updateSave();
+    }
+
+    /**
      * Sets a player's Stats. Used to save any Stats changes to the Player.
      * @param newStats Stats object, preferably the one from the currently logged in user (currUser.getPlayerStats(), for example)
      * @see Stats

@@ -6,7 +6,6 @@ import com.mapstob.group35.core.PlayerProfile;
 import com.mapstob.group35.core.Stats;
 import com.mapstob.group35.core.loggedUser;
 import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.collections.transformation.SortedList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -14,8 +13,6 @@ import javafx.scene.Parent;
 import javafx.scene.control.*;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -65,16 +62,25 @@ public class parentalController {
     }
 
     /**
-     * Reset the {@link Stats} of every player that the Parent is managing.
+     * Reset the high score board, setting everyone's peak waves to 0.
      * @author Ethan Gregory
      */
     @FXML
-    protected void resetAllPlayersStats() {
-        for (PlayerProfile player : currentUser.getPlayersManaged()) {
-            player.resetStats();
+    protected void resetHighScore() {
+        try {
+            List<ParentProfile> parents = DataManager.loadList("parents.json", new TypeReference<List<ParentProfile>>() {
+            });
+            for (ParentProfile curr : parents) {
+                for (PlayerProfile player : curr.getPlayersManaged()) {
+                    player.leaderboardReset();
+                }
+                curr.leaderboardReset();
+            }
+            leftError.setVisible(true);
+            leftError.setText("High Score Board reset.");
+        } catch (IOException e) {
+            throw new RuntimeException(e);
         }
-        leftError.setVisible(true);
-        leftError.setText("All Players' stats reset.");
     }
 
 

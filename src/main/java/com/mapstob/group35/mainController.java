@@ -44,7 +44,7 @@ public class mainController {
     }
 
     /**
-     * Checks if a Run is currently occuring, and adjusts text accordingly.
+     * Checks if a Run is currently occurring, and adjusts text accordingly.
      * @author Shaun Zhang
      */
     private void runButtonText(){

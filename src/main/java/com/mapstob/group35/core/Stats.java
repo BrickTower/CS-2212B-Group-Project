@@ -208,6 +208,14 @@ public class Stats {
     public int getTotalPlaytime() {
         return this.totalPlaytime;
     }
+
+    /**
+     * Sets peakWaves to 0. Used when resetting leaderboard.
+     * @author Ethan Gregory
+     */
+    public void resetPeakWaves() {
+        this.peakWaves = 0;
+    }
 }
 
 
