@@ -12,7 +12,7 @@ import java.util.ArrayList;
 
 /**
  * Test launcher for gameplay.
- * @author Shaun
+ * @author Shaun Zhang
  */
 public class GameLauncher extends Application{
     static GameGUIManager GUI;

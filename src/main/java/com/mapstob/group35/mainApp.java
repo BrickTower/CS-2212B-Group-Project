@@ -8,7 +8,7 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 /**
- * Interface for opening BotSpam. This should open directly to the main menu.
+ * Interface for opening BotSpam. This should open directly to the base menu.
  * <br><br>
  * Implementation is a slightly modified InteliJ JavaFX Hello World Preset, created when initializing the project.
  * @author InteliJ, Ethan Gregory
