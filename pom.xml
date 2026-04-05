@@ -85,6 +85,7 @@
                         <!-- Default configuration for running with: mvn clean javafx:run -->
                         <id>default-cli</id>
                         <configuration>
+                            <sourcepath>com.mapstob.group35</sourcepath>
                             <mainClass>com.mapstob.group35/com.mapstob.group35.Launcher</mainClass>
                             <launcher>app</launcher>
                             <jlinkZipName>app</jlinkZipName>
