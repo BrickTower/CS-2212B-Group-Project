@@ -14,7 +14,9 @@ import java.io.IOException;
 import java.util.List;
 
 /**
- * Controller for the Login Page, handling verifying any log in attempts, alongside creation of any new Parent accounts
+ * Controller for the Login Page, handling verifying any log in attempts, alongside creation of any new Parent accounts.
+ * @author Ethan Gregory
+ * @version 1
  */
 public class LoginController {
 
