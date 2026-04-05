@@ -6,175 +6,232 @@ import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * tests for TextManager
- * covers text list management, spelling attempts, wpm tracking, and time behavior
- * note: makeText() currently hardcodes "AAA" as the word so tests reflect that
+ * covers text list mgmt, spelling attempts, wpm, time behavior, and firstAttempt tracking
+ *
  */
 public class TextManagerTest {
 
-    private TextManager textManager;
+    private TextManager tm;
 
-    // fresh manager with default settings before each test
+    // fresh manager before each test
     @BeforeEach
-
-    void setUp() {
-        // Initialize with 2 second spawn rate and 15 second word life
-        TextManager manager = new TextManager();
-
+    public void setUp() {
+        tm = new TextManager();
     }
 
-    // brand new manager should have an empty text list
+    // empty list on init
     @Test
-    public void testInitial_textListIsEmpty() {
-        assertTrue(textManager.getTextList().isEmpty());
+    public void testInit_listEmpty() {
+        assertTrue(tm.getTextList().isEmpty());
     }
 
-    // wpm starts at zero
+    // wpm init zero
     @Test
-    public void testInitial_wpmIsZero() {
-        assertEquals(0, textManager.getWPM());
+    public void testInit_wpmZero() {
+        assertEquals(0, tm.getWPM());
     }
 
-    // words completed starts at zero
+    // wordsCompleted init zero
     @Test
-    public void testInitial_wordsCompletedIsZero() {
-        assertEquals(0, textManager.getWordsCompleted());
+    public void testInit_wordsZero() {
+        assertEquals(0, tm.getWordsCompleted());
     }
 
-    // makeText should add a new textunit to the list
+    // mistakes init zero
     @Test
-    public void testMakeText_addsToList() {
-        textManager.makeText();
-        assertEquals(1, textManager.getTextList().size());
+    public void testInit_mistakesZero() {
+        assertEquals(0, tm.getMistakes());
     }
 
-    // calling makeText multiple times should grow the list
+    // firstAttemptWords init zero
     @Test
-    public void testMakeText_multipleAdds() {
-        textManager.makeText();
-        textManager.makeText();
-        textManager.makeText();
-        assertEquals(3, textManager.getTextList().size());
+    public void testInit_firstAttZero() {
+        assertEquals(0, tm.getFirstAttemptWords());
     }
 
-    // clear should wipe the text list completely
+    // makeText adds one unit
     @Test
-    public void testClear_emptiesList() {
-        textManager.makeText();
-        textManager.makeText();
-        textManager.clear();
-        assertTrue(textManager.getTextList().isEmpty());
+    public void testMakeText_addsOne() {
+        tm.makeText();
+        assertEquals(1, tm.getTextList().size());
     }
 
-    // spelling attempt on empty list should return -1 (invalid)
+    // makeText multiple times grows list
     @Test
-    public void testSpellingAttempt_emptyListReturnsNegativeOne() {
-        int result = textManager.spellingAttempt("AAA");
-        assertEquals(-1, result);
+    public void testMakeText_multi() {
+        tm.makeText();
+        tm.makeText();
+        tm.makeText();
+        assertEquals(3, tm.getTextList().size());
     }
 
-    // correct spelling should return 0 (no damage) and increment wordsCompleted
+    // word from WordList is not null or empty
     @Test
-    public void testSpellingAttempt_correctSpelling() {
-        textManager.makeText(); // hardcoded to "AAA"
-        int result = textManager.spellingAttempt("AAA");
-        assertEquals(0, result);
-        assertEquals(1, textManager.getWordsCompleted());
+    public void testMakeText_wordNotEmpty() {
+        tm.makeText();
+        String word = tm.getTextList().get(0).getText();
+        assertNotNull(word);
+        assertFalse(word.isEmpty());
     }
 
-    // correct spelling should remove the word from the text list
+    // clear wipes list
     @Test
-    public void testSpellingAttempt_correctRemovesText() {
-        textManager.makeText();
-        textManager.spellingAttempt("AAA");
-        assertTrue(textManager.getTextList().isEmpty());
+    public void testClear_empty() {
+        tm.makeText();
+        tm.makeText();
+        tm.clear();
+        assertTrue(tm.getTextList().isEmpty());
     }
 
-    // wrong spelling should return damage (non-zero) and not remove the word
+    // spelling attempt on empty list returns -1
     @Test
-    public void testSpellingAttempt_incorrectSpelling() {
-        textManager.makeText();
-        int result = textManager.spellingAttempt("ZZZ");
-        assertTrue(result > 0); // should deal some damage
-        // the word should still be in the list since it was wrong
-        assertEquals(1, textManager.getTextList().size());
+    public void testSpell_emptyList() {
+        assertEquals(-1, tm.spellingAttempt("ANYTHING"));
     }
 
-    // reset should clear everything back to starting state
+    // correct spelling returns 0 and increments wordsCompleted
+    // uppercase to mirror GameManager behaviour
+    @Test
+    public void testSpell_correct() {
+        tm.makeText();
+        String word = tm.getTextList().get(0).getText().toUpperCase();
+        assertEquals(0, tm.spellingAttempt(word));
+        assertEquals(1, tm.getWordsCompleted());
+    }
+
+    // correct spelling removes word from list
+    @Test
+    public void testSpell_correctRemoves() {
+        tm.makeText();
+        tm.spellingAttempt(tm.getTextList().get(0).getText().toUpperCase());
+        assertTrue(tm.getTextList().isEmpty());
+    }
+
+    // wrong spelling returns damage and leaves word in list
+    @Test
+    public void testSpell_wrong() {
+        tm.makeText();
+        int dmg = tm.spellingAttempt("ZZZZZZZZZZZZZZ");
+        assertTrue(dmg > 0);
+        assertEquals(1, tm.getTextList().size());
+    }
+
+    // getMistakes increments on wrong answer
+    @Test
+    public void testMistakes_incOnWrong() {
+        tm.makeText();
+        tm.spellingAttempt("ZZZZZZZZZZZZZZ");
+        assertEquals(1, tm.getMistakes());
+    }
+
+    // getMistakes unchanged on correct answer
+    @Test
+    public void testMistakes_noIncOnCorrect() {
+        tm.makeText();
+        tm.spellingAttempt(tm.getTextList().get(0).getText().toUpperCase());
+        assertEquals(0, tm.getMistakes());
+    }
+
+    // first try correct increments firstAttemptWords
+    @Test
+    public void testFirstAtt_incOnFirstTry() {
+        tm.makeText();
+        tm.spellingAttempt(tm.getTextList().get(0).getText().toUpperCase());
+        assertEquals(1, tm.getFirstAttemptWords());
+    }
+
+    // wrong then correct does not count as first attempt
+    @Test
+    public void testFirstAtt_noIncAfterMistake() {
+        tm.makeText();
+        tm.spellingAttempt("ZZZZZZZZZZZZZZ"); // wrong
+        tm.spellingAttempt(tm.getTextList().get(0).getText().toUpperCase()); // correct but not first try
+        assertEquals(0, tm.getFirstAttemptWords());
+    }
+
+    // firstTry resets after each word so next word starts fresh
+    @Test
+    public void testFirstAtt_resetsPerWord() {
+        tm.makeText();
+        tm.spellingAttempt("ZZZZZZZZZZZZZZ"); // wrong on word 1
+        tm.spellingAttempt(tm.getTextList().get(0).getText().toUpperCase()); // complete word 1 - not first try
+
+        tm.makeText();
+        tm.spellingAttempt(tm.getTextList().get(0).getText().toUpperCase()); // word 2 first try
+
+        assertEquals(1, tm.getFirstAttemptWords()); // only word 2 counts
+    }
+
+    // reset clears everything including mistakes
     @Test
     public void testReset_clearsAll() {
-        textManager.makeText();
-        textManager.spellingAttempt("AAA"); // complete one word
-        textManager.reset();
-
-        assertTrue(textManager.getTextList().isEmpty());
-        assertEquals(0, textManager.getWordsCompleted());
-        assertEquals(0, textManager.getWPM());
+        tm.makeText();
+        tm.spellingAttempt(tm.getTextList().get(0).getText());
+        tm.reset();
+        assertTrue(tm.getTextList().isEmpty());
+        assertEquals(0, tm.getWordsCompleted());
+        assertEquals(0, tm.getMistakes());
+        assertEquals(0, tm.getWPM());
     }
 
-    // incTime on an empty list should return 0 damage
+    // incTime on empty list returns 0 damage
     @Test
-    public void testIncTime_emptyListNoDamage() {
-        int damage = textManager.incTime();
-        assertEquals(0, damage);
+    public void testIncTime_emptyNoDmg() {
+        assertEquals(0, tm.incTime());
     }
 
-    // incTime many times should eventually cause damage when words time out
+    // word times out after 20 ticks (wordDefaultTimeLeft = 20)
     @Test
-    public void testIncTime_wordTimeoutCausesDamage() {
-        textManager.makeText(); // default time limit is 15 seconds
-
-        int totalDamage = 0;
-        for (int i = 0; i < 20; i++) {
-            totalDamage += textManager.incTime();
-        }
-
-        // after 20 ticks the word with 15 second limit should have timed out
-        assertTrue(totalDamage > 0, "expected damage from timed out word but got none");
+    public void testIncTime_timeoutDmg() {
+        tm.makeText();
+        int totalDmg = 0;
+        for (int i = 0; i < 25; i++) totalDmg += tm.incTime();
+        assertTrue(totalDmg > 0, "expected dmg from timed out word but got none");
     }
 
-    // words completed should only go up when you get one right
+    // wordsCompleted only goes up on correct answer
     @Test
-    public void testWordsCompleted_onlyIncrementsOnSuccess() {
-        textManager.makeText();
-        textManager.spellingAttempt("ZZZ"); // wrong
-        assertEquals(0, textManager.getWordsCompleted());
-
-        textManager.spellingAttempt("AAA"); // correct
-        assertEquals(1, textManager.getWordsCompleted());
+    public void testWordsCompleted_onlyOnCorrect() {
+        tm.makeText();
+        tm.spellingAttempt("ZZZZZZZZZZZZZZ"); // wrong
+        assertEquals(0, tm.getWordsCompleted());
+        tm.spellingAttempt(tm.getTextList().get(0).getText().toUpperCase()); // correct
+        assertEquals(1, tm.getWordsCompleted());
     }
 
-    // mistakes percent is 0 initially since both numerator and denominator are 0
-    // after a wrong then right answer it should be 0.5 (1 mistake out of 2 word events but only 1 word completed)
+    // 1 mistake / 1 wordsCompleted = 1.0
     @Test
-    public void testCalculateMistakesPercent_afterMistake() {
-        textManager.makeText();
-        textManager.spellingAttempt("ZZZ"); // wrong - increments mistakes
-        textManager.makeText();
-        textManager.spellingAttempt("AAA"); // right - increments wordsCompleted
-
-        // 1 mistake / 1 wordsCompleted = 1.0
-        float percent = textManager.calculateMistakesPercent();
-        assertEquals(1.0f, percent, 0.001f);
+    public void testMistakePct_afterOne() {
+        tm.makeText();
+        tm.spellingAttempt("ZZZZZZZZZZZZZZ"); // wrong
+        tm.spellingAttempt(tm.getTextList().get(0).getText().toUpperCase()); // right
+        assertEquals(1.0f, tm.calculateMistakesPercent(), 0.001f);
     }
 
-    // setting word spawn time should update the internal spawn timer
+    // setWordSpawnTime doesnt throw
     @Test
-    public void testSetWordSpawnTime_doesNotThrow() {
-        assertDoesNotThrow(() -> textManager.setWordSpawnTime(6));
+    public void testSetSpawnTime_noThrow() {
+        assertDoesNotThrow(() -> tm.setWordSpawnTime(8));
     }
 
-    // the overloaded constructor should apply the provided settings
+    // overloaded ctor applies provided values
     @Test
-    public void testOverloadedConstructor_setsValues() {
+    public void testCtor_overloaded() {
         TextManager custom = new TextManager(3, 20, 5, 10);
-        // we cant access private fields directly but we can verify it doesnt throw
-        // and that wordsCompleted/mistakes are reflected
         assertEquals(10, custom.getWordsCompleted());
+        assertEquals(5, custom.getMistakes());
     }
 
-    // calculateWPM returns 0 when no words have been typed in the tracking window
+    // calculateWPM starts at zero
     @Test
-    public void testCalculateWPM_startsAtZero() {
-        assertEquals(0, textManager.calculateWPM());
+    public void testWPM_initZero() {
+        assertEquals(0, tm.calculateWPM());
+    }
+
+    // auto-spawns word at default spawn interval of 6
+    @Test
+    public void testIncTime_autoSpawn() {
+        for (int i = 0; i < 6; i++) tm.incTime();
+        assertFalse(tm.getTextList().isEmpty());
     }
 }
