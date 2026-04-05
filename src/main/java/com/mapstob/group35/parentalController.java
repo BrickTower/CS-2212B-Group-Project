@@ -106,6 +106,10 @@ public class parentalController {
         }
     }
 
+    /**
+     * Allows for the ability to view the Statistics of a Player that is managed by the current Parent.
+     * @author Eric Chen
+     */
     @FXML
     protected void viewPlayerStats() {
         PlayerProfile student = managedPlayers.getValue();
@@ -115,19 +119,11 @@ public class parentalController {
             leftError.setText("User not selected.");
         } else {
             try {
-                // 1. Create the loader
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("stats.fxml"));
-
-                // 2. Load the UI (this triggers StatsController.initialize() for the logged-in user)
                 Parent root = loader.load();
-
-                // 3. Get the controller instance and OVERWRITE with student data
                 StatsController controller = loader.getController();
                 controller.setPlayer(student);
-
-                // 4. Switch the scene
                 backButton.getScene().setRoot(root);
-
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -137,6 +133,7 @@ public class parentalController {
     /**
      * Grabs all players from the Current Parent and logs them into the ChoiceBox
      * Only called when adding a new User and entering this screen (latter is why it's public)
+     * @author Ethan Gregory
      */
     public void getParentsPlayers() {
         LinkedList<PlayerProfile> allPlayers = currentUser.getPlayersManaged();

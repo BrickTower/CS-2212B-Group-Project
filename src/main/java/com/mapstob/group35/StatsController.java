@@ -103,6 +103,7 @@ public class StatsController {
     /**
      * This method can be called from parentalController to change
      * the displayed stats to a specific student.
+     * @author Eric Chen
      */
     public void setPlayer(PlayerProfile player) {
         loadPlayerData(player);
@@ -138,6 +139,7 @@ public class StatsController {
      * </p>
      *
      * @throws Exception if the mainMenu.fxml file cannot be loaded
+     * @author Ethan Gregory
      */
     @FXML
     private void handleExit() throws Exception {

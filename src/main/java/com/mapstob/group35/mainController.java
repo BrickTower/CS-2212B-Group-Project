@@ -102,7 +102,7 @@ public class mainController {
     }
 
     /**
-        Moves to the tutorial screen
+        Moves to the tutorial screen from Main Menu using {@link SceneManager}.
         @author Ethan Gregory
      */
     @FXML
