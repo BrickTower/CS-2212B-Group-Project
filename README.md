@@ -1,3 +1,6 @@
+***Created as part of a group project. Members included Ethan Gregory, Shaun Zhang, Tamaki Konan, and Eric Chen.***
+---
+
 To run the game, open Launcher.java and run it.
 
 Music from OpenGameArt; can be found here (https://opengameart.org/content/crystal-cave-song18)
