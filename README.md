@@ -1,4 +1,5 @@
 ***Created as part of a group project. Members included Ethan Gregory, Shaun Zhang, Tamaki Konan, and Eric Chen.***
+Original Readme from Project follows below:
 ---
 
 To run the game, open Launcher.java and run it.
